@@ -1,4 +1,6 @@
-from flask import Flask, request, redirect, url_for, session
+if __name__ == "__main__":
+
+ from flask import Flask, request, redirect, url_for, session, render_template
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from database import init_db, get_db_connection
@@ -147,6 +149,53 @@ def login():
 
         </form>
     """
+
+@app.route("/cities")
+def get_cities():
+
+    connection = get_db_connection()
+
+    cities = connection.execute(
+        """
+        SELECT *
+        FROM cities
+        ORDER BY popularity DESC
+        """
+    ).fetchall()
+
+    connection.close()
+
+    return {
+        "cities": [dict(city) for city in cities]
+    }
+
+
+@app.route("/cities/<int:city_id>")
+def get_city(city_id):
+
+    connection = get_db_connection()
+
+    city = connection.execute(
+        """
+        SELECT *
+        FROM cities
+        WHERE id = ?
+        """,
+        (city_id,)
+    ).fetchone()
+
+    connection.close()
+
+    if city is None:
+        return {
+            "error": "City not found"
+        }, 404
+
+    return {
+        "city": dict(city)
+    }
+
+
 @app.route("/trips/create", methods=["GET", "POST"])
 def create_trip():
 
@@ -180,53 +229,9 @@ def create_trip():
         connection.commit()
         connection.close()
 
-        return redirect(url_for("dashboard"))
+    return redirect(url_for("dashboard"))
 
-    return """
-        <h1>Create New Trip</h1>
-
-        <form method="POST">
-
-            <input
-                type="text"
-                name="name"
-                placeholder="Trip Name"
-                required
-            >
-
-            <br><br>
-
-            <textarea
-                name="description"
-                placeholder="Trip Description"
-            ></textarea>
-
-            <br><br>
-
-            <label>Start Date</label>
-            <input
-                type="date"
-                name="start_date"
-                required
-            >
-
-            <br><br>
-
-            <label>End Date</label>
-            <input
-                type="date"
-                name="end_date"
-                required
-            >
-
-            <br><br>
-
-            <button type="submit">
-                Create Trip
-            </button>
-
-        </form>
-    """
+    return render_template("create_trip.html")
 
 @app.route("/dashboard")
 def dashboard():
@@ -248,49 +253,14 @@ def dashboard():
 
     connection.close()
 
-    trip_list = ""
+    total_trips = len(trips)
 
-    for trip in trips:
-        trip_list += f"""
-            <div>
-                <h2>{trip["name"]}</h2>
-
-                <p>
-                    {trip["start_date"]}
-                    →
-                    {trip["end_date"]}
-                </p>
-
-                <p>
-                    {trip["description"] or "No description"}
-                </p>
-            </div>
-
-            <hr>
-        """
-
-    if not trips:
-        trip_list = "<p>You haven't created any trips yet.</p>"
-
-    return f"""
-        <h1>Welcome, {session["user_name"]}!</h1>
-
-        <h2>My Trips</h2>
-
-        <a href="{url_for("create_trip")}">
-            Create New Trip
-        </a>
-
-        <br><br>
-
-        {trip_list}
-
-        <br>
-
-        <a href="{url_for("logout")}">
-            Logout
-        </a>
-    """
+    return render_template(
+        "dashboard.html",
+        trips=trips,
+        user_name=session["user_name"],
+        total_trips=total_trips
+    )
 
 
 @app.route("/logout")
