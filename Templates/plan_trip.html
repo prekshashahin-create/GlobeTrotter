@@ -24,10 +24,20 @@
     </a>
 
     <nav class="nav-links">
-        <a href="/dashboard">Dashboard</a>
-        <a href="/explore">Explore</a>
-        <a href="/plan-trip" class="active">Plan Trip</a>
-    </nav>
+
+    <a href="{{ url_for('dashboard') }}">
+        Dashboard
+    </a>
+
+    <a href="{{ url_for('explore') }}">
+        Explore
+    </a>
+
+    <a href="{{ url_for('plan_trip') }}">
+        Plan Trip
+    </a>
+
+</nav>
 
     <a href="/logout" class="logout-btn">Logout</a>
 
@@ -59,7 +69,7 @@
 
         <!-- OPTION 1 -->
 
-        <a href="/create-trip" class="choice-card">
+        <a href="{{ url_for('create_trip') }}" class="choice-card">
 
             <div class="choice-icon">
                 ✨

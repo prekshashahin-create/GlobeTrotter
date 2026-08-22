@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Experiences | GlobeTrotter</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="/dashboard" class="brand">
+        <span class="brand-icon">✦</span>
+        <span>GlobeTrotter</span>
+    </a>
+
+    <nav class="nav-links">
+
+    <a href="{{ url_for('dashboard') }}">
+        Dashboard
+    </a>
+
+    <a href="{{ url_for('explore') }}">
+        Explore
+    </a>
+
+    <a href="{{ url_for('plan_trip') }}">
+        Plan Trip
+    </a>
+
+</nav>
+
+    <a href="/logout" class="logout-btn">
+        Logout
+    </a>
+
+</header>
+
+
+<main class="experiences-page">
+
+    <section class="choice-hero">
+
+        <span class="eyebrow">
+            MAKE MEMORIES
+        </span>
+
+        <h1>
+            Find your kind<br>
+            of <span>adventure.</span>
+        </h1>
+
+        <p>
+            Whether you love food, culture, nature or adventure,
+            find experiences that make your trip special.
+        </p>
+
+    </section>
+
+
+    <section class="experience-grid">
+
+        <a href="/experiences?category=Food"
+           class="experience-card food">
+
+            <div class="experience-icon">
+                🍜
+            </div>
+
+            <div>
+                <span>01</span>
+                <h2>Food & Cuisine</h2>
+                <p>Discover local flavours and unforgettable dishes.</p>
+            </div>
+
+            <b>→</b>
+
+        </a>
+
+
+        <a href="/experiences?category=Culture"
+           class="experience-card culture">
+
+            <div class="experience-icon">
+                🏛️
+            </div>
+
+            <div>
+                <span>02</span>
+                <h2>Culture & History</h2>
+                <p>Explore traditions, landmarks and local stories.</p>
+            </div>
+
+            <b>→</b>
+
+        </a>
+
+
+        <a href="/experiences?category=Adventure"
+           class="experience-card adventure">
+
+            <div class="experience-icon">
+                🏔️
+            </div>
+
+            <div>
+                <span>03</span>
+                <h2>Adventure</h2>
+                <p>Find exciting activities and outdoor experiences.</p>
+            </div>
+
+            <b>→</b>
+
+        </a>
+
+
+        <a href="/experiences?category=Nature"
+           class="experience-card nature">
+
+            <div class="experience-icon">
+                🌿
+            </div>
+
+            <div>
+                <span>04</span>
+                <h2>Nature & Wildlife</h2>
+                <p>Escape into beautiful natural surroundings.</p>
+            </div>
+
+            <b>→</b>
+
+        </a>
+
+
+        <a href="/experiences?category=Beach"
+           class="experience-card beach">
+
+            <div class="experience-icon">
+                🏖️
+            </div>
+
+            <div>
+                <span>05</span>
+                <h2>Beaches & Relaxation</h2>
+                <p>Slow down and enjoy peaceful destinations.</p>
+            </div>
+
+            <b>→</b>
+
+        </a>
+
+
+        <a href="/experiences?category=Shopping"
+           class="experience-card shopping">
+
+            <div class="experience-icon">
+                🛍️
+            </div>
+
+            <div>
+                <span>06</span>
+                <h2>Shopping</h2>
+                <p>Find local markets, boutiques and hidden gems.</p>
+            </div>
+
+            <b>→</b>
+
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-brand">
+        <span class="brand-icon">✦</span>
+        GlobeTrotter
+    </div>
+
+    <p>Plan less. Travel more. ✈</p>
+
+</footer>
+
+</body>
+</html>

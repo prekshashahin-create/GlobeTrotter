@@ -2091,3 +2091,649 @@ footer p {
     }
 
 }
+
+/* =========================
+   QUICK PLAN
+========================= */
+
+.quick-plan-page {
+
+    max-width: 850px;
+
+    margin: auto;
+
+    padding: 65px 25px 90px;
+
+}
+
+
+.quick-form-card {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 24px;
+
+    padding: 38px;
+
+    box-shadow:
+        0 20px 60px rgba(50,45,80,0.08);
+
+}
+
+
+.travel-types {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+}
+
+
+.travel-option {
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    padding: 15px 10px;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.travel-option span {
+
+    display: block;
+
+    font-size: 24px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.travel-option input {
+
+    display: none;
+
+}
+
+
+.travel-option:has(input:checked) {
+
+    border-color: var(--purple);
+
+    background: #f2efff;
+
+    color: var(--purple);
+
+}
+
+
+/* =========================
+   EXPERIENCES
+========================= */
+
+.experiences-page {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 65px 25px 100px;
+
+}
+
+
+.experience-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.experience-card {
+
+    min-height: 210px;
+
+    padding: 28px;
+
+    border-radius: 21px;
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition: 0.3s;
+
+}
+
+
+.experience-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    border-radius: 50%;
+
+    right: -80px;
+
+    bottom: -90px;
+
+    background: rgba(108,92,231,0.07);
+
+}
+
+
+.experience-card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 20px 45px rgba(50,45,80,0.1);
+
+}
+
+
+.experience-icon {
+
+    min-width: 58px;
+
+    height: 58px;
+
+    border-radius: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 27px;
+
+}
+
+
+.food .experience-icon {
+    background: #fff0df;
+}
+
+.culture .experience-icon {
+    background: #eeebff;
+}
+
+.adventure .experience-icon {
+    background: #e4f4ec;
+}
+
+.nature .experience-icon {
+    background: #e1f3e9;
+}
+
+.beach .experience-icon {
+    background: #e2f0ff;
+}
+
+.shopping .experience-icon {
+    background: #ffe8ef;
+}
+
+
+.experience-card div:nth-child(2) {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.experience-card div:nth-child(2) > span {
+
+    font-size: 10px;
+
+    color: var(--purple);
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+}
+
+
+.experience-card h2 {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 24px;
+
+    margin-top: 5px;
+
+}
+
+
+.experience-card p {
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-top: 7px;
+
+}
+
+
+.experience-card > b {
+
+    margin-left: auto;
+
+    color: var(--purple);
+
+    font-size: 20px;
+
+    transition: 0.2s;
+
+}
+
+
+.experience-card:hover > b {
+
+    transform: translateX(5px);
+
+}
+
+
+@media (max-width: 700px) {
+
+    .travel-types {
+
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+
+    .experience-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+/* =========================
+   DESTINATION SELECTION
+========================= */
+
+.destination-select-page {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 60px 25px 110px;
+
+}
+
+
+.destination-search {
+
+    max-width: 600px;
+
+    height: 55px;
+
+    margin: 0 auto 35px;
+
+    padding: 0 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
+
+}
+
+
+.destination-search span {
+
+    color: var(--purple);
+
+    font-size: 22px;
+
+}
+
+
+.destination-search input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+}
+
+
+/* City grid */
+
+.select-city-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(250px, 1fr));
+
+    gap: 20px;
+
+}
+
+
+.select-city-card {
+
+    background: white;
+
+    border: 2px solid transparent;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+
+}
+
+
+.select-city-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 40px rgba(50,45,80,0.1);
+
+}
+
+
+.select-city-card input {
+
+    display: none;
+
+}
+
+
+.select-city-image {
+
+    height: 145px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7569df,
+            #d6d1ff
+        );
+
+    display: flex;
+
+    align-items: flex-end;
+
+    padding: 15px;
+
+}
+
+
+.select-city-card:nth-child(2n)
+.select-city-image {
+
+    background:
+        linear-gradient(
+            135deg,
+            #e7a26c,
+            #ffe1c5
+        );
+
+}
+
+
+.select-city-card:nth-child(3n)
+.select-city-image {
+
+    background:
+        linear-gradient(
+            135deg,
+            #64b59f,
+            #d6f0e7
+        );
+
+}
+
+
+.select-city-image span {
+
+    background:
+        rgba(255,255,255,0.9);
+
+    padding: 6px 9px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.select-city-content {
+
+    padding: 19px;
+
+    position: relative;
+
+}
+
+
+.select-city-content h3 {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 23px;
+
+}
+
+
+.select-city-content p {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    margin-top: 6px;
+
+    padding-right: 30px;
+
+}
+
+
+.select-indicator {
+
+    position: absolute;
+
+    right: 17px;
+
+    top: 19px;
+
+    width: 29px;
+
+    height: 29px;
+
+    border-radius: 50%;
+
+    border: 1px solid #ddd9e7;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: transparent;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+
+.select-city-card:has(input:checked) {
+
+    border-color: var(--purple);
+
+    box-shadow:
+        0 12px 30px rgba(108,92,231,0.13);
+
+}
+
+
+.select-city-card:has(input:checked)
+.select-indicator {
+
+    background: var(--purple);
+
+    border-color: var(--purple);
+
+    color: white;
+
+}
+
+
+/* Bottom action */
+
+.selection-footer {
+
+    position: sticky;
+
+    bottom: 20px;
+
+    margin-top: 35px;
+
+    padding: 15px 18px;
+
+    background:
+        rgba(255,255,255,0.95);
+
+    backdrop-filter: blur(15px);
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    box-shadow:
+        0 15px 40px rgba(50,45,80,0.1);
+
+}
+
+
+.selection-footer span {
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+.selection-footer .create-trip-btn {
+
+    width: auto;
+
+    padding: 12px 22px;
+
+}
+
+
+@media (max-width: 600px) {
+
+    .destination-select-page {
+
+        padding: 40px 18px 100px;
+
+    }
+
+    .select-city-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .selection-footer {
+
+        gap: 15px;
+
+    }
+
+}

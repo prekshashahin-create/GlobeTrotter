@@ -1,6 +1,4 @@
-if __name__ == "__main__":
-
- from flask import Flask, request, redirect, url_for, session, render_template
+from flask import Flask, request, redirect, url_for, session, render_template
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from database import init_db, get_db_connection
@@ -370,8 +368,8 @@ def create_trip():
 
         connection.commit()
         connection.close()
-
-        return redirect(url_for("dashboard"))
+    return redirect(url_for("select_destinations"))
+        
 
     return render_template("create_trip.html")
 
@@ -492,13 +490,66 @@ def experiences():
     return render_template("experiences.html")
 
 
-@app.route("/quick-plan")
+@app.route("/quick-plan", methods=["GET", "POST"])
 def quick_plan():
 
     if "user_id" not in session:
         return redirect(url_for("login"))
 
+    if request.method == "POST":
+
+        destination = request.form["destination"]
+        start_date = request.form["start_date"]
+        days = request.form["days"]
+        trip_type = request.form["trip_type"]
+
+        return render_template(
+            "quick_plan.html",
+            destination=destination,
+            start_date=start_date,
+            days=days,
+            trip_type=trip_type
+        )
+
     return render_template("quick_plan.html")
+
+@app.route("/select-destinations", methods=["GET", "POST"])
+def select_destinations():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    connection = get_db_connection()
+
+    cities = connection.execute(
+        """
+        SELECT *
+        FROM cities
+        ORDER BY name
+        """
+    ).fetchall()
+
+    connection.close()
+
+    if request.method == "POST":
+
+        city_ids = request.form.getlist("city_ids")
+
+        if not city_ids:
+            return render_template(
+                "select_destinations.html",
+                cities=cities,
+                error="Please select at least one destination."
+            )
+
+        session["selected_city_ids"] = city_ids
+
+        return redirect(url_for("dashboard"))
+
+    return render_template(
+        "select_destinations.html",
+        cities=cities
+    )
 
 @app.route("/logout")
 def logout():

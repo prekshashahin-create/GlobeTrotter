@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Choose Destinations | GlobeTrotter</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="/dashboard" class="brand">
+        <span class="brand-icon">✦</span>
+        <span>GlobeTrotter</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/explore">Explore</a>
+        <a href="/plan-trip" class="active">Plan Trip</a>
+    </nav>
+
+    <a href="/logout" class="logout-btn">Logout</a>
+
+</header>
+
+
+<main class="destination-select-page">
+
+    <section class="choice-hero">
+
+        <span class="eyebrow">
+            STEP 2 OF 3
+        </span>
+
+        <h1>
+            Choose your<br>
+            <span>destinations.</span>
+        </h1>
+
+        <p>
+            Pick the cities you want to visit.
+            You can choose more than one.
+        </p>
+
+    </section>
+
+
+    <div class="destination-search">
+
+        <span>⌕</span>
+
+        <input
+            type="text"
+            id="destinationSearch"
+            placeholder="Search cities or countries..."
+        >
+
+    </div>
+
+
+    <form method="POST" action="/select-destinations">
+
+        <div class="select-city-grid">
+
+            {% for city in cities %}
+
+            <label class="select-city-card">
+
+                <input
+                    type="checkbox"
+                    name="city_ids"
+                    value="{{ city['id'] }}"
+                >
+
+                <div class="select-city-image">
+
+                    <span>
+                        📍 {{ city["country"] }}
+                    </span>
+
+                </div>
+
+                <div class="select-city-content">
+
+                    <h3>
+                        {{ city["name"] }}
+                    </h3>
+
+                    {% if city["description"] %}
+
+                    <p>
+                        {{ city["description"] }}
+                    </p>
+
+                    {% endif %}
+
+                    <div class="select-indicator">
+                        ✓
+                    </div>
+
+                </div>
+
+            </label>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="selection-footer">
+
+            <span id="selectedCount">
+                0 destinations selected
+            </span>
+
+            <button
+                type="submit"
+                class="create-trip-btn"
+            >
+                Continue
+                <span>→</span>
+            </button>
+
+        </div>
+
+    </form>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-brand">
+        <span class="brand-icon">✦</span>
+        GlobeTrotter
+    </div>
+
+    <p>
+        Plan less. Travel more. ✈
+    </p>
+
+</footer>
+
+
+<script>
+
+const searchInput =
+    document.getElementById("destinationSearch");
+
+const cards =
+    document.querySelectorAll(".select-city-card");
+
+const checkboxes =
+    document.querySelectorAll(
+        '.select-city-card input[type="checkbox"]'
+    );
+
+const selectedCount =
+    document.getElementById("selectedCount");
+
+
+function updateCount() {
+
+    const selected =
+        document.querySelectorAll(
+            '.select-city-card input[type="checkbox"]:checked'
+        ).length;
+
+    selectedCount.textContent =
+        selected +
+        (selected === 1
+            ? " destination selected"
+            : " destinations selected");
+}
+
+
+checkboxes.forEach(box => {
+
+    box.addEventListener("change", updateCount);
+
+});
+
+
+searchInput.addEventListener("input", function () {
+
+    const search =
+        this.value.toLowerCase().trim();
+
+    cards.forEach(card => {
+
+        const text =
+            card.innerText.toLowerCase();
+
+        card.style.display =
+            text.includes(search)
+                ? "block"
+                : "none";
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
