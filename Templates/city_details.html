@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ city["name"] }} - GlobeTrotter</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            margin: 0;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #6d45f5, #7045ee);
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .city-details {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #6d45f5;
+            font-size: 42px;
+        }
+
+        .country {
+            font-size: 20px;
+            color: #64748b;
+        }
+
+        .description {
+            margin-top: 25px;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #6d45f5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <strong>🌍 GlobeTrotter</strong>
+
+        <div>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('cities') }}">Explore Cities</a>
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <a
+            href="{{ url_for('cities') }}"
+            class="back-btn"
+        >
+            ← Back to Cities
+        </a>
+
+        <div class="city-details">
+
+            <h1>
+                {{ city["name"] }}
+            </h1>
+
+            <p class="country">
+                {{ city["country"] }}
+            </p>
+
+            {% if city["description"] %}
+
+                <p class="description">
+                    {{ city["description"] }}
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

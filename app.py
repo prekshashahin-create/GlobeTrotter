@@ -151,24 +151,51 @@ def login():
     """
 
 @app.route("/cities")
-def get_cities():
+def cities():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
 
     connection = get_db_connection()
 
-    cities = connection.execute(
-        """
+    cities = connection.execute("""
         SELECT *
         FROM cities
-        ORDER BY popularity DESC
-        """
-    ).fetchall()
+        ORDER BY name
+    """).fetchall()
 
     connection.close()
 
-    return {
-        "cities": [dict(city) for city in cities]
-    }
+    return render_template(
+        "cities.html",
+        cities=cities
+    )
 
+@app.route("/city/<int:city_id>")
+def city_details(city_id):
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    connection = get_db_connection()
+
+    city = connection.execute(
+        """
+        SELECT *
+        FROM cities
+        WHERE id = ?
+        """,
+        (city_id,)
+    ).fetchone()
+
+    connection.close()
+
+    if city is None:
+        return "City not found", 404
+
+    return render_template(
+        "city_details.html",
+        city=city
+    )
 
 @app.route("/cities/<int:city_id>")
 def get_city(city_id):
@@ -195,6 +222,148 @@ def get_city(city_id):
         "city": dict(city)
     }
 
+@app.route("/trips/<int:trip_id>/stops", methods=["POST"])
+def add_trip_stop(trip_id):
+
+    if "user_id" not in session:
+        return {
+            "error": "Login required"
+        }, 401
+
+    city_id = request.form.get("city_id")
+    start_date = request.form.get("start_date")
+    end_date = request.form.get("end_date")
+
+    if not city_id or not start_date or not end_date:
+        return {
+            "error": "city_id, start_date and end_date are required"
+        }, 400
+
+    connection = get_db_connection()
+
+    # Check that this trip belongs to the logged-in user
+    trip = connection.execute(
+        """
+        SELECT *
+        FROM trips
+        WHERE id = ?
+        AND user_id = ?
+        """,
+        (trip_id, session["user_id"])
+    ).fetchone()
+
+    if trip is None:
+        connection.close()
+
+        return {
+            "error": "Trip not found"
+        }, 404
+
+    # Check that the city exists
+    city = connection.execute(
+        """
+        SELECT *
+        FROM cities
+        WHERE id = ?
+        """,
+        (city_id,)
+    ).fetchone()
+
+    if city is None:
+        connection.close()
+
+        return {
+            "error": "City not found"
+        }, 404
+
+    # Find the next stop order
+    result = connection.execute(
+        """
+        SELECT COALESCE(MAX(stop_order), 0) + 1 AS next_order
+        FROM trip_stops
+        WHERE trip_id = ?
+        """,
+        (trip_id,)
+    ).fetchone()
+
+    stop_order = result["next_order"]
+
+    # Add the city to the trip
+    connection.execute(
+        """
+        INSERT INTO trip_stops
+        (trip_id, city_id, start_date, end_date, stop_order)
+        VALUES (?, ?, ?, ?, ?)
+        """,
+        (
+            trip_id,
+            city_id,
+            start_date,
+            end_date,
+            stop_order
+        )
+    )
+
+    connection.executescript("""
+    CREATE TABLE IF NOT EXISTS trips (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        name TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+
+    CREATE TABLE IF NOT EXISTS trip_cities (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        trip_id INTEGER NOT NULL,
+        city_id INTEGER NOT NULL,
+        FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE,
+        FOREIGN KEY (city_id) REFERENCES cities(id) ON DELETE CASCADE,
+        UNIQUE(trip_id, city_id)
+    );
+""")
+
+    connection.commit()
+    connection.close()
+
+    return {
+        "message": "City added to trip successfully",
+        "trip_id": trip_id,
+        "city_id": int(city_id),
+        "stop_order": stop_order
+    }, 201
+
+@app.route("/city/<int:city_id>")
+def city_details(city_id):
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    connection = get_db_connection()
+
+    city = connection.execute("""
+        SELECT *
+        FROM cities
+        WHERE id = ?
+    """, (city_id,)).fetchone()
+
+    trips = connection.execute("""
+        SELECT *
+        FROM trips
+        WHERE user_id = ?
+        ORDER BY created_at DESC
+    """, (session["user_id"],)).fetchall()
+
+    connection.close()
+
+    if city is None:
+        return "City not found", 404
+
+    return render_template(
+        "city_details.html",
+        city=city,
+        trips=trips
+    )
 
 @app.route("/trips/create", methods=["GET", "POST"])
 def create_trip():
@@ -233,6 +402,28 @@ def create_trip():
 
     return render_template("create_trip.html")
 
+@app.route("/trips")
+def trips():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    connection = get_db_connection()
+
+    trips = connection.execute("""
+        SELECT *
+        FROM trips
+        WHERE user_id = ?
+        ORDER BY created_at DESC
+    """, (session["user_id"],)).fetchall()
+
+    connection.close()
+
+    return render_template(
+        "trips.html",
+        trips=trips
+    )
+
 @app.route("/dashboard")
 def dashboard():
 
@@ -262,6 +453,39 @@ def dashboard():
         total_trips=total_trips
     )
 
+@app.route("/add-to-trip", methods=["POST"])
+def add_to_trip():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    city_id = request.form.get("city_id")
+    trip_id = request.form.get("trip_id")
+
+    if not city_id or not trip_id:
+        return redirect(url_for("cities"))
+
+    connection = get_db_connection()
+
+    trip = connection.execute("""
+        SELECT *
+        FROM trips
+        WHERE id = ? AND user_id = ?
+    """, (trip_id, session["user_id"])).fetchone()
+
+    if trip is None:
+        connection.close()
+        return "Trip not found", 404
+
+    connection.execute("""
+        INSERT OR IGNORE INTO trip_cities (trip_id, city_id)
+        VALUES (?, ?)
+    """, (trip_id, city_id))
+
+    connection.commit()
+    connection.close()
+
+    return redirect(url_for("city_details", city_id=city_id))
 
 @app.route("/logout")
 def logout():

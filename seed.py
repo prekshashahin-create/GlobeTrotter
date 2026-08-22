@@ -17,14 +17,27 @@ cities = [
 
 connection = get_db_connection()
 
-connection.executemany(
-    """
-    INSERT INTO cities
-    (name, country, region, cost_index, popularity)
-    VALUES (?, ?, ?, ?, ?)
-    """,
-    cities
-)
+for city in cities:
+
+    existing_city = connection.execute(
+        """
+        SELECT id
+        FROM cities
+        WHERE name = ? AND country = ?
+        """,
+        (city[0], city[1])
+    ).fetchone()
+
+    if existing_city is None:
+
+        connection.execute(
+            """
+            INSERT INTO cities
+            (name, country, region, cost_index, popularity)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            city
+        )
 
 connection.commit()
 connection.close()
