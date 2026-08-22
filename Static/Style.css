@@ -8744,3 +8744,253 @@ footer p {
     }
 
 }
+
+/* =========================================================
+   FINAL PLAN TRIP
+========================================================= */
+
+.plan-page {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding:
+        60px 5vw 100px;
+
+}
+
+
+.plan-hero {
+
+    text-align: center;
+
+}
+
+
+.plan-hero h1 {
+
+    margin-top: 18px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(48px, 7vw, 78px);
+
+    line-height: .95;
+
+    letter-spacing: -3px;
+
+}
+
+
+.plan-hero h1 span {
+
+    color: var(--purple);
+
+}
+
+
+.plan-hero p {
+
+    margin-top: 18px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+.plan-options {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 18px;
+
+    margin-top: 55px;
+
+}
+
+
+.plan-option {
+
+    position: relative;
+
+    padding: 30px;
+
+    min-height: 330px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 25px;
+
+    box-shadow:
+        var(--shadow-soft);
+
+    transition: .3s;
+
+}
+
+
+.plan-option:hover {
+
+    transform:
+        translateY(-10px);
+
+    box-shadow:
+        var(--shadow-hover);
+
+}
+
+
+.plan-option.featured {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            145deg,
+            #5144c7,
+            #8175ed
+        );
+
+    border: none;
+
+}
+
+
+.plan-option-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background:
+        var(--purple-soft);
+
+    font-size: 25px;
+
+}
+
+
+.featured .plan-option-icon {
+
+    background:
+        rgba(255,255,255,.15);
+
+}
+
+
+.plan-option > span {
+
+    margin-top: 30px;
+
+    color: var(--purple);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+}
+
+
+.featured > span {
+
+    color:
+        rgba(255,255,255,.65);
+
+}
+
+
+.plan-option h2 {
+
+    margin-top: 9px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 26px;
+
+    line-height: 1.15;
+
+}
+
+
+.plan-option p {
+
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.7;
+
+}
+
+
+.featured p {
+
+    color:
+        rgba(255,255,255,.7);
+
+}
+
+
+.plan-option strong {
+
+    margin-top: auto;
+
+    padding-top: 25px;
+
+    color: var(--purple);
+
+    font-size: 10px;
+
+}
+
+
+.featured strong {
+
+    color: white;
+
+}
+
+
+@media(max-width:800px) {
+
+    .plan-options {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

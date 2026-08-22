@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,7 +12,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
           rel="stylesheet">
-
 </head>
 
 <body>
@@ -21,11 +19,8 @@
 <header class="navbar">
 
     <a href="{{ url_for('dashboard') }}" class="brand">
-
         <span class="brand-icon">✦</span>
-
         GlobeTrotter
-
     </a>
 
     <nav class="nav-links">
@@ -53,195 +48,111 @@
 
 <main class="plan-page">
 
-
     <section class="plan-hero">
 
-        <div>
+        <span class="eyebrow">
+            YOUR NEXT ADVENTURE
+        </span>
 
-            <span class="eyebrow">
-                YOUR NEXT ADVENTURE
-            </span>
+        <h1>
+            How do you want<br>
+            to <span>travel?</span>
+        </h1>
 
-            <h1>
-                How do you want<br>
-                to <span>travel?</span>
-            </h1>
-
-            <p>
-                Whether you know exactly where you're going
-                or just want some inspiration, we've got you covered.
-            </p>
-
-        </div>
-
-        <div class="plan-compass">
-            🧭
-        </div>
+        <p>
+            Choose the planning style that fits your journey.
+        </p>
 
     </section>
 
 
-    <section class="planning-options">
+    <section class="plan-options">
 
-
-        <!-- OPTION 1 -->
-
-        <a href="{{ url_for('create_trip') }}"
-           class="planning-card planning-main">
-
-            <div class="planning-number">
-                01
-            </div>
-
-            <div class="planning-icon">
-                ✦
-            </div>
-
-            <div class="planning-content">
-
-                <span>
-                    FOR THE PLANNERS
-                </span>
-
-                <h2>
-                    Start from Scratch
-                </h2>
-
-                <p>
-                    You already know what you want.
-                    Build your perfect trip from the ground up.
-                </p>
-
-                <div class="planning-arrow">
-                    Start planning
-                    <b>→</b>
-                </div>
-
-            </div>
-
-        </a>
-
-
-        <!-- OPTION 2 -->
-
-        <a href="{{ url_for('cities') }}"
-           class="planning-card">
-
-            <div class="planning-number">
-                02
-            </div>
-
-            <div class="planning-icon">
-                🌍
-            </div>
-
-            <div class="planning-content">
-
-                <span>
-                    FOR THE CURIOUS
-                </span>
-
-                <h2>
-                    Explore Destinations
-                </h2>
-
-                <p>
-                    Browse cities, discover new places
-                    and save destinations that inspire you.
-                </p>
-
-                <div class="planning-arrow">
-                    Explore the world
-                    <b>→</b>
-                </div>
-
-            </div>
-
-        </a>
-
-
-        <!-- OPTION 3 -->
 
         <a href="{{ url_for('quick_plan') }}"
-           class="planning-card">
+           class="plan-option">
 
-            <div class="planning-number">
-                03
-            </div>
-
-            <div class="planning-icon">
+            <div class="plan-option-icon">
                 ⚡
             </div>
 
-            <div class="planning-content">
+            <span>
+                QUICK PLAN
+            </span>
 
-                <span>
-                    FOR THE SPONTANEOUS
-                </span>
+            <h2>
+                I know where I'm going.
+            </h2>
 
-                <h2>
-                    Quick Plan
-                </h2>
+            <p>
+                Tell us your destination, dates and
+                travel style. We'll get you started quickly.
+            </p>
 
-                <p>
-                    Tell us a few things and get a simple
-                    travel plan without the hassle.
-                </p>
+            <strong>
+                Start quick planning →
+            </strong>
 
-                <div class="planning-arrow">
-                    Plan instantly
-                    <b>→</b>
-                </div>
+        </a>
 
+
+        <a href="{{ url_for('select_destinations') }}"
+           class="plan-option featured">
+
+            <div class="plan-option-icon">
+                🧭
             </div>
+
+            <span>
+                BUILD YOUR JOURNEY
+            </span>
+
+            <h2>
+                I want to explore first.
+            </h2>
+
+            <p>
+                Discover destinations and hand-pick
+                the places you want to experience.
+            </p>
+
+            <strong>
+                Explore destinations →
+            </strong>
+
+        </a>
+
+
+        <a href="{{ url_for('create_trip') }}"
+           class="plan-option">
+
+            <div class="plan-option-icon">
+                ✦
+            </div>
+
+            <span>
+                START FROM SCRATCH
+            </span>
+
+            <h2>
+                I'll create my own plan.
+            </h2>
+
+            <p>
+                Create a completely custom trip
+                and build it your way.
+            </p>
+
+            <strong>
+                Create a trip →
+            </strong>
 
         </a>
 
 
     </section>
 
-
-    <section class="planning-tip">
-
-        <span>✦</span>
-
-        <div>
-
-            <strong>
-                Not sure where to start?
-            </strong>
-
-            <p>
-                Start with Explore Destinations and let the
-                world surprise you.
-            </p>
-
-        </div>
-
-    </section>
-
-
 </main>
 
-
-<footer>
-
-    <div class="footer-brand">
-
-        <span class="brand-icon">
-            ✦
-        </span>
-
-        GlobeTrotter
-
-    </div>
-
-    <p>
-        Plan less. Travel more. ✈
-    </p>
-
-</footer>
-
 </body>
-
 </html>

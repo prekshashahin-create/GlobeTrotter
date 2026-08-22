@@ -21,11 +21,8 @@
 <header class="navbar">
 
     <a href="{{ url_for('dashboard') }}" class="brand">
-
         <span class="brand-icon">✦</span>
-
         GlobeTrotter
-
     </a>
 
     <nav class="nav-links">
@@ -51,254 +48,131 @@
 </header>
 
 
-<main class="experience-page">
+<main class="cities-page">
 
-
-    <!-- HERO -->
-
-    <section class="experience-hero">
+    <section class="cities-hero">
 
         <div>
 
             <span class="eyebrow">
-                TRAVEL YOUR WAY
+                TRAVEL EXPERIENCES
             </span>
 
             <h1>
-                Don't just visit.<br>
-                <span>Experience.</span>
+                Travel for the<br>
+                <span>experience.</span>
             </h1>
 
             <p>
-                Choose the kind of memories you want to make.
-                Your destination is only the beginning.
+                Collect moments, discover cultures and
+                make your journey unforgettable.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="detail-mini-grid">
+
+        <div class="detail-mini-card">
+
+            <span>🍜</span>
+
+            <h3>
+                Local Food
+            </h3>
+
+            <p>
+                Discover authentic flavours and
+                unforgettable local dishes.
             </p>
 
         </div>
 
 
-        <div class="experience-symbol">
+        <div class="detail-mini-card">
 
-            ✨
+            <span>🏔️</span>
+
+            <h3>
+                Adventure
+            </h3>
+
+            <p>
+                Find exciting places and experiences
+                outside the ordinary.
+            </p>
+
+        </div>
+
+
+        <div class="detail-mini-card">
+
+            <span>🎭</span>
+
+            <h3>
+                Culture
+            </h3>
+
+            <p>
+                Experience traditions, art and
+                stories from around the world.
+            </p>
+
+        </div>
+
+
+        <div class="detail-mini-card">
+
+            <span>🌅</span>
+
+            <h3>
+                Relaxation
+            </h3>
+
+            <p>
+                Slow down and enjoy beautiful
+                places at your own pace.
+            </p>
+
+        </div>
+
+
+        <div class="detail-mini-card">
+
+            <span>📸</span>
+
+            <h3>
+                Photography
+            </h3>
+
+            <p>
+                Find places that deserve a spot
+                in your travel memories.
+            </p>
+
+        </div>
+
+
+        <div class="detail-mini-card">
+
+            <span>✨</span>
+
+            <h3>
+                Hidden Gems
+            </h3>
+
+            <p>
+                Go beyond the obvious and discover
+                something unexpected.
+            </p>
 
         </div>
 
     </section>
-
-
-    <!-- EXPERIENCE GRID -->
-
-    <section class="experience-grid">
-
-
-        <a href="{{ url_for('cities') }}"
-           class="experience-card experience-adventure">
-
-            <div class="experience-top">
-
-                <span class="experience-icon">
-                    🏔
-                </span>
-
-                <span class="experience-index">
-                    01
-                </span>
-
-            </div>
-
-            <div>
-
-                <span class="experience-label">
-                    ADRENALINE
-                </span>
-
-                <h2>
-                    Adventure
-                </h2>
-
-                <p>
-                    Chase mountains, trails and unforgettable
-                    moments outside your comfort zone.
-                </p>
-
-                <strong>
-                    Find your adventure →
-                </strong>
-
-            </div>
-
-        </a>
-
-
-        <a href="{{ url_for('cities') }}"
-           class="experience-card experience-food">
-
-            <div class="experience-top">
-
-                <span class="experience-icon">
-                    🍜
-                </span>
-
-                <span class="experience-index">
-                    02
-                </span>
-
-            </div>
-
-            <div>
-
-                <span class="experience-label">
-                    TASTE THE WORLD
-                </span>
-
-                <h2>
-                    Food & Flavours
-                </h2>
-
-                <p>
-                    Discover local dishes, hidden cafés and
-                    flavours that tell a story.
-                </p>
-
-                <strong>
-                    Find your flavour →
-                </strong>
-
-            </div>
-
-        </a>
-
-
-        <a href="{{ url_for('cities') }}"
-           class="experience-card experience-culture">
-
-            <div class="experience-top">
-
-                <span class="experience-icon">
-                    🏛
-                </span>
-
-                <span class="experience-index">
-                    03
-                </span>
-
-            </div>
-
-            <div>
-
-                <span class="experience-label">
-                    STORIES & HERITAGE
-                </span>
-
-                <h2>
-                    Culture
-                </h2>
-
-                <p>
-                    Walk through history, traditions and
-                    places that shaped the world.
-                </p>
-
-                <strong>
-                    Discover culture →
-                </strong>
-
-            </div>
-
-        </a>
-
-
-        <a href="{{ url_for('cities') }}"
-           class="experience-card experience-nature">
-
-            <div class="experience-top">
-
-                <span class="experience-icon">
-                    🌿
-                </span>
-
-                <span class="experience-index">
-                    04
-                </span>
-
-            </div>
-
-            <div>
-
-                <span class="experience-label">
-                    ESCAPE & BREATHE
-                </span>
-
-                <h2>
-                    Nature
-                </h2>
-
-                <p>
-                    Find peaceful landscapes, forests, beaches
-                    and places to simply slow down.
-                </p>
-
-                <strong>
-                    Find your escape →
-                </strong>
-
-            </div>
-
-        </a>
-
-
-    </section>
-
-
-    <!-- BOTTOM CTA -->
-
-    <section class="experience-cta">
-
-        <div>
-
-            <span class="section-label">
-                YOUR TRIP. YOUR STORY.
-            </span>
-
-            <h2>
-                What kind of story<br>
-                will you bring home?
-            </h2>
-
-        </div>
-
-        <a href="{{ url_for('plan_trip') }}"
-           class="primary-action">
-
-            Start planning
-
-            <span>→</span>
-
-        </a>
-
-    </section>
-
 
 </main>
-
-
-<footer>
-
-    <div class="footer-brand">
-
-        <span class="brand-icon">
-            ✦
-        </span>
-
-        GlobeTrotter
-
-    </div>
-
-    <p>
-        Collect moments. ✈
-    </p>
-
-</footer>
 
 </body>
 
