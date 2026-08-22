@@ -4,335 +4,457 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard | GlobeTrotter</title>
+    <title>GlobeTrotter | Dashboard</title>
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
 
 </head>
 
+
 <body>
 
-    <!-- NAVBAR -->
+<header class="navbar">
 
-    <header class="navbar">
+    <a href="{{ url_for('dashboard') }}" class="brand">
 
-        <a href="/dashboard" class="brand">
+        <span class="brand-icon">✦</span>
 
-            <span class="brand-icon">✦</span>
+        <span>GlobeTrotter</span>
 
-            <span>GlobeTrotter</span>
+    </a>
 
+
+    <nav class="nav-links">
+
+        <a href="{{ url_for('dashboard') }}"
+           class="active">
+            Dashboard
         </a>
 
-        <nav class="nav-links">
-
-    <a href="{{ url_for('dashboard') }}">
-        Dashboard
-    </a>
-
-    <a href="{{ url_for('explore') }}">
-        Explore
-    </a>
-
-    <a href="{{ url_for('plan_trip') }}">
-        Plan Trip
-    </a>
-
-</nav>
-
-        <a href="/logout" class="logout-btn">
-            Logout
+        <a href="{{ url_for('explore') }}">
+            Explore
         </a>
 
-    </header>
+        <a href="{{ url_for('plan_trip') }}">
+            Plan Trip
+        </a>
 
+    </nav>
 
-    <!-- DASHBOARD HERO -->
 
-    <main class="dashboard">
+    <a href="{{ url_for('logout') }}"
+       class="logout-btn">
 
-        <section class="dashboard-hero">
+        Logout
 
-            <div>
+    </a>
 
-                <span class="eyebrow">
-                    YOUR TRAVEL SPACE
-                </span>
+</header>
 
-                <h1>
-                    Welcome back,
-                    <span>{{ session["user_name"] }}</span> 👋
-                </h1>
 
-                <p>
-                    Your next adventure is closer than you think.
-                    Start planning something unforgettable.
-                </p>
+<main class="dashboard-page">
 
-            </div>
 
+    <!-- HERO -->
 
-            <a href="/create-trip" class="primary-btn">
-                + Plan a Trip
-            </a>
+    <section class="dashboard-hero">
 
-        </section>
+        <div class="hero-copy">
 
+            <span class="eyebrow">
+                YOUR TRAVEL SPACE
+            </span>
 
-        <!-- STATS -->
 
-        <section class="stats-grid">
+            <h1>
+                Hello,
+                <span>{{ session["user_name"] }}</span>.
+                <br>
+                Where will you go next?
+            </h1>
 
-            <div class="stat-card">
 
-                <div class="stat-icon purple">
-                    ✈
-                </div>
+            <p>
+                Your journeys, destinations and adventures —
+                all in one beautiful place.
+            </p>
 
-                <div>
 
-                    <span class="stat-label">
-                        MY TRIPS
-                    </span>
+            <div class="hero-actions">
 
-                    <h2>
-                        {{ trips|length if trips is defined else 0 }}
-                    </h2>
+                <a href="{{ url_for('plan_trip') }}"
+                   class="primary-action">
 
-                </div>
+                    ✦ Plan a trip
 
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon orange">
-                    🌍
-                </div>
-
-                <div>
-
-                    <span class="stat-label">
-                        DESTINATIONS
-                    </span>
-
-                    <h2>
-                        {{ cities|length if cities is defined else 0 }}
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon green">
-                    🧳
-                </div>
-
-                <div>
-
-                    <span class="stat-label">
-                        ADVENTURES
-                    </span>
-
-                    <h2>
-                        Explore
-                    </h2>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- MAIN CONTENT -->
-
-        <section class="dashboard-grid">
-
-            <!-- TRIPS -->
-
-            <div class="dashboard-panel">
-
-                <div class="panel-header">
-
-                    <div>
-
-                        <span class="section-label">
-                            YOUR JOURNEYS
-                        </span>
-
-                        <h2>
-                            Upcoming Trips
-                        </h2>
-
-                    </div>
-
-                    <a href="/create-trip" class="small-btn">
-                        + New Trip
-                    </a>
-
-                </div>
-
-
-                {% if trips is defined and trips %}
-
-                    <div class="trip-list">
-
-                        {% for trip in trips %}
-
-                            <div class="trip-card">
-
-                                <div class="trip-icon">
-                                    ✈️
-                                </div>
-
-                                <div class="trip-info">
-
-                                    <h3>
-                                        {{ trip["name"] }}
-                                    </h3>
-
-                                    <p>
-                                        {{ trip["start_date"] }}
-                                        →
-                                        {{ trip["end_date"] }}
-                                    </p>
-
-                                </div>
-
-                                <span class="trip-arrow">
-                                    →
-                                </span>
-
-                            </div>
-
-                        {% endfor %}
-
-                    </div>
-
-                {% else %}
-
-                    <div class="empty-dashboard">
-
-                        <div>
-                            🗺️
-                        </div>
-
-                        <h3>
-                            Your next adventure starts here
-                        </h3>
-
-                        <p>
-                            You haven't planned any trips yet.
-                        </p>
-
-                        <a href="/create-trip" class="primary-btn">
-                            Create your first trip
-                        </a>
-
-                    </div>
-
-                {% endif %}
-
-            </div>
-
-
-            <!-- QUICK ACTIONS -->
-
-            <div class="dashboard-panel quick-panel">
-
-                <span class="section-label">
-                    QUICK ACTIONS
-                </span>
-
-                <h2>
-                    What do you want to do?
-                </h2>
-
-
-                <a href="/cities" class="quick-action">
-
-                    <span class="quick-action-icon">
-                        🌎
-                    </span>
-
-                    <span>
-                        <strong>Explore destinations</strong>
-                        <small>Find your next place</small>
-                    </span>
-
-                    <b>→</b>
+                    <span>→</span>
 
                 </a>
 
 
-                <a href="/create-trip" class="quick-action">
+                <a href="{{ url_for('cities') }}"
+                   class="secondary-action">
 
-                    <span class="quick-action-icon">
-                        ✈️
-                    </span>
-
-                    <span>
-                        <strong>Plan a trip</strong>
-                        <small>Create a new journey</small>
-                    </span>
-
-                    <b>→</b>
-
-                </a>
-
-
-                <a href="/cities" class="quick-action">
-
-                    <span class="quick-action-icon">
-                        📍
-                    </span>
-
-                    <span>
-                        <strong>Discover cities</strong>
-                        <small>Browse destinations</small>
-                    </span>
-
-                    <b>→</b>
+                    Explore destinations
 
                 </a>
 
             </div>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <div class="footer-brand">
-
-            <span class="brand-icon">✦</span>
-
-            GlobeTrotter
 
         </div>
 
-        <p>
-            Plan less. Travel more. ✈
-        </p>
 
-    </footer>
+        <div class="hero-visual">
+
+            <div class="hero-orbit orbit-one"></div>
+
+            <div class="hero-orbit orbit-two"></div>
+
+            <div class="hero-globe">
+
+                🌍
+
+            </div>
+
+
+            <div class="floating-card card-one">
+
+                <span>✈</span>
+
+                <div>
+                    <strong>Adventure</strong>
+                    <small>is waiting</small>
+                </div>
+
+            </div>
+
+
+            <div class="floating-card card-two">
+
+                <span>📍</span>
+
+                <div>
+                    <strong>{{ cities|length }}</strong>
+                    <small>destinations</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK STATS -->
+
+    <section class="dashboard-stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ✈
+            </div>
+
+            <div>
+
+                <strong>
+                    {{ trips|length }}
+                </strong>
+
+                <span>
+                    Trips planned
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🌍
+            </div>
+
+            <div>
+
+                <strong>
+                    {{ cities|length }}
+                </strong>
+
+                <span>
+                    Destinations
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ✨
+            </div>
+
+            <div>
+
+                <strong>
+                    Ready
+                </strong>
+
+                <span>
+                    For adventure
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TRIPS -->
+
+    <section class="dashboard-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    YOUR JOURNEYS
+                </span>
+
+                <h2>
+                    Trips you've planned
+                </h2>
+
+            </div>
+
+
+            <a href="{{ url_for('plan_trip') }}"
+               class="section-link">
+
+                + New trip
+
+            </a>
+
+        </div>
+
+
+        {% if trips %}
+
+        <div class="trip-grid">
+
+            {% for trip in trips %}
+
+            <article class="trip-card">
+
+
+                <div class="trip-cover">
+
+                    <span class="trip-number">
+                        {{ "%02d"|format(loop.index) }}
+                    </span>
+
+                    <span class="trip-plane">
+                        ✈
+                    </span>
+
+                </div>
+
+
+                <div class="trip-content">
+
+                    <span class="trip-status">
+                        PLANNED
+                    </span>
+
+
+                    <h3>
+                        {{ trip["name"] }}
+                    </h3>
+
+
+                    {% if trip["description"] %}
+
+                    <p>
+                        {{ trip["description"] }}
+                    </p>
+
+                    {% else %}
+
+                    <p>
+                        Your next adventure awaits.
+                    </p>
+
+                    {% endif %}
+
+
+                    <div class="trip-meta">
+
+                        {% if trip["start_date"] %}
+
+                        <span>
+                            📅 {{ trip["start_date"] }}
+                        </span>
+
+                        {% endif %}
+
+
+                        {% if trip["end_date"] %}
+
+                        <span>
+                            → {{ trip["end_date"] }}
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- EMPTY STATE -->
+
+        <div class="empty-trip-state">
+
+            <div class="empty-illustration">
+                🧳
+            </div>
+
+            <div>
+
+                <span class="section-label">
+                    YOUR FIRST ADVENTURE
+                </span>
+
+                <h3>
+                    You haven't planned a trip yet.
+                </h3>
+
+                <p>
+                    Start with a destination and we'll
+                    help you turn it into an unforgettable journey.
+                </p>
+
+                <a href="{{ url_for('plan_trip') }}"
+                   class="primary-action">
+
+                    Start planning
+
+                    <span>→</span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- EXPLORE -->
+
+    <section class="discover-section">
+
+        <div class="discover-copy">
+
+            <span class="section-label">
+                GET INSPIRED
+            </span>
+
+            <h2>
+                The world is<br>
+                <span>waiting for you.</span>
+            </h2>
+
+            <p>
+                Discover places worth remembering,
+                experiences worth trying and stories
+                worth bringing home.
+            </p>
+
+
+            <a href="{{ url_for('cities') }}"
+               class="primary-action">
+
+                Explore cities
+
+                <span>→</span>
+
+            </a>
+
+        </div>
+
+
+        <div class="discover-visual">
+
+            <div class="discover-circle">
+
+                <span>✦</span>
+
+            </div>
+
+
+            <div class="discover-location location-one">
+                📍 Paris
+            </div>
+
+            <div class="discover-location location-two">
+                📍 Tokyo
+            </div>
+
+            <div class="discover-location location-three">
+                📍 Bali
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <div class="footer-brand">
+
+        <span class="brand-icon">
+            ✦
+        </span>
+
+        GlobeTrotter
+
+    </div>
+
+
+    <p>
+        Plan less. Travel more. ✈
+    </p>
+
+</footer>
+
 
 </body>
 

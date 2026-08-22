@@ -2,155 +2,224 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Plan Trip | GlobeTrotter</title>
+    <title>Plan Your Trip | GlobeTrotter</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
           rel="stylesheet">
+
 </head>
 
 <body>
 
 <header class="navbar">
 
-    <a href="/dashboard" class="brand">
+    <a href="{{ url_for('dashboard') }}" class="brand">
+
         <span class="brand-icon">✦</span>
-        <span>GlobeTrotter</span>
+
+        GlobeTrotter
+
     </a>
 
     <nav class="nav-links">
 
-    <a href="{{ url_for('dashboard') }}">
-        Dashboard
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('explore') }}">
+            Explore
+        </a>
+
+        <a href="{{ url_for('plan_trip') }}" class="active">
+            Plan Trip
+        </a>
+
+    </nav>
+
+    <a href="{{ url_for('logout') }}" class="logout-btn">
+        Logout
     </a>
-
-    <a href="{{ url_for('explore') }}">
-        Explore
-    </a>
-
-    <a href="{{ url_for('plan_trip') }}">
-        Plan Trip
-    </a>
-
-</nav>
-
-    <a href="/logout" class="logout-btn">Logout</a>
 
 </header>
 
 
-<main class="choice-page">
+<main class="plan-page">
 
-    <section class="choice-hero">
 
-        <span class="eyebrow">
-            YOUR JOURNEY STARTS HERE
-        </span>
+    <section class="plan-hero">
 
-        <h1>
-            How do you want to<br>
-            <span>plan your trip?</span>
-        </h1>
+        <div>
 
-        <p>
-            Choose the planning style that works best for you.
-            You can always customize your journey later.
-        </p>
+            <span class="eyebrow">
+                YOUR NEXT ADVENTURE
+            </span>
+
+            <h1>
+                How do you want<br>
+                to <span>travel?</span>
+            </h1>
+
+            <p>
+                Whether you know exactly where you're going
+                or just want some inspiration, we've got you covered.
+            </p>
+
+        </div>
+
+        <div class="plan-compass">
+            🧭
+        </div>
 
     </section>
 
 
-    <section class="choice-grid">
+    <section class="planning-options">
+
 
         <!-- OPTION 1 -->
 
-        <a href="{{ url_for('create_trip') }}" class="choice-card">
+        <a href="{{ url_for('create_trip') }}"
+           class="planning-card planning-main">
 
-            <div class="choice-icon">
-                ✨
+            <div class="planning-number">
+                01
             </div>
 
-            <span class="choice-number">
-                01
-            </span>
+            <div class="planning-icon">
+                ✦
+            </div>
 
-            <h2>
-                Start from Scratch
-            </h2>
+            <div class="planning-content">
 
-            <p>
-                Build your perfect trip step by step.
-                Choose your dates, destinations and itinerary.
-            </p>
+                <span>
+                    FOR THE PLANNERS
+                </span>
 
-            <span class="choice-link">
-                Start planning <b>→</b>
-            </span>
+                <h2>
+                    Start from Scratch
+                </h2>
+
+                <p>
+                    You already know what you want.
+                    Build your perfect trip from the ground up.
+                </p>
+
+                <div class="planning-arrow">
+                    Start planning
+                    <b>→</b>
+                </div>
+
+            </div>
 
         </a>
 
 
         <!-- OPTION 2 -->
 
-        <a href="/cities" class="choice-card">
+        <a href="{{ url_for('cities') }}"
+           class="planning-card">
 
-            <div class="choice-icon">
+            <div class="planning-number">
+                02
+            </div>
+
+            <div class="planning-icon">
                 🌍
             </div>
 
-            <span class="choice-number">
-                02
-            </span>
+            <div class="planning-content">
 
-            <h2>
-                Explore Destinations
-            </h2>
+                <span>
+                    FOR THE CURIOUS
+                </span>
 
-            <p>
-                Discover cities first and add the places
-                you love to your travel plan.
-            </p>
+                <h2>
+                    Explore Destinations
+                </h2>
 
-            <span class="choice-link">
-                Explore cities <b>→</b>
-            </span>
+                <p>
+                    Browse cities, discover new places
+                    and save destinations that inspire you.
+                </p>
+
+                <div class="planning-arrow">
+                    Explore the world
+                    <b>→</b>
+                </div>
+
+            </div>
 
         </a>
 
 
         <!-- OPTION 3 -->
 
-        <a href="/quick-plan" class="choice-card">
+        <a href="{{ url_for('quick_plan') }}"
+           class="planning-card">
 
-            <div class="choice-icon">
-                🧭
+            <div class="planning-number">
+                03
             </div>
 
-            <span class="choice-number">
-                03
-            </span>
+            <div class="planning-icon">
+                ⚡
+            </div>
 
-            <h2>
-                Quick Plan
-            </h2>
+            <div class="planning-content">
 
-            <p>
-                Short on time? Give us your destination
-                and dates and create a simple plan quickly.
-            </p>
+                <span>
+                    FOR THE SPONTANEOUS
+                </span>
 
-            <span class="choice-link">
-                Quick plan <b>→</b>
-            </span>
+                <h2>
+                    Quick Plan
+                </h2>
+
+                <p>
+                    Tell us a few things and get a simple
+                    travel plan without the hassle.
+                </p>
+
+                <div class="planning-arrow">
+                    Plan instantly
+                    <b>→</b>
+                </div>
+
+            </div>
 
         </a>
 
+
     </section>
+
+
+    <section class="planning-tip">
+
+        <span>✦</span>
+
+        <div>
+
+            <strong>
+                Not sure where to start?
+            </strong>
+
+            <p>
+                Start with Explore Destinations and let the
+                world surprise you.
+            </p>
+
+        </div>
+
+    </section>
+
 
 </main>
 
@@ -158,8 +227,13 @@
 <footer>
 
     <div class="footer-brand">
-        <span class="brand-icon">✦</span>
+
+        <span class="brand-icon">
+            ✦
+        </span>
+
         GlobeTrotter
+
     </div>
 
     <p>
@@ -169,4 +243,5 @@
 </footer>
 
 </body>
+
 </html>

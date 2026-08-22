@@ -2,96 +2,148 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Plan a Trip | GlobeTrotter</title>
+    <title>Create Trip | GlobeTrotter</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
           rel="stylesheet">
+
 </head>
 
 <body>
 
 <header class="navbar">
 
-    <a href="/dashboard" class="brand">
+    <a href="{{ url_for('dashboard') }}" class="brand">
         <span class="brand-icon">✦</span>
-        <span>GlobeTrotter</span>
+        GlobeTrotter
     </a>
 
     <nav class="nav-links">
 
-    <a href="{{ url_for('dashboard') }}">
-        Dashboard
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('explore') }}">
+            Explore
+        </a>
+
+        <a href="{{ url_for('plan_trip') }}" class="active">
+            Plan Trip
+        </a>
+
+    </nav>
+
+    <a href="{{ url_for('logout') }}" class="logout-btn">
+        Logout
     </a>
-
-    <a href="{{ url_for('explore') }}">
-        Explore
-    </a>
-
-    <a href="{{ url_for('plan_trip') }}">
-        Plan Trip
-    </a>
-
-</nav>
-
-    <a href="/logout" class="logout-btn">Logout</a>
 
 </header>
 
 
-<main class="create-trip-page">
+<main class="create-page">
 
-    <section class="create-trip-hero">
+
+    <!-- LEFT SIDE -->
+
+    <section class="create-intro">
 
         <span class="eyebrow">
-            YOUR NEXT ADVENTURE
+            NEW JOURNEY
         </span>
 
         <h1>
-            Plan something<br>
-            <span>unforgettable.</span>
+            Let's give your<br>
+            next adventure<br>
+            a <span>name.</span>
         </h1>
 
         <p>
-            Give your journey a name, choose your dates,
-            and let's start building your perfect trip.
+            Every great journey starts with a simple idea.
+            Tell us the basics and we'll take it from there.
         </p>
+
+
+        <div class="journey-decoration">
+
+            <div class="route-line"></div>
+
+            <div class="route-point point-a">
+                <span>✈</span>
+            </div>
+
+            <div class="route-point point-b">
+                <span>📍</span>
+            </div>
+
+            <div class="route-point point-c">
+                <span>✦</span>
+            </div>
+
+        </div>
 
     </section>
 
 
-    <section class="trip-form-card">
+    <!-- FORM -->
 
-        <form action="/create-trip" method="POST">
+    <section class="create-form-card">
+
+        <div class="form-top">
+
+            <div>
+
+                <span class="form-step">
+                    STEP 01 / 03
+                </span>
+
+                <h2>
+                    Trip basics
+                </h2>
+
+            </div>
+
+            <span class="form-icon">
+                🧳
+            </span>
+
+        </div>
+
+
+        <form method="POST"
+              action="{{ url_for('create_trip') }}">
+
 
             <div class="form-group">
 
-                <label for="trip_name">
-                    Trip name
+                <label for="name">
+                    What should we call this trip?
                 </label>
 
                 <input
                     type="text"
-                    id="trip_name"
-                    name="trip_name"
-                    placeholder="e.g. Summer in Europe"
+                    id="name"
+                    name="name"
+                    placeholder="e.g. Summer in Japan"
                     required
                 >
 
             </div>
 
 
-            <div class="date-grid">
+            <div class="date-row">
 
                 <div class="form-group">
 
                     <label for="start_date">
-                        Start date
+                        Leaving
                     </label>
 
                     <input
@@ -104,10 +156,15 @@
                 </div>
 
 
+                <div class="date-arrow">
+                    →
+                </div>
+
+
                 <div class="form-group">
 
                     <label for="end_date">
-                        End date
+                        Coming back
                     </label>
 
                     <input
@@ -124,44 +181,67 @@
 
             <div class="form-group">
 
-                <label for="description">
-                    Tell us about the trip
-                    <span class="optional">Optional</span>
-                </label>
+                <div class="label-row">
+
+                    <label for="description">
+                        What's the vibe?
+                    </label>
+
+                    <span>
+                        OPTIONAL
+                    </span>
+
+                </div>
 
                 <textarea
                     id="description"
                     name="description"
-                    rows="4"
-                    placeholder="Beach holiday, family trip, adventure..."
+                    rows="5"
+                    placeholder="Beach escape, food adventure, family holiday..."
                 ></textarea>
 
             </div>
 
 
-            <button type="submit" class="create-trip-btn">
-                Create my trip
+            <div class="vibe-suggestions">
+
+                <button type="button"
+                        onclick="setVibe('Beach escape')">
+                    🏖 Beach
+                </button>
+
+                <button type="button"
+                        onclick="setVibe('Food adventure')">
+                    🍜 Food
+                </button>
+
+                <button type="button"
+                        onclick="setVibe('Adventure trip')">
+                    🏔 Adventure
+                </button>
+
+                <button type="button"
+                        onclick="setVibe('Cultural exploration')">
+                    🏛 Culture
+                </button>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="create-submit">
+
+                Create my journey
+
                 <span>→</span>
+
             </button>
+
 
         </form>
 
     </section>
-
-
-    <div class="travel-tip">
-
-        <span>💡</span>
-
-        <div>
-            <strong>Travel tip</strong>
-            <p>
-                A good trip starts with a good plan.
-                You can always change your itinerary later.
-            </p>
-        </div>
-
-    </div>
 
 </main>
 
@@ -169,15 +249,32 @@
 <footer>
 
     <div class="footer-brand">
-        <span class="brand-icon">✦</span>
+
+        <span class="brand-icon">
+            ✦
+        </span>
+
         GlobeTrotter
+
     </div>
 
     <p>
-        Plan less. Travel more. ✈
+        Your story starts here. ✈
     </p>
 
 </footer>
 
+
+<script>
+
+function setVibe(text) {
+
+    document.getElementById("description").value = text;
+
+}
+
+</script>
+
 </body>
+
 </html>

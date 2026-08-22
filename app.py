@@ -558,6 +558,44 @@ def logout():
 
     return redirect(url_for("login"))
 
+@app.route("/trip/<int:trip_id>")
+def trip_details(trip_id):
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    connection = get_db_connection()
+
+    trip = connection.execute("""
+        SELECT *
+        FROM trips
+        WHERE id = ?
+        AND user_id = ?
+    """, (trip_id, session["user_id"])).fetchone()
+
+    if trip is None:
+        connection.close()
+        return "Trip not found", 404
+
+    stops = connection.execute("""
+        SELECT
+            trip_stops.*,
+            cities.name AS city_name,
+            cities.country AS country
+        FROM trip_stops
+        JOIN cities
+            ON trip_stops.city_id = cities.id
+        WHERE trip_stops.trip_id = ?
+        ORDER BY trip_stops.stop_order
+    """, (trip_id,)).fetchall()
+
+    connection.close()
+
+    return render_template(
+        "trip_details.html",
+        trip=trip,
+        stops=stops
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)

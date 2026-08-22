@@ -4,342 +4,288 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ city["name"] }} - GlobeTrotter</title>
+    <title>{{ city["name"] }} | GlobeTrotter</title>
 
-    <style>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background: #f5f7fb;
-            color: #222;
-        }
-
-        /* HEADER */
-
-        header {
-            background: #6c4df6;
-            color: white;
-
-            padding: 20px 50px;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            font-size: 28px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 25px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* MAIN */
-
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 40px auto;
-        }
-
-        .back {
-            display: inline-block;
-            margin-bottom: 25px;
-
-            color: #6c4df6;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .back:hover {
-            text-decoration: underline;
-        }
-
-        /* CITY HERO */
-
-        .city-hero {
-            background: white;
-            border-radius: 20px;
-
-            padding: 40px;
-
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-
-            margin-bottom: 30px;
-        }
-
-        .city-icon {
-            width: 75px;
-            height: 75px;
-
-            background: #eee9ff;
-            border-radius: 50%;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 35px;
-
-            margin-bottom: 20px;
-        }
-
-        .city-hero h2 {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .country {
-            color: #6c4df6;
-            font-size: 19px;
-            font-weight: bold;
-
-            margin-bottom: 20px;
-        }
-
-        .description {
-            color: #666;
-            line-height: 1.7;
-            font-size: 17px;
-        }
-
-        /* TRIPS */
-
-        .trips-section {
-            background: white;
-            border-radius: 20px;
-
-            padding: 30px;
-
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        }
-
-        .trips-section h3 {
-            font-size: 26px;
-            margin-bottom: 20px;
-        }
-
-        .trip-card {
-            border: 1px solid #eee;
-
-            border-radius: 12px;
-
-            padding: 18px;
-
-            margin-bottom: 15px;
-        }
-
-        .trip-card h4 {
-            font-size: 19px;
-            margin-bottom: 8px;
-        }
-
-        .trip-card p {
-            color: #777;
-        }
-
-        .no-trips {
-            color: #777;
-            padding: 20px 0;
-        }
-
-        /* BUTTON */
-
-        .add-trip {
-            display: inline-block;
-
-            margin-top: 25px;
-
-            background: #6c4df6;
-            color: white;
-
-            padding: 12px 22px;
-
-            border-radius: 10px;
-
-            text-decoration: none;
-
-            font-weight: bold;
-        }
-
-        .add-trip:hover {
-            background: #5739d6;
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 600px) {
-
-            header {
-                padding: 18px 20px;
-
-                flex-direction: column;
-
-                gap: 12px;
-            }
-
-            nav a {
-                margin: 0 8px;
-            }
-
-            .container {
-                width: 92%;
-            }
-
-            .city-hero {
-                padding: 25px;
-            }
-
-            .city-hero h2 {
-                font-size: 30px;
-            }
-
-        }
-
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
 
 </head>
 
-
 <body>
 
+<header class="navbar">
 
-<header>
+    <a href="{{ url_for('dashboard') }}" class="brand">
+        <span class="brand-icon">✦</span>
+        GlobeTrotter
+    </a>
 
-    <h1>🌍 GlobeTrotter</h1>
+    <nav class="nav-links">
 
-    <nav>
-
-        <a href="/dashboard">
+        <a href="{{ url_for('dashboard') }}">
             Dashboard
         </a>
 
-        <a href="/cities">
-            Cities
+        <a href="{{ url_for('explore') }}" class="active">
+            Explore
         </a>
 
-        <a href="/logout">
-            Logout
+        <a href="{{ url_for('plan_trip') }}">
+            Plan Trip
         </a>
 
     </nav>
 
+    <a href="{{ url_for('logout') }}" class="logout-btn">
+        Logout
+    </a>
+
 </header>
 
 
-<main class="container">
+<main class="city-detail-page">
 
 
-    <a href="/cities" class="back">
-        ← Back to Cities
+    <!-- BACK -->
+
+    <a href="{{ url_for('cities') }}"
+       class="back-link">
+
+        ← Back to destinations
+
     </a>
 
 
-    <!-- CITY INFORMATION -->
+    <!-- HERO -->
 
-    <section class="city-hero">
+    <section class="city-detail-hero">
 
-        <div class="city-icon">
-            🌆
+        <div class="city-detail-art">
+
+            <span class="detail-art-number">
+                DESTINATION
+            </span>
+
+            <span class="detail-art-icon">
+                🌍
+            </span>
+
+            <div class="detail-ring ring-one"></div>
+            <div class="detail-ring ring-two"></div>
+
         </div>
 
-        <h2>
-            {{ city["name"] }}
-        </h2>
 
-        <p class="country">
-            📍 {{ city["country"] }}
-        </p>
+        <div class="city-detail-info">
 
+            <span class="city-country">
+                {{ city["country"] }}
+            </span>
 
-        {% if city["description"] %}
+            <h1>
+                {{ city["name"] }}
+            </h1>
 
-            <p class="description">
-                {{ city["description"] }}
+            <p>
+                {% if city["description"] %}
+                    {{ city["description"] }}
+                {% else %}
+                    Discover the sights, flavours, culture and
+                    experiences of {{ city["name"] }}.
+                {% endif %}
             </p>
 
-        {% else %}
+            <div class="city-detail-tags">
 
-            <p class="description">
-                Explore this amazing destination and
-                discover its attractions, culture and experiences.
-            </p>
+                <span>📍 {{ city["country"] }}</span>
 
-        {% endif %}
+                <span>✦ Discover</span>
 
+                <span>✈ Travel</span>
 
-        <a href="{{ url_for('create_trip') }}" class="add-trip">
-    + Add to Trip
-</a>
+            </div>
+
+        </div>
 
     </section>
 
 
-    <!-- USER TRIPS -->
+    <!-- PLAN BOX -->
 
-    <section class="trips-section">
+    <section class="add-trip-panel">
 
-        <h3>
-            ✈️ Your Trips
-        </h3>
+        <div>
+
+            <span class="section-label">
+                ADD TO YOUR JOURNEY
+            </span>
+
+            <h2>
+                Make {{ city["name"] }} part of your trip.
+            </h2>
+
+            <p>
+                Choose one of your existing trips to save
+                this destination.
+            </p>
+
+        </div>
 
 
         {% if trips %}
 
-            {% for trip in trips %}
+        <form method="POST"
+              action="{{ url_for('add_to_trip') }}"
+              class="add-trip-form">
 
-                <div class="trip-card">
+            <input
+                type="hidden"
+                name="city_id"
+                value="{{ city['id'] }}"
+            >
 
-                    <h4>
-                        {{ trip["name"] }}
-                    </h4>
+            <select name="trip_id" required>
 
-                    {% if trip["start_date"] %}
+                <option value="">
+                    Choose a trip...
+                </option>
 
-                        <p>
-                            {{ trip["start_date"] }}
+                {% for trip in trips %}
 
-                            {% if trip["end_date"] %}
-                                → {{ trip["end_date"] }}
-                            {% endif %}
-                        </p>
+                <option value="{{ trip['id'] }}">
+                    {{ trip['name'] }}
+                </option>
 
-                    {% endif %}
+                {% endfor %}
 
-                </div>
+            </select>
 
-            {% endfor %}
+
+            <button type="submit">
+
+                Add to Trip
+
+                <span>→</span>
+
+            </button>
+
+        </form>
 
         {% else %}
 
-            <p class="no-trips">
-                You haven't created any trips yet.
+        <div class="no-trip-box">
+
+            <p>
+                You don't have a trip yet.
             </p>
+
+            <a href="{{ url_for('create_trip') }}"
+               class="primary-action">
+
+                Create your first trip →
+
+            </a>
+
+        </div>
 
         {% endif %}
 
+    </section>
+
+
+    <!-- EXPERIENCE PREVIEW -->
+
+    <section class="city-detail-section">
+
+        <div class="detail-heading">
+
+            <span class="section-label">
+                WHY GO
+            </span>
+
+            <h2>
+                Imagine your time here.
+            </h2>
+
+        </div>
+
+
+        <div class="detail-mini-grid">
+
+            <div class="detail-mini-card">
+
+                <span>🌅</span>
+
+                <h3>
+                    Discover
+                </h3>
+
+                <p>
+                    Explore places you've never seen before.
+                </p>
+
+            </div>
+
+
+            <div class="detail-mini-card">
+
+                <span>🍜</span>
+
+                <h3>
+                    Taste
+                </h3>
+
+                <p>
+                    Experience the local flavours and culture.
+                </p>
+
+            </div>
+
+
+            <div class="detail-mini-card">
+
+                <span>📸</span>
+
+                <h3>
+                    Remember
+                </h3>
+
+                <p>
+                    Turn your journey into memories worth keeping.
+                </p>
+
+            </div>
+
+        </div>
 
     </section>
 
 
 </main>
 
+
+<footer>
+
+    <div class="footer-brand">
+
+        <span class="brand-icon">
+            ✦
+        </span>
+
+        GlobeTrotter
+
+    </div>
+
+    <p>
+        Your journey starts with one destination. ✈
+    </p>
+
+</footer>
 
 </body>
 

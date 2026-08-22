@@ -4,328 +4,393 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Explore | GlobeTrotter</title>
+    <title>Explore Cities | GlobeTrotter</title>
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
 
 </head>
 
-
 <body>
 
-    <!-- Navigation -->
+<header class="navbar">
 
-    <header class="navbar">
+    <a href="{{ url_for('dashboard') }}" class="brand">
+        <span class="brand-icon">✦</span>
+        GlobeTrotter
+    </a>
 
-        <a href="/dashboard" class="brand">
+    <nav class="nav-links">
 
-            <span class="brand-icon">✦</span>
-
-            <span>GlobeTrotter</span>
-
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
         </a>
 
-
-        <nav class="nav-links">
-
-    <a href="{{ url_for('dashboard') }}">
-        Dashboard
-    </a>
-
-    <a href="{{ url_for('explore') }}">
-        Explore
-    </a>
-
-    <a href="{{ url_for('plan_trip') }}">
-        Plan Trip
-    </a>
-
-</nav>
-
-
-        <a href="/logout" class="logout-btn">
-            Logout
+        <a href="{{ url_for('explore') }}" class="active">
+            Explore
         </a>
 
-    </header>
+        <a href="{{ url_for('plan_trip') }}">
+            Plan Trip
+        </a>
+
+    </nav>
+
+    <a href="{{ url_for('logout') }}" class="logout-btn">
+        Logout
+    </a>
+
+</header>
 
 
+<main class="cities-page">
 
-    <!-- Hero -->
 
-    <section class="explore-hero">
+    <!-- HERO -->
 
-        <div class="hero-content">
+    <section class="cities-hero">
+
+        <div>
 
             <span class="eyebrow">
-                ✈ DISCOVER THE WORLD
+                DESTINATION LIBRARY
             </span>
 
             <h1>
-                Where will you<br>
-                <span>go next?</span>
+                Find somewhere<br>
+                <span>worth remembering.</span>
             </h1>
 
             <p>
-                Explore beautiful destinations, discover new experiences,
-                and create memories worth travelling for.
+                Explore destinations, discover new possibilities
+                and find the place that feels like your next story.
             </p>
-
-
-            <div class="search-box">
-
-                <span>⌕</span>
-
-                <input
-                    type="text"
-                    id="citySearch"
-                    placeholder="Search destinations..."
-                >
-
-            </div>
 
         </div>
 
 
-        <div class="hero-decoration">
+        <div class="cities-count">
 
-            <div class="floating-card card-one">
-                ✈️
-                <span>Adventure</span>
-            </div>
+            <strong>
+                {{ cities|length }}
+            </strong>
 
-            <div class="floating-card card-two">
-                🌎
-                <span>Explore</span>
-            </div>
+            <span>
+                destinations<br>
+                waiting for you
+            </span>
 
         </div>
 
     </section>
 
 
+    <!-- SEARCH -->
 
-    <!-- Destinations -->
+    <section class="city-tools">
 
-    <main class="cities-container">
+        <div class="city-search">
 
-        <div class="section-heading">
-
-            <div>
-
-                <span class="section-label">
-                    POPULAR DESTINATIONS
-                </span>
-
-                <h2>
-                    Explore places you'll love
-                </h2>
-
-            </div>
-
-            <span class="destination-count">
-                {{ cities|length }} destinations
+            <span>
+                ⌕
             </span>
+
+            <input
+                type="text"
+                id="citySearch"
+                placeholder="Search a city or country..."
+                onkeyup="filterCities()"
+            >
 
         </div>
 
 
-        {% if cities %}
+        <div class="city-filter">
 
-        <div class="city-grid" id="cityGrid">
+            <button
+                class="filter-btn active"
+                onclick="showAll(this)">
+                All
+            </button>
 
-            {% for city in cities %}
+            <button
+                class="filter-btn"
+                onclick="filterCountry('India', this)">
+                India
+            </button>
 
-            <article class="city-card">
+            <button
+                class="filter-btn"
+                onclick="filterCountry('Japan', this)">
+                Japan
+            </button>
 
-                <div class="city-image">
+            <button
+                class="filter-btn"
+                onclick="filterCountry('France', this)">
+                France
+            </button>
 
-                    <div class="image-overlay"></div>
+        </div>
 
-                    <span class="location-badge">
-                        📍 {{ city["country"] }}
-                    </span>
-
-                    <span class="heart">
-                        ♡
-                    </span>
-
-                </div>
+    </section>
 
 
-                <div class="city-content">
+    <!-- CITY GRID -->
 
-                    <h3>
-                        {{ city["name"] }}
-                    </h3>
+    <section class="cities-grid" id="citiesGrid">
 
-                    {% if city["description"] %}
+        {% for city in cities %}
 
-                    <p>
-                        {{ city["description"] }}
-                    </p>
+        <article
+            class="city-card-premium"
+            data-city="{{ city['name']|lower }}"
+            data-country="{{ city['country']|lower }}">
 
+
+            <div class="city-art">
+
+                <span class="city-number">
+                    {{ "%02d"|format(loop.index) }}
+                </span>
+
+                <span class="city-symbol">
+
+                    {% if loop.index % 4 == 1 %}
+                        🏙
+                    {% elif loop.index % 4 == 2 %}
+                        🏯
+                    {% elif loop.index % 4 == 3 %}
+                        🌴
                     {% else %}
-
-                    <p>
-                        Discover the beauty, culture and experiences
-                        of {{ city["name"] }}.
-                    </p>
-
+                        🏔
                     {% endif %}
 
+                </span>
 
-                    <div class="city-footer">
+                <div class="city-glow"></div>
 
-                        <span class="discover">
-                            Explore destination
-                            <span>→</span>
+            </div>
+
+
+            <div class="city-card-content">
+
+                <div class="city-title-row">
+
+                    <div>
+
+                        <span class="city-country">
+                            {{ city["country"] }}
                         </span>
+
+                        <h2>
+                            {{ city["name"] }}
+                        </h2>
 
                     </div>
 
+                    <span class="city-pin">
+                        📍
+                    </span>
+
                 </div>
 
-            </article>
 
-            {% endfor %}
+                {% if city["description"] %}
 
-        </div>
+                <p>
+                    {{ city["description"] }}
+                </p>
+
+                {% else %}
+
+                <p>
+                    Discover the sights, flavours and
+                    stories of {{ city["name"] }}.
+                </p>
+
+                {% endif %}
 
 
-        <div id="noResults" class="no-results">
+                <div class="city-card-bottom">
 
-            <div>🌍</div>
+                    <a href="{{ url_for('city_details', city_id=city['id']) }}"
+                       class="city-explore-btn">
 
-            <h3>No destination found</h3>
+                        Explore
 
-            <p>
-                Try searching for another city.
-            </p>
+                        <span>→</span>
 
-        </div>
+                    </a>
 
-        {% else %}
+                </div>
 
-        <div class="empty-state">
-
-            <div class="empty-icon">
-                🌍
             </div>
 
-            <h2>No destinations yet</h2>
+        </article>
 
-            <p>
-                Your destinations will appear here once they are added.
-            </p>
+        {% endfor %}
 
+    </section>
+
+
+    <!-- NO RESULTS -->
+
+    <div id="noCities"
+         class="no-cities"
+         style="display:none;">
+
+        <div>
+            🌍
         </div>
 
-        {% endif %}
-
-    </main>
-
-
-
-    <!-- Footer -->
-
-    <footer>
-
-        <div class="footer-brand">
-
-            <span class="brand-icon">✦</span>
-
-            GlobeTrotter
-
-        </div>
+        <h3>
+            No destinations found
+        </h3>
 
         <p>
-            Plan less. Travel more. ✈
+            Try searching for another city or country.
         </p>
 
-    </footer>
+    </div>
 
 
-
-    <script>
-
-        const searchInput =
-            document.getElementById("citySearch");
-
-        const cards =
-            document.querySelectorAll(".city-card");
-
-        const noResults =
-            document.getElementById("noResults");
+</main>
 
 
-        if (searchInput) {
+<footer>
 
-            searchInput.addEventListener("input", function () {
+    <div class="footer-brand">
 
-                const search =
-                    this.value.toLowerCase().trim();
+        <span class="brand-icon">
+            ✦
+        </span>
 
-                let visibleCards = 0;
+        GlobeTrotter
 
+    </div>
 
-                cards.forEach(card => {
+    <p>
+        Your next destination is closer than you think. ✈
+    </p>
 
-                    const text =
-                        card.innerText.toLowerCase();
-
-
-                    if (text.includes(search)) {
-
-                        card.style.display = "block";
-
-                        visibleCards++;
-
-                    } else {
-
-                        card.style.display = "none";
-
-                    }
-
-                });
+</footer>
 
 
-                if (noResults) {
+<script>
 
-                    noResults.style.display =
-                        visibleCards === 0
-                            ? "block"
-                            : "none";
+function filterCities() {
 
-                }
+    const search =
+        document
+        .getElementById("citySearch")
+        .value
+        .toLowerCase();
 
-            });
+    const cards =
+        document.querySelectorAll(".city-card-premium");
+
+    let visible = 0;
+
+    cards.forEach(card => {
+
+        const city =
+            card.dataset.city;
+
+        const country =
+            card.dataset.country;
+
+        if (
+            city.includes(search) ||
+            country.includes(search)
+        ) {
+
+            card.style.display = "";
+
+            visible++;
+
+        } else {
+
+            card.style.display = "none";
 
         }
 
-    </script>
+    });
+
+    document.getElementById("noCities").style.display =
+        visible === 0 ? "block" : "none";
+
+}
+
+
+function showAll(button) {
+
+    setActive(button);
+
+    document
+        .querySelectorAll(".city-card-premium")
+        .forEach(card => {
+            card.style.display = "";
+        });
+
+    document.getElementById("noCities").style.display =
+        "none";
+
+}
+
+
+function filterCountry(country, button) {
+
+    setActive(button);
+
+    const cards =
+        document.querySelectorAll(".city-card-premium");
+
+    let visible = 0;
+
+    cards.forEach(card => {
+
+        if (
+            card.dataset.country
+            === country.toLowerCase()
+        ) {
+
+            card.style.display = "";
+
+            visible++;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+    document.getElementById("noCities").style.display =
+        visible === 0 ? "block" : "none";
+
+}
+
+
+function setActive(button) {
+
+    document
+        .querySelectorAll(".filter-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    button.classList.add("active");
+
+}
+
+</script>
 
 </body>
 

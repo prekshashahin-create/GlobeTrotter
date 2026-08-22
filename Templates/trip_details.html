@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ trip["name"] }} | GlobeTrotter</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <a href="{{ url_for('dashboard') }}"
+       class="brand">
+
+        <span class="brand-icon">✦</span>
+
+        GlobeTrotter
+
+    </a>
+
+
+    <nav class="nav-links">
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('explore') }}">
+            Explore
+        </a>
+
+        <a href="{{ url_for('plan_trip') }}">
+            Plan Trip
+        </a>
+
+    </nav>
+
+
+    <a href="{{ url_for('logout') }}"
+       class="logout-btn">
+
+        Logout
+
+    </a>
+
+</header>
+
+
+
+<main class="trip-detail-page">
+
+
+    <a href="{{ url_for('trips') }}"
+       class="back-link">
+
+        ← Back to my journeys
+
+    </a>
+
+
+
+    <!-- HERO -->
+
+    <section class="trip-detail-header">
+
+
+        <div>
+
+            <span class="eyebrow">
+                YOUR JOURNEY
+            </span>
+
+
+            <h1>
+                {{ trip["name"] }}
+            </h1>
+
+
+            {% if trip["description"] %}
+
+            <p>
+                {{ trip["description"] }}
+            </p>
+
+            {% else %}
+
+            <p>
+                A journey created with GlobeTrotter.
+            </p>
+
+            {% endif %}
+
+
+            <div class="trip-date-pills">
+
+                {% if trip["start_date"] %}
+
+                <span>
+                    📅 {{ trip["start_date"] }}
+                </span>
+
+                {% endif %}
+
+
+                {% if trip["end_date"] %}
+
+                <span>
+                    → {{ trip["end_date"] }}
+                </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="trip-big-number">
+
+            <strong>
+                {{ stops|length }}
+            </strong>
+
+            <span>
+                destinations
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ITINERARY -->
+
+    <section class="itinerary-section">
+
+
+        <div class="itinerary-title">
+
+            <div>
+
+                <span class="section-label">
+                    YOUR ROUTE
+                </span>
+
+                <h2>
+                    Journey timeline
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+        {% if stops %}
+
+
+        <div class="timeline">
+
+
+            {% for stop in stops %}
+
+            <div class="timeline-item">
+
+
+                <div class="timeline-marker">
+
+                    <span>
+                        {{ "%02d"|format(loop.index) }}
+                    </span>
+
+                </div>
+
+
+                <div class="timeline-card">
+
+
+                    <div class="timeline-card-top">
+
+                        <div>
+
+                            <span class="timeline-day">
+                                STOP {{ "%02d"|format(loop.index) }}
+                            </span>
+
+
+                            <h3>
+                                {{ stop["city_name"] }}
+                            </h3>
+
+
+                            <span class="timeline-country">
+
+                                📍 {{ stop["country"] }}
+
+                            </span>
+
+                        </div>
+
+
+                        <span class="timeline-arrow">
+                            {% if not loop.last %}
+                                ↓
+                            {% else %}
+                                ✦
+                            {% endif %}
+                        </span>
+
+                    </div>
+
+
+                    <div class="timeline-dates">
+
+
+                        {% if stop["start_date"] %}
+
+                        <span>
+                            {{ stop["start_date"] }}
+                        </span>
+
+                        {% endif %}
+
+
+                        {% if stop["end_date"] %}
+
+                        <span>
+                            →
+                        </span>
+
+                        <span>
+                            {{ stop["end_date"] }}
+                        </span>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty-itinerary">
+
+            <div>
+                🧭
+            </div>
+
+            <h3>
+                Your route is still empty.
+            </h3>
+
+            <p>
+                Explore destinations and add them
+                to this journey.
+            </p>
+
+
+            <a href="{{ url_for('cities') }}"
+               class="primary-action">
+
+                Explore destinations →
+
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- END -->
+
+    <section class="journey-end">
+
+        <span>
+            ✦
+        </span>
+
+        <p>
+            Every great journey begins with one destination.
+        </p>
+
+    </section>
+
+
+</main>
+
+
+
+<footer>
+
+    <div class="footer-brand">
+
+        <span class="brand-icon">
+            ✦
+        </span>
+
+        GlobeTrotter
+
+    </div>
+
+    <p>
+        Plan less. Experience more. ✈
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

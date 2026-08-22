@@ -20,115 +20,164 @@
 
 <header class="navbar">
 
-    <a href="/dashboard" class="brand">
+    <a href="{{ url_for('dashboard') }}" class="brand">
         <span class="brand-icon">✦</span>
-        <span>GlobeTrotter</span>
+        GlobeTrotter
     </a>
 
     <nav class="nav-links">
 
-    <a href="{{ url_for('dashboard') }}">
-        Dashboard
-    </a>
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
 
-    <a href="{{ url_for('explore') }}">
-        Explore
-    </a>
+        <a href="{{ url_for('explore') }}" class="active">
+            Explore
+        </a>
 
-    <a href="{{ url_for('plan_trip') }}">
-        Plan Trip
-    </a>
+        <a href="{{ url_for('plan_trip') }}">
+            Plan Trip
+        </a>
 
-</nav>
+    </nav>
 
-    <a href="/logout" class="logout-btn">
+    <a href="{{ url_for('logout') }}" class="logout-btn">
         Logout
     </a>
 
 </header>
 
 
-<main class="choice-page">
+<main class="explore-page">
 
-    <section class="choice-hero">
 
-        <span class="eyebrow">
-            DISCOVER SOMETHING NEW
-        </span>
+    <!-- HERO -->
 
-        <h1>
-            What are you looking<br>
-            <span>for?</span>
-        </h1>
+    <section class="explore-hero">
 
-        <p>
-            Discover amazing destinations and experiences
-            that can make your next journey unforgettable.
-        </p>
+        <div>
+
+            <span class="eyebrow">
+                DISCOVER YOUR NEXT PLACE
+            </span>
+
+            <h1>
+                Go somewhere<br>
+                <span>you've never been.</span>
+            </h1>
+
+            <p>
+                Browse destinations, find inspiration and
+                turn your favourite places into your next adventure.
+            </p>
+
+        </div>
+
+
+        <div class="explore-orb">
+
+            <div class="orb-inner">
+                🌍
+            </div>
+
+            <span class="orb-dot dot-one"></span>
+            <span class="orb-dot dot-two"></span>
+            <span class="orb-dot dot-three"></span>
+
+        </div>
 
     </section>
 
 
-    <section class="choice-grid explore-choice-grid">
+    <!-- EXPLORE OPTIONS -->
 
-        <!-- CITIES -->
+    <section class="explore-options">
 
-        <a href="/cities" class="choice-card large-choice">
 
-            <div class="choice-icon">
+        <a href="{{ url_for('cities') }}"
+           class="explore-feature-card large">
+
+            <div class="feature-icon">
                 🌎
             </div>
 
-            <span class="choice-number">
-                01
-            </span>
+            <div>
 
-            <h2>
-                Discover Cities
-            </h2>
+                <span>
+                    DISCOVER
+                </span>
 
-            <p>
-                Explore cities around the world, discover
-                new destinations and find the perfect place
-                for your next adventure.
-            </p>
+                <h2>
+                    Explore Cities
+                </h2>
 
-            <span class="choice-link">
-                Explore cities <b>→</b>
-            </span>
+                <p>
+                    Find destinations waiting to be added
+                    to your travel story.
+                </p>
+
+            </div>
+
+            <strong>
+                →
+            </strong>
 
         </a>
 
 
-        <!-- EXPERIENCES -->
+        <a href="{{ url_for('experiences') }}"
+           class="explore-feature-card">
 
-        <a href="/experiences" class="choice-card large-choice">
-
-            <div class="choice-icon">
+            <div class="feature-icon">
                 ✨
             </div>
 
-            <span class="choice-number">
-                02
-            </span>
+            <div>
 
-            <h2>
-                Find Experiences
-            </h2>
+                <span>
+                    GET INSPIRED
+                </span>
 
-            <p>
-                Discover food, culture, nature, adventure
-                and unique experiences waiting for you
-                at your destination.
-            </p>
+                <h2>
+                    Experiences
+                </h2>
 
-            <span class="choice-link">
-                Discover experiences <b>→</b>
-            </span>
+                <p>
+                    Discover things worth doing
+                    wherever you go.
+                </p>
+
+            </div>
+
+            <strong>
+                →
+            </strong>
 
         </a>
 
+
     </section>
+
+
+    <!-- QUOTE -->
+
+    <section class="explore-quote">
+
+        <div class="quote-mark">
+            “
+        </div>
+
+        <blockquote>
+            The world is too big to stay
+            in one place.
+        </blockquote>
+
+        <span>
+            — Your next adventure
+        </span>
+
+    </section>
+
 
 </main>
 
@@ -136,15 +185,22 @@
 <footer>
 
     <div class="footer-brand">
-        <span class="brand-icon">✦</span>
+
+        <span class="brand-icon">
+            ✦
+        </span>
+
         GlobeTrotter
+
     </div>
 
     <p>
-        Plan less. Travel more. ✈
+        Collect places, not things. ✈
     </p>
 
 </footer>
 
+
 </body>
+
 </html>

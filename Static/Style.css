@@ -2737,3 +2737,6010 @@ footer p {
     }
 
 }
+
+/* =========================
+   CITIES / EXPLORE
+========================= */
+
+.cities-page {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 60px 25px 100px;
+
+}
+
+
+.city-search {
+
+    max-width: 650px;
+
+    height: 56px;
+
+    margin: 0 auto 40px;
+
+    padding: 0 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 25px rgba(50,45,80,0.05);
+
+}
+
+
+.city-search span {
+
+    font-size: 23px;
+
+    color: var(--purple);
+
+}
+
+
+.city-search input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+}
+
+
+.city-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+
+}
+
+
+.city-card {
+
+    overflow: hidden;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    transition: 0.3s;
+
+}
+
+
+.city-card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 20px 45px rgba(50,45,80,0.11);
+
+}
+
+
+.city-card-image {
+
+    height: 175px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7569df,
+            #cfcaff
+        );
+
+    position: relative;
+
+}
+
+
+.city-card:nth-child(2n)
+.city-card-image {
+
+    background:
+        linear-gradient(
+            135deg,
+            #df9d68,
+            #ffe0c2
+        );
+
+}
+
+
+.city-card:nth-child(3n)
+.city-card-image {
+
+    background:
+        linear-gradient(
+            135deg,
+            #62ae98,
+            #d7eee7
+        );
+
+}
+
+
+.city-card:nth-child(4n)
+.city-card-image {
+
+    background:
+        linear-gradient(
+            135deg,
+            #789ac8,
+            #dbe7fa
+        );
+
+}
+
+
+.country-tag {
+
+    position: absolute;
+
+    left: 15px;
+
+    bottom: 15px;
+
+    padding: 7px 10px;
+
+    background:
+        rgba(255,255,255,0.92);
+
+    border-radius: 8px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.city-card-content {
+
+    padding: 21px;
+
+}
+
+
+.city-card-content h2 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 24px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.city-card-content p {
+
+    min-height: 38px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+}
+
+
+.city-explore-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 18px;
+
+    padding: 11px 14px;
+
+    border-radius: 10px;
+
+    background: #f2efff;
+
+    color: var(--purple);
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition: 0.2s;
+
+}
+
+
+.city-explore-btn:hover {
+
+    background: var(--purple);
+
+    color: white;
+
+}
+
+
+.city-explore-btn span {
+
+    font-size: 17px;
+
+}
+
+
+.empty-cities {
+
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 70px 20px;
+
+}
+
+
+.empty-cities div {
+
+    font-size: 45px;
+
+}
+
+
+.empty-cities h2 {
+
+    margin-top: 12px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+}
+
+
+.empty-cities p {
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-top: 7px;
+
+}
+
+
+@media (max-width: 850px) {
+
+    .city-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .city-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+/* =========================================================
+   GLOBETROTTER — PREMIUM TRAVEL DESIGN SYSTEM
+========================================================= */
+
+:root {
+
+    --purple: #6c5ce7;
+    --purple-dark: #5144c7;
+    --purple-soft: #eeeaff;
+
+    --cream: #faf9f5;
+    --surface: #ffffff;
+
+    --text: #17151f;
+    --muted: #777482;
+
+    --border: #ebe8f0;
+
+    --shadow-soft:
+        0 15px 45px rgba(28, 23, 50, 0.08);
+
+    --shadow-hover:
+        0 25px 70px rgba(28, 23, 50, 0.15);
+
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+
+    background:
+
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(108,92,231,0.07),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(236,171,125,0.08),
+            transparent 30%
+        ),
+
+        var(--cream);
+
+    color: var(--text);
+
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    height: 76px;
+
+    padding: 0 5vw;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background:
+        rgba(250,249,245,0.78);
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+    border-bottom:
+        1px solid rgba(0,0,0,0.05);
+
+}
+
+
+/* Logo */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+}
+
+
+.brand-icon {
+
+    width: 35px;
+
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--purple),
+            #9b8cff
+        );
+
+    color: white;
+
+    box-shadow:
+        0 8px 20px rgba(108,92,231,0.25);
+
+}
+
+
+/* Navigation */
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+}
+
+
+.nav-links a {
+
+    position: relative;
+
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition: 0.25s;
+
+}
+
+
+.nav-links a:hover {
+
+    color: var(--text);
+
+    background: rgba(108,92,231,0.06);
+
+}
+
+
+.nav-links a.active {
+
+    color: var(--purple);
+
+    background: var(--purple-soft);
+
+}
+
+
+.logout-btn {
+
+    padding: 10px 17px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    background: var(--text);
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    transition: 0.25s;
+
+}
+
+
+.logout-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.15);
+
+}
+
+
+/* =========================================================
+   HERO TYPOGRAPHY
+========================================================= */
+
+.choice-hero {
+
+    text-align: center;
+
+    max-width: 760px;
+
+    margin:
+        20px auto 55px;
+
+}
+
+
+.eyebrow {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 12px;
+
+    border-radius: 100px;
+
+    background: var(--purple-soft);
+
+    color: var(--purple);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.choice-hero h1 {
+
+    margin-top: 20px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(48px, 7vw, 86px);
+
+    line-height: 0.95;
+
+    letter-spacing: -3px;
+
+}
+
+
+.choice-hero h1 span {
+
+    background:
+
+    linear-gradient(
+        110deg,
+        var(--purple),
+        #a394ff
+    );
+
+background-clip: text;
+
+-webkit-background-clip: text;
+
+-webkit-text-fill-color: transparent;
+
+}
+
+
+.choice-hero p {
+
+    max-width: 560px;
+
+    margin: 22px auto 0;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================================
+   CARDS — PREMIUM
+========================================================= */
+
+.choice-card,
+.city-card,
+.experience-card {
+
+    border:
+        1px solid rgba(30,25,50,0.07);
+
+    box-shadow:
+        0 10px 35px rgba(30,25,50,0.045);
+
+}
+
+
+.choice-card:hover,
+.city-card:hover,
+.experience-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        var(--shadow-hover);
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.create-trip-btn {
+
+    border: none;
+
+    cursor: pointer;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+
+        linear-gradient(
+            110deg,
+            var(--purple-dark),
+            var(--purple)
+        );
+
+    box-shadow:
+        0 12px 30px rgba(108,92,231,0.25);
+
+}
+
+
+.create-trip-btn::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 80px;
+
+    height: 100%;
+
+    top: 0;
+
+    left: -100px;
+
+    background:
+        rgba(255,255,255,0.18);
+
+    transform:
+        skewX(-20deg);
+
+    transition: 0.6s;
+
+}
+
+
+.create-trip-btn:hover::after {
+
+    left: 120%;
+
+}
+
+
+.create-trip-btn:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 18px 40px rgba(108,92,231,0.32);
+
+}
+
+
+/* =========================================================
+   SEARCH BOX
+========================================================= */
+
+.city-search,
+.destination-search {
+
+    transition: 0.25s;
+
+}
+
+
+.city-search:focus-within,
+.destination-search:focus-within {
+
+    border-color:
+        rgba(108,92,231,0.5);
+
+    box-shadow:
+        0 0 0 5px rgba(108,92,231,0.08),
+        var(--shadow-soft);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   CITY CARDS
+========================================================= */
+
+.city-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.city-card-image {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.city-card-image::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(15,12,25,0.35),
+            transparent 60%
+        );
+
+}
+
+
+.city-card:hover
+.city-card-image {
+
+    transform: scale(1.01);
+
+}
+
+
+/* =========================================================
+   EXPERIENCE CARDS
+========================================================= */
+
+.experience-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.experience-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 200px;
+
+    height: 200px;
+
+    border-radius: 50%;
+
+    right: -80px;
+
+    top: -100px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(108,92,231,0.12),
+            transparent 70%
+        );
+
+    transition: 0.5s;
+
+}
+
+
+.experience-card:hover::before {
+
+    transform:
+        scale(1.5);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    margin-top: 80px;
+
+    padding:
+        45px 5vw;
+
+    border-top:
+        1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+footer p {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px) {
+
+    .navbar {
+
+        padding: 0 18px;
+
+    }
+
+    .nav-links {
+
+        display: none;
+
+    }
+
+    .choice-hero h1 {
+
+        font-size: 50px;
+
+        letter-spacing: -2px;
+
+    }
+
+    footer {
+
+        flex-direction: column;
+
+        gap: 15px;
+
+    }
+
+
+}
+/* =========================================================
+   PREMIUM DASHBOARD
+========================================================= */
+
+.dashboard-page {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding:
+        50px 5vw 100px;
+
+}
+
+
+/* HERO */
+
+.dashboard-hero {
+
+    min-height: 500px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.15fr 0.85fr;
+
+    align-items: center;
+
+    gap: 50px;
+
+}
+
+
+.hero-copy h1 {
+
+    margin-top: 22px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(45px, 5vw, 72px);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+}
+
+
+.hero-copy h1 span {
+
+    color: var(--purple);
+
+}
+
+
+.hero-copy p {
+
+    max-width: 510px;
+
+    margin-top: 24px;
+
+    color: var(--muted);
+
+    line-height: 1.8;
+
+    font-size: 14px;
+
+}
+
+
+.hero-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 32px;
+
+}
+
+
+.primary-action {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 14px 18px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            110deg,
+            var(--purple-dark),
+            var(--purple)
+        );
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 12px 30px
+        rgba(108,92,231,0.25);
+
+    transition: 0.25s;
+
+}
+
+
+.primary-action:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 18px 40px
+        rgba(108,92,231,0.32);
+
+}
+
+
+.primary-action span {
+
+    font-size: 18px;
+
+}
+
+
+.secondary-action {
+
+    padding: 14px 18px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    transition: 0.25s;
+
+}
+
+
+.secondary-action:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        var(--shadow-soft);
+
+}
+
+
+/* HERO VISUAL */
+
+.hero-visual {
+
+    position: relative;
+
+    height: 430px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.hero-globe {
+
+    width: 250px;
+
+    height: 250px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 120px;
+
+    background:
+
+        radial-gradient(
+            circle at 35% 30%,
+            white,
+            #eeeaff 40%,
+            #d8d2ff
+        );
+
+    box-shadow:
+
+        0 35px 80px
+        rgba(108,92,231,0.20),
+
+        inset
+        -15px -20px 40px
+        rgba(108,92,231,0.15);
+
+    animation:
+        floatGlobe 5s ease-in-out infinite;
+
+}
+
+
+@keyframes floatGlobe {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+}
+
+
+.hero-orbit {
+
+    position: absolute;
+
+    border:
+        1px solid
+        rgba(108,92,231,0.15);
+
+    border-radius: 50%;
+
+}
+
+
+.orbit-one {
+
+    width: 330px;
+
+    height: 150px;
+
+    transform:
+        rotate(-25deg);
+
+}
+
+
+.orbit-two {
+
+    width: 390px;
+
+    height: 190px;
+
+    transform:
+        rotate(35deg);
+
+}
+
+
+.floating-card {
+
+    position: absolute;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 15px;
+
+    background:
+        rgba(255,255,255,0.85);
+
+    backdrop-filter:
+        blur(15px);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.8);
+
+    border-radius: 14px;
+
+    box-shadow:
+        var(--shadow-soft);
+
+}
+
+
+.floating-card span {
+
+    font-size: 20px;
+
+}
+
+
+.floating-card strong,
+.floating-card small {
+
+    display: block;
+
+}
+
+
+.floating-card strong {
+
+    font-size: 11px;
+
+}
+
+
+.floating-card small {
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    margin-top: 3px;
+
+}
+
+
+.card-one {
+
+    top: 55px;
+
+    right: 10px;
+
+}
+
+
+.card-two {
+
+    bottom: 60px;
+
+    left: 15px;
+
+}
+
+
+/* STATS */
+
+.dashboard-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 16px;
+
+    margin-bottom: 85px;
+
+}
+
+
+.stat-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 20px;
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 17px;
+
+    box-shadow:
+        var(--shadow-soft);
+
+}
+
+
+.stat-icon {
+
+    width: 45px;
+
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        var(--purple-soft);
+
+    font-size: 19px;
+
+}
+
+
+.stat-card strong,
+.stat-card span {
+
+    display: block;
+
+}
+
+
+.stat-card strong {
+
+    font-size: 20px;
+
+}
+
+
+.stat-card span {
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+}
+
+
+/* SECTION */
+
+.dashboard-section {
+
+    margin-bottom: 90px;
+
+}
+
+
+.section-heading {
+
+    display: flex;
+
+    align-items: end;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+
+}
+
+
+.section-label {
+
+    color: var(--purple);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.section-heading h2 {
+
+    margin-top: 8px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 32px;
+
+}
+
+
+.section-link {
+
+    color: var(--purple);
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+/* TRIPS */
+
+.trip-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 20px;
+
+}
+
+
+.trip-card {
+
+    overflow: hidden;
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 20px;
+
+    transition: 0.3s;
+
+}
+
+
+.trip-card:hover {
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        var(--shadow-hover);
+
+}
+
+
+.trip-cover {
+
+    height: 145px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #7569df,
+            #b8afff
+        );
+
+}
+
+
+.trip-card:nth-child(2n)
+.trip-cover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #dc996d,
+            #f5c8a7
+        );
+
+}
+
+
+.trip-card:nth-child(3n)
+.trip-cover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #59a58f,
+            #abd7c9
+        );
+
+}
+
+
+.trip-number {
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 15px;
+
+    color: white;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    opacity: .8;
+
+}
+
+
+.trip-plane {
+
+    font-size: 45px;
+
+    filter:
+        drop-shadow(
+            0 10px 12px
+            rgba(0,0,0,.12)
+        );
+
+}
+
+
+.trip-content {
+
+    padding: 20px;
+
+}
+
+
+.trip-status {
+
+    color: var(--purple);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.trip-content h3 {
+
+    margin-top: 7px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 22px;
+
+}
+
+
+.trip-content p {
+
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+}
+
+
+.trip-meta {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 15px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+}
+
+
+/* EMPTY TRIPS */
+
+.empty-trip-state {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 40px;
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 22px;
+
+    box-shadow:
+        var(--shadow-soft);
+
+}
+
+
+.empty-illustration {
+
+    width: 90px;
+
+    height: 90px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 25px;
+
+    background:
+        var(--purple-soft);
+
+    font-size: 40px;
+
+}
+
+
+.empty-trip-state h3 {
+
+    margin: 7px 0;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 24px;
+
+}
+
+
+.empty-trip-state p {
+
+    max-width: 500px;
+
+    margin-bottom: 18px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+}
+
+
+/* DISCOVER */
+
+.discover-section {
+
+    min-height: 450px;
+
+    padding: 55px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background:
+
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(255,255,255,.8),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            120deg,
+            #e9e5ff,
+            #faf9f5
+        );
+
+}
+
+
+.discover-copy h2 {
+
+    margin-top: 15px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 52px;
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+
+}
+
+
+.discover-copy h2 span {
+
+    color: var(--purple);
+
+}
+
+
+.discover-copy p {
+
+    max-width: 440px;
+
+    margin:
+        20px 0 28px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.8;
+
+}
+
+
+.discover-visual {
+
+    position: relative;
+
+    height: 330px;
+
+}
+
+
+.discover-circle {
+
+    position: absolute;
+
+    width: 260px;
+
+    height: 260px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            #9f93ff
+        );
+
+    box-shadow:
+        0 30px 70px
+        rgba(108,92,231,.28);
+
+}
+
+
+.discover-circle span {
+
+    color: white;
+
+    font-size: 80px;
+
+}
+
+
+.discover-location {
+
+    position: absolute;
+
+    padding: 10px 14px;
+
+    border-radius: 100px;
+
+    background: white;
+
+    box-shadow:
+        var(--shadow-soft);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.location-one {
+
+    top: 30px;
+
+    right: 20px;
+
+}
+
+
+.location-two {
+
+    bottom: 35px;
+
+    left: 10px;
+
+}
+
+
+.location-three {
+
+    bottom: 10px;
+
+    right: 50px;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px) {
+
+    .dashboard-hero {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .hero-visual {
+
+        height: 330px;
+
+    }
+
+    .dashboard-stats,
+    .trip-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .discover-section {
+
+        grid-template-columns: 1fr;
+
+        padding: 35px;
+
+    }
+
+    .discover-visual {
+
+        margin-top: 30px;
+
+    }
+
+}
+
+
+@media(max-width:550px) {
+
+    .hero-actions {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+    .empty-trip-state {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    .discover-copy h2 {
+
+        font-size: 40px;
+
+    }
+
+}
+
+/* =========================================================
+   PLAN TRIP — PREMIUM EXPERIENCE
+========================================================= */
+
+.plan-page {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding:
+        55px 5vw 100px;
+
+}
+
+
+.plan-hero {
+
+    min-height: 310px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+}
+
+
+.plan-hero h1 {
+
+    margin-top: 20px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(50px, 6vw, 78px);
+
+    line-height: .95;
+
+    letter-spacing: -3px;
+
+}
+
+
+.plan-hero h1 span {
+
+    color: var(--purple);
+
+}
+
+
+.plan-hero p {
+
+    max-width: 560px;
+
+    margin-top: 22px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+.plan-compass {
+
+    width: 180px;
+
+    height: 180px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 85px;
+
+    background:
+
+        radial-gradient(
+            circle at 35% 30%,
+            white,
+            var(--purple-soft)
+        );
+
+    box-shadow:
+
+        0 30px 70px
+        rgba(108,92,231,.18);
+
+    animation:
+        compassFloat 4s ease-in-out infinite;
+
+}
+
+
+@keyframes compassFloat {
+
+    0%,100% {
+        transform:
+            rotate(-4deg)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            rotate(4deg)
+            translateY(-10px);
+    }
+
+}
+
+
+/* OPTIONS */
+
+.planning-options {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 18px;
+
+}
+
+
+.planning-card {
+
+    position: relative;
+
+    min-height: 360px;
+
+    padding: 28px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    border:
+        1px solid var(--border);
+
+    background: white;
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    box-shadow:
+        var(--shadow-soft);
+
+    transition:
+        transform .35s,
+        box-shadow .35s;
+
+}
+
+
+.planning-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+
+    height: 190px;
+
+    right: -75px;
+
+    top: -75px;
+
+    border-radius: 50%;
+
+    background:
+        var(--purple-soft);
+
+    transition: .5s;
+
+}
+
+
+.planning-card:hover {
+
+    transform:
+        translateY(-10px);
+
+    box-shadow:
+        var(--shadow-hover);
+
+}
+
+
+.planning-card:hover::before {
+
+    transform:
+        scale(1.8);
+
+}
+
+
+.planning-main {
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #5144c7,
+            #8175ed
+        );
+
+}
+
+
+.planning-main::before {
+
+    background:
+        rgba(255,255,255,.10);
+
+}
+
+
+.planning-number {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    opacity: .65;
+
+}
+
+
+.planning-icon {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 62px;
+
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background:
+        rgba(108,92,231,.10);
+
+    font-size: 28px;
+
+}
+
+
+.planning-main .planning-icon {
+
+    background:
+        rgba(255,255,255,.15);
+
+}
+
+
+.planning-content {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.planning-content > span {
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    color: var(--purple);
+
+}
+
+
+.planning-main .planning-content > span {
+
+    color: rgba(255,255,255,.7);
+
+}
+
+
+.planning-content h2 {
+
+    margin-top: 9px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 28px;
+
+    line-height: 1.05;
+
+}
+
+
+.planning-content p {
+
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+}
+
+
+.planning-main .planning-content p {
+
+    color:
+        rgba(255,255,255,.75);
+
+}
+
+
+.planning-arrow {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 22px;
+
+    padding-top: 15px;
+
+    border-top:
+        1px solid var(--border);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.planning-main .planning-arrow {
+
+    border-color:
+        rgba(255,255,255,.2);
+
+}
+
+
+.planning-arrow b {
+
+    font-size: 19px;
+
+    transition: .25s;
+
+}
+
+
+.planning-card:hover
+.planning-arrow b {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+/* TIP */
+
+.planning-tip {
+
+    max-width: 650px;
+
+    margin: 35px auto 0;
+
+    padding: 18px 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 16px;
+
+    background:
+        rgba(255,255,255,.7);
+
+}
+
+
+.planning-tip > span {
+
+    width: 35px;
+
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        var(--purple-soft);
+
+    color: var(--purple);
+
+}
+
+
+.planning-tip strong {
+
+    font-size: 11px;
+
+}
+
+
+.planning-tip p {
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:850px) {
+
+    .planning-options {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .planning-card {
+
+        min-height: 300px;
+
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    .plan-hero {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    .plan-compass {
+
+        display: none;
+
+    }
+
+}
+
+/* =========================================================
+   CREATE TRIP — JOURNEY BUILDER
+========================================================= */
+
+.create-page {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    min-height: 700px;
+
+    padding:
+        65px 5vw 100px;
+
+    display: grid;
+
+    grid-template-columns:
+        .9fr 1.1fr;
+
+    align-items: center;
+
+    gap: 70px;
+
+}
+
+
+/* INTRO */
+
+.create-intro h1 {
+
+    margin-top: 20px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(48px, 5vw, 68px);
+
+    line-height: .96;
+
+    letter-spacing: -3px;
+
+}
+
+
+.create-intro h1 span {
+
+    color: var(--purple);
+
+}
+
+
+.create-intro > p {
+
+    max-width: 440px;
+
+    margin-top: 25px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+/* JOURNEY DECORATION */
+
+.journey-decoration {
+
+    position: relative;
+
+    width: 400px;
+
+    height: 150px;
+
+    margin-top: 40px;
+
+}
+
+
+.route-line {
+
+    position: absolute;
+
+    left: 25px;
+
+    top: 65px;
+
+    width: 330px;
+
+    height: 70px;
+
+    border-top:
+        2px dashed
+        rgba(108,92,231,.25);
+
+    border-radius: 50%;
+
+    transform:
+        rotate(5deg);
+
+}
+
+
+.route-point {
+
+    position: absolute;
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 10px 30px
+        rgba(30,25,50,.1);
+
+    font-size: 17px;
+
+}
+
+
+.point-a {
+
+    left: 5px;
+
+    top: 45px;
+
+}
+
+
+.point-b {
+
+    left: 165px;
+
+    top: 75px;
+
+}
+
+
+.point-c {
+
+    right: 5px;
+
+    top: 30px;
+
+}
+
+
+/* FORM CARD */
+
+.create-form-card {
+
+    padding: 35px;
+
+    background:
+        rgba(255,255,255,.88);
+
+    backdrop-filter:
+        blur(20px);
+
+    border:
+        1px solid
+        rgba(255,255,255,.9);
+
+    border-radius: 27px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(30,25,50,.1);
+
+}
+
+
+.form-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 35px;
+
+}
+
+
+.form-step {
+
+    color: var(--purple);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.form-top h2 {
+
+    margin-top: 7px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 28px;
+
+}
+
+
+.form-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background:
+        var(--purple-soft);
+
+    font-size: 22px;
+
+}
+
+
+/* INPUTS */
+
+.form-group {
+
+    margin-bottom: 24px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.form-group input,
+.form-group textarea {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 15px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    background:
+        rgba(250,249,245,.7);
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    color: var(--text);
+
+    transition: .25s;
+
+}
+
+
+.form-group textarea {
+
+    resize: vertical;
+
+    min-height: 115px;
+
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+
+    border-color:
+        rgba(108,92,231,.5);
+
+    background: white;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(108,92,231,.07);
+
+}
+
+
+/* DATES */
+
+.date-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 30px 1fr;
+
+    align-items: end;
+
+    gap: 8px;
+
+}
+
+
+.date-arrow {
+
+    padding-bottom: 15px;
+
+    text-align: center;
+
+    color: var(--purple);
+
+    font-weight: 700;
+
+}
+
+
+.label-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+}
+
+
+.label-row > span {
+
+    color: #aaa;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* VIBES */
+
+.vibe-suggestions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: -8px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.vibe-suggestions button {
+
+    border:
+        1px solid var(--border);
+
+    background: white;
+
+    border-radius: 100px;
+
+    padding: 8px 11px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    transition: .2s;
+
+}
+
+
+.vibe-suggestions button:hover {
+
+    border-color:
+        var(--purple);
+
+    color: var(--purple);
+
+    background:
+        var(--purple-soft);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* SUBMIT */
+
+.create-submit {
+
+    width: 100%;
+
+    border: none;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 16px 18px;
+
+    border-radius: 13px;
+
+    background:
+
+        linear-gradient(
+            110deg,
+            var(--purple-dark),
+            var(--purple)
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 12px 30px
+        rgba(108,92,231,.25);
+
+    transition: .25s;
+
+}
+
+
+.create-submit span {
+
+    font-size: 20px;
+
+}
+
+
+.create-submit:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 18px 40px
+        rgba(108,92,231,.35);
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:850px) {
+
+    .create-page {
+
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+
+    }
+
+    .journey-decoration {
+
+        display: none;
+
+    }
+
+}
+
+
+@media(max-width:550px) {
+
+    .create-form-card {
+
+        padding: 24px;
+
+    }
+
+    .date-row {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .date-arrow {
+
+        display: none;
+
+    }
+
+}
+
+/* =========================================================
+   EXPLORE — DISCOVERY EXPERIENCE
+========================================================= */
+
+.explore-page {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding:
+        55px 5vw 100px;
+
+}
+
+
+/* HERO */
+
+.explore-hero {
+
+    min-height: 390px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr .7fr;
+
+    align-items: center;
+
+    gap: 50px;
+
+}
+
+
+.explore-hero h1 {
+
+    margin-top: 20px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(50px, 6vw, 76px);
+
+    line-height: .96;
+
+    letter-spacing: -3px;
+
+}
+
+
+.explore-hero h1 span {
+
+    color: var(--purple);
+
+}
+
+
+.explore-hero p {
+
+    max-width: 520px;
+
+    margin-top: 25px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ORB */
+
+.explore-orb {
+
+    position: relative;
+
+    height: 330px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.orb-inner {
+
+    width: 210px;
+
+    height: 210px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 90px;
+
+    background:
+
+        radial-gradient(
+            circle at 35% 30%,
+            white,
+            #e8e4ff
+        );
+
+    box-shadow:
+
+        0 35px 80px
+        rgba(108,92,231,.18);
+
+    animation:
+        exploreFloat 5s ease-in-out infinite;
+
+}
+
+
+@keyframes exploreFloat {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50% {
+        transform:
+            translateY(-12px)
+            rotate(2deg);
+    }
+
+}
+
+
+.explore-orb::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+
+    height: 150px;
+
+    border:
+        1px solid
+        rgba(108,92,231,.15);
+
+    border-radius: 50%;
+
+    transform:
+        rotate(-25deg);
+
+}
+
+
+.orb-dot {
+
+    position: absolute;
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background:
+        var(--purple);
+
+    box-shadow:
+        0 0 0 6px
+        rgba(108,92,231,.08);
+
+}
+
+
+.dot-one {
+
+    top: 45px;
+
+    right: 50px;
+
+}
+
+
+.dot-two {
+
+    bottom: 55px;
+
+    left: 40px;
+
+}
+
+
+.dot-three {
+
+    top: 120px;
+
+    left: 20px;
+
+}
+
+
+/* OPTIONS */
+
+.explore-options {
+
+    display: grid;
+
+    grid-template-columns:
+        1.2fr .8fr;
+
+    gap: 18px;
+
+}
+
+
+.explore-feature-card {
+
+    position: relative;
+
+    min-height: 270px;
+
+    padding: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 24px;
+
+    background: white;
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    box-shadow:
+        var(--shadow-soft);
+
+    transition: .3s;
+
+}
+
+
+.explore-feature-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        var(--shadow-hover);
+
+}
+
+
+.explore-feature-card.large {
+
+    background:
+
+        linear-gradient(
+            140deg,
+            #5144c7,
+            #8175ed
+        );
+
+    color: white;
+
+}
+
+
+.explore-feature-card::after {
+
+    content: "✦";
+
+    position: absolute;
+
+    right: -20px;
+
+    bottom: -55px;
+
+    font-size: 180px;
+
+    opacity: .05;
+
+}
+
+
+.feature-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background:
+        var(--purple-soft);
+
+    font-size: 25px;
+
+}
+
+
+.large .feature-icon {
+
+    background:
+        rgba(255,255,255,.15);
+
+}
+
+
+.explore-feature-card span {
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    color: var(--purple);
+
+}
+
+
+.large span {
+
+    color:
+        rgba(255,255,255,.7);
+
+}
+
+
+.explore-feature-card h2 {
+
+    margin-top: 8px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 30px;
+
+}
+
+
+.explore-feature-card p {
+
+    max-width: 400px;
+
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+}
+
+
+.large p {
+
+    color:
+        rgba(255,255,255,.75);
+
+}
+
+
+.explore-feature-card strong {
+
+    position: absolute;
+
+    right: 28px;
+
+    bottom: 28px;
+
+    font-size: 25px;
+
+    transition: .25s;
+
+}
+
+
+.explore-feature-card:hover strong {
+
+    transform:
+        translateX(6px);
+
+}
+
+
+/* QUOTE */
+
+.explore-quote {
+
+    padding:
+        90px 20px 60px;
+
+    text-align: center;
+
+}
+
+
+.quote-mark {
+
+    color: var(--purple);
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 70px;
+
+    line-height: .5;
+
+}
+
+
+.explore-quote blockquote {
+
+    max-width: 700px;
+
+    margin:
+        20px auto;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(28px,4vw,44px);
+
+    line-height: 1.15;
+
+}
+
+
+.explore-quote > span {
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px) {
+
+    .explore-hero {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .explore-orb {
+
+        height: 260px;
+
+    }
+
+    .explore-options {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media(max-width:550px) {
+
+    .explore-hero h1 {
+
+        font-size: 48px;
+
+    }
+
+}
+
+/* =========================================================
+   EXPERIENCES
+========================================================= */
+
+.experience-page {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding:
+        55px 5vw 100px;
+
+}
+
+
+/* HERO */
+
+.experience-hero {
+
+    min-height: 350px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.experience-hero h1 {
+
+    margin-top: 20px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(50px, 6vw, 76px);
+
+    line-height: .95;
+
+    letter-spacing: -3px;
+
+}
+
+
+.experience-hero h1 span {
+
+    color: var(--purple);
+
+}
+
+
+.experience-hero p {
+
+    max-width: 510px;
+
+    margin-top: 23px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+.experience-symbol {
+
+    width: 200px;
+
+    height: 200px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 85px;
+
+    background:
+
+        radial-gradient(
+            circle at 30% 25%,
+            white,
+            var(--purple-soft)
+        );
+
+    box-shadow:
+        0 30px 70px
+        rgba(108,92,231,.18);
+
+    animation:
+        experienceFloat 4s ease-in-out infinite;
+
+}
+
+
+@keyframes experienceFloat {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            translateY(-12px)
+            rotate(3deg);
+    }
+
+}
+
+
+/* GRID */
+
+.experience-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 18px;
+
+}
+
+
+.experience-card {
+
+    position: relative;
+
+    min-height: 330px;
+
+    padding: 28px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    box-shadow:
+        var(--shadow-soft);
+
+    transition: .35s;
+
+}
+
+
+.experience-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        var(--shadow-hover);
+
+}
+
+
+.experience-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    right: -80px;
+
+    bottom: -80px;
+
+    border-radius: 50%;
+
+    background:
+        var(--purple-soft);
+
+    transition: .4s;
+
+}
+
+
+.experience-card:hover::after {
+
+    transform:
+        scale(1.4);
+
+}
+
+
+.experience-top {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: space-between;
+
+}
+
+
+.experience-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background:
+        var(--purple-soft);
+
+    font-size: 25px;
+
+}
+
+
+.experience-index {
+
+    color: #aaa;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+.experience-card > div:last-child {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.experience-label {
+
+    color: var(--purple);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.experience-card h2 {
+
+    margin-top: 8px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 32px;
+
+}
+
+
+.experience-card p {
+
+    max-width: 430px;
+
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+}
+
+
+.experience-card strong {
+
+    display: inline-block;
+
+    margin-top: 18px;
+
+    color: var(--purple);
+
+    font-size: 10px;
+
+}
+
+
+.experience-adventure {
+
+    background:
+        linear-gradient(
+            140deg,
+            #f0edff,
+            white
+        );
+
+}
+
+
+.experience-food {
+
+    background:
+        linear-gradient(
+            140deg,
+            #fff1e8,
+            white
+        );
+
+}
+
+
+.experience-culture {
+
+    background:
+        linear-gradient(
+            140deg,
+            #eef8f4,
+            white
+        );
+
+}
+
+
+.experience-nature {
+
+    background:
+        linear-gradient(
+            140deg,
+            #edf5ed,
+            white
+        );
+
+}
+
+
+/* CTA */
+
+.experience-cta {
+
+    margin-top: 65px;
+
+    padding: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    border-radius: 25px;
+
+    background:
+
+        linear-gradient(
+            120deg,
+            #5144c7,
+            #8175ed
+        );
+
+    color: white;
+
+}
+
+
+.experience-cta h2 {
+
+    margin-top: 10px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 35px;
+
+    line-height: 1.05;
+
+}
+
+
+.experience-cta .section-label {
+
+    color:
+        rgba(255,255,255,.65);
+
+}
+
+
+.experience-cta .primary-action {
+
+    background: white;
+
+    color: var(--purple);
+
+    box-shadow: none;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    .experience-hero {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding-bottom: 40px;
+
+    }
+
+    .experience-symbol {
+
+        display: none;
+
+    }
+
+    .experience-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .experience-cta {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+}
+
+/* =========================================================
+   CITIES — DESTINATION GALLERY
+========================================================= */
+
+.cities-page {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding:
+        55px 5vw 100px;
+
+}
+
+
+/* HERO */
+
+.cities-hero {
+
+    min-height: 350px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+}
+
+
+.cities-hero h1 {
+
+    margin-top: 20px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(48px, 6vw, 74px);
+
+    line-height: .95;
+
+    letter-spacing: -3px;
+
+}
+
+
+.cities-hero h1 span {
+
+    color: var(--purple);
+
+}
+
+
+.cities-hero p {
+
+    max-width: 540px;
+
+    margin-top: 23px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+.cities-count {
+
+    min-width: 160px;
+
+    padding: 25px;
+
+    border-radius: 22px;
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    box-shadow:
+        var(--shadow-soft);
+
+}
+
+
+.cities-count strong {
+
+    display: block;
+
+    color: var(--purple);
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 55px;
+
+    line-height: 1;
+
+}
+
+
+.cities-count span {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+}
+
+
+/* TOOLS */
+
+.city-tools {
+
+    margin-bottom: 30px;
+
+}
+
+
+.city-search {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    max-width: 620px;
+
+    padding: 14px 17px;
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 14px;
+
+    box-shadow:
+        var(--shadow-soft);
+
+}
+
+
+.city-search span {
+
+    color: var(--purple);
+
+    font-size: 20px;
+
+}
+
+
+.city-search input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+}
+
+
+.city-filter {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 14px;
+
+}
+
+
+.filter-btn {
+
+    border:
+        1px solid var(--border);
+
+    background: white;
+
+    border-radius: 100px;
+
+    padding: 8px 14px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    transition: .2s;
+
+}
+
+
+.filter-btn:hover,
+.filter-btn.active {
+
+    color: white;
+
+    border-color:
+        var(--purple);
+
+    background:
+        var(--purple);
+
+}
+
+
+/* GRID */
+
+.cities-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 20px;
+
+}
+
+
+.city-card-premium {
+
+    overflow: hidden;
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 22px;
+
+    box-shadow:
+        var(--shadow-soft);
+
+    transition:
+        transform .3s,
+        box-shadow .3s;
+
+}
+
+
+.city-card-premium:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        var(--shadow-hover);
+
+}
+
+
+/* CITY ART */
+
+.city-art {
+
+    position: relative;
+
+    height: 190px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #dcd7ff,
+            #f5f3ff
+        );
+
+}
+
+
+.city-card-premium:nth-child(3n)
+.city-art {
+
+    background:
+        linear-gradient(
+            135deg,
+            #d6eee7,
+            #f4faf8
+        );
+
+}
+
+
+.city-card-premium:nth-child(3n+2)
+.city-art {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7dfd0,
+            #fff7f2
+        );
+
+}
+
+
+.city-number {
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 14px;
+
+    color:
+        rgba(30,25,50,.35);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+.city-symbol {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 75px;
+
+    filter:
+        drop-shadow(
+            0 15px 15px
+            rgba(30,25,50,.10)
+        );
+
+    transition: .3s;
+
+}
+
+
+.city-card-premium:hover
+.city-symbol {
+
+    transform:
+        scale(1.08)
+        translateY(-4px);
+
+}
+
+
+.city-glow {
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.55);
+
+    filter: blur(5px);
+
+}
+
+
+/* CONTENT */
+
+.city-card-content {
+
+    padding: 20px;
+
+}
+
+
+.city-title-row {
+
+    display: flex;
+
+    align-items: start;
+
+    justify-content: space-between;
+
+}
+
+
+.city-country {
+
+    color: var(--purple);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+
+}
+
+
+.city-title-row h2 {
+
+    margin-top: 5px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 25px;
+
+}
+
+
+.city-pin {
+
+    font-size: 17px;
+
+}
+
+
+.city-card-content > p {
+
+    min-height: 38px;
+
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.7;
+
+}
+
+
+.city-card-bottom {
+
+    margin-top: 17px;
+
+    padding-top: 14px;
+
+    border-top:
+        1px solid var(--border);
+
+}
+
+
+.city-explore-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    color: var(--text);
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.city-explore-btn span {
+
+    color: var(--purple);
+
+    font-size: 18px;
+
+    transition: .2s;
+
+}
+
+
+.city-explore-btn:hover span {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+/* NO RESULTS */
+
+.no-cities {
+
+    padding: 70px 20px;
+
+    text-align: center;
+
+}
+
+
+.no-cities > div {
+
+    font-size: 50px;
+
+}
+
+
+.no-cities h3 {
+
+    margin-top: 15px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 25px;
+
+}
+
+
+.no-cities p {
+
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:850px) {
+
+    .cities-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    .cities-hero {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    .cities-count {
+
+        display: none;
+
+    }
+
+    .cities-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+/* =========================================================
+   CITY DETAILS
+========================================================= */
+
+.city-detail-page {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding:
+        45px 5vw 100px;
+
+}
+
+
+.back-link {
+
+    display: inline-block;
+
+    color: var(--muted);
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    transition: .2s;
+
+}
+
+
+.back-link:hover {
+
+    color: var(--purple);
+
+    transform:
+        translateX(-3px);
+
+}
+
+
+/* HERO */
+
+.city-detail-hero {
+
+    margin-top: 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        .9fr 1.1fr;
+
+    gap: 55px;
+
+    align-items: center;
+
+}
+
+
+.city-detail-art {
+
+    position: relative;
+
+    height: 430px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background:
+
+        linear-gradient(
+            140deg,
+            #dcd7ff,
+            #f8f7ff
+        );
+
+    box-shadow:
+        var(--shadow-soft);
+
+}
+
+
+.detail-art-number {
+
+    position: absolute;
+
+    top: 25px;
+
+    left: 25px;
+
+    color:
+        rgba(40,35,70,.35);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.detail-art-icon {
+
+    position: relative;
+
+    z-index: 3;
+
+    font-size: 125px;
+
+    filter:
+        drop-shadow(
+            0 25px 25px
+            rgba(50,40,100,.15)
+        );
+
+    animation:
+        detailFloat 5s ease-in-out infinite;
+
+}
+
+
+@keyframes detailFloat {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50% {
+        transform:
+            translateY(-14px)
+            rotate(2deg);
+    }
+
+}
+
+
+.detail-ring {
+
+    position: absolute;
+
+    border:
+        1px solid
+        rgba(108,92,231,.2);
+
+    border-radius: 50%;
+
+}
+
+
+.ring-one {
+
+    width: 300px;
+
+    height: 170px;
+
+    transform:
+        rotate(-25deg);
+
+}
+
+
+.ring-two {
+
+    width: 370px;
+
+    height: 210px;
+
+    transform:
+        rotate(25deg);
+
+}
+
+
+/* INFO */
+
+.city-detail-info .city-country {
+
+    font-size: 10px;
+
+}
+
+
+.city-detail-info h1 {
+
+    margin-top: 12px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(55px,7vw,85px);
+
+    line-height: .9;
+
+    letter-spacing: -3px;
+
+}
+
+
+.city-detail-info > p {
+
+    max-width: 520px;
+
+    margin-top: 25px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.9;
+
+}
+
+
+.city-detail-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 25px;
+
+}
+
+
+.city-detail-tags span {
+
+    padding: 8px 12px;
+
+    border-radius: 100px;
+
+    background: var(--purple-soft);
+
+    color: var(--purple);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+}
+
+
+/* ADD TO TRIP */
+
+.add-trip-panel {
+
+    margin-top: 60px;
+
+    padding: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 35px;
+
+    border-radius: 24px;
+
+    background:
+
+        linear-gradient(
+            120deg,
+            #5144c7,
+            #8175ed
+        );
+
+    color: white;
+
+}
+
+
+.add-trip-panel .section-label {
+
+    color:
+        rgba(255,255,255,.65);
+
+}
+
+
+.add-trip-panel h2 {
+
+    margin-top: 8px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 27px;
+
+}
+
+
+.add-trip-panel p {
+
+    margin-top: 7px;
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-size: 10px;
+
+}
+
+
+.add-trip-form {
+
+    display: flex;
+
+    gap: 9px;
+
+}
+
+
+.add-trip-form select {
+
+    min-width: 190px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+}
+
+
+.add-trip-form button {
+
+    padding: 13px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: var(--purple);
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+}
+
+
+.add-trip-form button span {
+
+    margin-left: 5px;
+
+}
+
+
+.no-trip-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.no-trip-box p {
+
+    margin: 0;
+
+}
+
+
+/* WHY GO */
+
+.city-detail-section {
+
+    margin-top: 80px;
+
+}
+
+
+.detail-heading h2 {
+
+    margin-top: 10px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 38px;
+
+}
+
+
+.detail-mini-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 17px;
+
+    margin-top: 25px;
+
+}
+
+
+.detail-mini-card {
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    border:
+        1px solid var(--border);
+
+    background: white;
+
+    box-shadow:
+        var(--shadow-soft);
+
+}
+
+
+.detail-mini-card > span {
+
+    font-size: 27px;
+
+}
+
+
+.detail-mini-card h3 {
+
+    margin-top: 17px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 20px;
+
+}
+
+
+.detail-mini-card p {
+
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.7;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px) {
+
+    .city-detail-hero {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .city-detail-art {
+
+        height: 280px;
+
+    }
+
+    .add-trip-panel {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    .add-trip-form {
+
+        width: 100%;
+
+        flex-direction: column;
+
+    }
+
+    .add-trip-form select {
+
+        width: 100%;
+
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    .detail-mini-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+/* =========================================================
+   MY JOURNEYS
+========================================================= */
+
+.trips-page {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding:
+        55px 5vw 100px;
+
+}
+
+
+.trips-hero {
+
+    min-height: 300px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+}
+
+
+.trips-hero h1 {
+
+    margin-top: 18px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(55px, 7vw, 80px);
+
+    line-height: .9;
+
+    letter-spacing: -3px;
+
+}
+
+
+.trips-hero h1 span {
+
+    color: var(--purple);
+
+}
+
+
+.trips-hero p {
+
+    margin-top: 20px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+
+.journey-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 20px;
+
+}
+
+
+.journey-card {
+
+    overflow: hidden;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 24px;
+
+    background: white;
+
+    box-shadow:
+        var(--shadow-soft);
+
+    transition: .3s;
+
+}
+
+
+.journey-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        var(--shadow-hover);
+
+}
+
+
+.journey-cover {
+
+    position: relative;
+
+    height: 180px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5144c7,
+            #9389f5
+        );
+
+}
+
+
+.journey-card:nth-child(2n)
+.journey-cover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #287c72,
+            #72bcb0
+        );
+
+}
+
+
+.journey-card:nth-child(3n)
+.journey-cover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #c56d42,
+            #e7a47f
+        );
+
+}
+
+
+.journey-cover::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+
+    height: 120px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    border-radius: 50%;
+
+    transform:
+        rotate(-25deg);
+
+}
+
+
+.journey-number {
+
+    position: absolute;
+
+    top: 17px;
+
+    left: 18px;
+
+    color:
+        rgba(255,255,255,.6);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+.journey-icon {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 72px;
+
+    filter:
+        drop-shadow(
+            0 15px 15px
+            rgba(0,0,0,.15)
+        );
+
+}
+
+
+.journey-content {
+
+    padding: 25px;
+
+}
+
+
+.journey-status {
+
+    color: var(--purple);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+}
+
+
+.journey-content h2 {
+
+    margin-top: 8px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 29px;
+
+}
+
+
+.journey-content > p {
+
+    min-height: 35px;
+
+    margin-top: 9px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.7;
+
+}
+
+
+.journey-meta {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 17px;
+
+}
+
+
+.journey-meta span {
+
+    padding: 7px 10px;
+
+    border-radius: 100px;
+
+    background: var(--purple-soft);
+
+    color: var(--purple);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+}
+
+
+.journey-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 20px;
+
+    padding-top: 15px;
+
+    border-top:
+        1px solid var(--border);
+
+}
+
+
+.journey-footer span {
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+}
+
+
+.journey-footer a {
+
+    color: var(--purple);
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+}
+
+
+.empty-journeys {
+
+    padding:
+        90px 20px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    border:
+        1px solid var(--border);
+
+    background: white;
+
+}
+
+
+.empty-globe {
+
+    font-size: 65px;
+
+}
+
+
+.empty-journeys h2 {
+
+    margin-top: 15px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 32px;
+
+}
+
+
+.empty-journeys p {
+
+    margin: 8px 0 25px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+@media(max-width:700px) {
+
+    .trips-hero {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding-bottom: 40px;
+
+    }
+
+    .journey-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+/* =========================================================
+   TRIP ITINERARY
+========================================================= */
+
+.trip-detail-page {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding:
+        45px 5vw 100px;
+
+}
+
+
+.trip-detail-header {
+
+    margin-top: 35px;
+
+    padding: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4f2ff,
+            #ffffff
+        );
+
+    border:
+        1px solid var(--border);
+
+    box-shadow:
+        var(--shadow-soft);
+
+}
+
+
+.trip-detail-header h1 {
+
+    margin-top: 12px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(45px, 6vw, 70px);
+
+    line-height: .95;
+
+    letter-spacing: -3px;
+
+}
+
+
+.trip-detail-header p {
+
+    max-width: 550px;
+
+    margin-top: 18px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.8;
+
+}
+
+
+.trip-date-pills {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 20px;
+
+}
+
+
+.trip-date-pills span {
+
+    padding: 8px 12px;
+
+    border-radius: 100px;
+
+    background: var(--purple-soft);
+
+    color: var(--purple);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+}
+
+
+.trip-big-number {
+
+    min-width: 145px;
+
+    height: 145px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        var(--purple);
+
+    color: white;
+
+    box-shadow:
+        0 20px 40px
+        rgba(90,75,200,.22);
+
+}
+
+
+.trip-big-number strong {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 48px;
+
+    line-height: 1;
+
+}
+
+
+.trip-big-number span {
+
+    margin-top: 5px;
+
+    font-size: 8px;
+
+    opacity: .75;
+
+}
+
+
+/* ITINERARY */
+
+.itinerary-section {
+
+    margin-top: 75px;
+
+}
+
+
+.itinerary-title h2 {
+
+    margin-top: 9px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 36px;
+
+}
+
+
+.timeline {
+
+    position: relative;
+
+    margin-top: 35px;
+
+}
+
+
+.timeline::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 24px;
+
+    top: 20px;
+
+    bottom: 20px;
+
+    width: 1px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            var(--purple),
+            var(--border)
+        );
+
+}
+
+
+.timeline-item {
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        50px 1fr;
+
+    gap: 20px;
+
+    margin-bottom: 28px;
+
+}
+
+
+.timeline-marker {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 49px;
+
+    height: 49px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border:
+        1px solid var(--purple);
+
+    color: var(--purple);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 20px
+        rgba(90,75,200,.12);
+
+}
+
+
+.timeline-card {
+
+    padding: 23px;
+
+    border-radius: 20px;
+
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    box-shadow:
+        var(--shadow-soft);
+
+    transition: .25s;
+
+}
+
+
+.timeline-card:hover {
+
+    transform:
+        translateX(5px);
+
+    box-shadow:
+        var(--shadow-hover);
+
+}
+
+
+.timeline-card-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+}
+
+
+.timeline-day {
+
+    color: var(--purple);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.timeline-card h3 {
+
+    margin-top: 6px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 28px;
+
+}
+
+
+.timeline-country {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+}
+
+
+.timeline-arrow {
+
+    color: var(--purple);
+
+    font-size: 25px;
+
+}
+
+
+.timeline-dates {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 18px;
+
+    padding-top: 13px;
+
+    border-top:
+        1px solid var(--border);
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+}
+
+
+.empty-itinerary {
+
+    margin-top: 30px;
+
+    padding: 70px 20px;
+
+    text-align: center;
+
+    border-radius: 25px;
+
+    border:
+        1px solid var(--border);
+
+    background: white;
+
+}
+
+
+.empty-itinerary > div {
+
+    font-size: 55px;
+
+}
+
+
+.empty-itinerary h3 {
+
+    margin-top: 15px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 27px;
+
+}
+
+
+.empty-itinerary p {
+
+    margin: 8px 0 25px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+}
+
+
+.journey-end {
+
+    margin-top: 70px;
+
+    text-align: center;
+
+}
+
+
+.journey-end span {
+
+    color: var(--purple);
+
+    font-size: 22px;
+
+}
+
+
+.journey-end p {
+
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+}
+
+
+@media(max-width:650px) {
+
+    .trip-detail-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding: 30px;
+
+    }
+
+    .trip-big-number {
+
+        width: 100%;
+
+        height: 100px;
+
+        border-radius: 20px;
+
+    }
+
+    .timeline-item {
+
+        grid-template-columns: 42px 1fr;
+
+        gap: 12px;
+
+    }
+
+    .timeline-marker {
+
+        width: 42px;
+
+        height: 42px;
+
+    }
+
+}

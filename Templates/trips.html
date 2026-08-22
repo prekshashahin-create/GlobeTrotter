@@ -2,198 +2,219 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Trips - GlobeTrotter</title>
+    <title>My Journeys | GlobeTrotter</title>
 
-    <style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #222;
-        }
-
-        .navbar {
-            background: #6c4df6;
-            color: white;
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar h1 {
-            margin: 0;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .create-box {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .create-box input {
-            width: 70%;
-            padding: 13px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
-        .create-box button {
-            padding: 13px 20px;
-            border: none;
-            border-radius: 8px;
-            background: #6c4df6;
-            color: white;
-            cursor: pointer;
-            margin-left: 8px;
-        }
-
-        .trips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-        }
-
-        .trip-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .trip-card h2 {
-            color: #6c4df6;
-        }
-
-        .trip-card a {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 18px;
-            background: #6c4df6;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-
-        .empty {
-            color: #777;
-        }
-
-    </style>
-
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
 </head>
-
 
 <body>
 
-    <div class="navbar">
+    <header class="navbar">
 
-        <h1>🌍 GlobeTrotter</h1>
+        <a href="{{ url_for('dashboard') }}" class="brand">
+            <span class="brand-icon">✦</span>
+            GlobeTrotter
+        </a>
 
-        <div>
+        <nav class="nav-links">
 
-            <a href="/dashboard">
+            <a href="{{ url_for('dashboard') }}">
                 Dashboard
             </a>
 
-            <a href="/cities">
-                Explore Cities
+            <a href="{{ url_for('explore') }}">
+                Explore
             </a>
 
-            <a href="/trips">
-                My Trips
+            <a href="{{ url_for('plan_trip') }}">
+                Plan Trip
             </a>
 
-        </div>
+        </nav>
 
-    </div>
+        <a href="{{ url_for('logout') }}" class="logout-btn">
+            Logout
+        </a>
 
-
-    <div class="container">
-
-        <h1>My Trips ✈️</h1>
-
-        <p>Create and manage your travel plans.</p>
+    </header>
 
 
-        <div class="create-box">
+    <main class="trips-page">
 
-            <h2>Create a New Trip</h2>
+        <section class="trips-hero">
 
-            <form method="POST" action="/create-trip">
+            <div>
 
-                <input
-                    type="text"
-                    name="trip_name"
-                    placeholder="Enter trip name..."
-                    required
-                >
+                <span class="eyebrow">
+                    YOUR TRAVEL COLLECTION
+                </span>
 
-                <button type="submit">
-                    + Create Trip
-                </button>
+                <h1>
+                    My <span>Journeys.</span>
+                </h1>
 
-            </form>
+                <p>
+                    Every destination you've planned,
+                    all in one place.
+                </p>
 
-        </div>
+            </div>
+
+            <a href="{{ url_for('create_trip') }}" class="primary-action">
+
+                + Create Trip
+
+            </a>
+
+        </section>
 
 
         {% if trips %}
 
-        <div class="trips-grid">
+        <section class="journey-grid">
 
             {% for trip in trips %}
 
-            <div class="trip-card">
+            <article class="journey-card">
 
-                <h2>
-                    {{ trip["name"] }}
-                </h2>
+                <div class="journey-cover">
 
-                <p>
-                    Created on {{ trip["created_at"] }}
-                </p>
+                    <span class="journey-number">
+                        {{ "%02d"|format(loop.index) }}
+                    </span>
 
-                <a href="#">
-                    View Trip
-                </a>
+                    <span class="journey-icon">
 
-            </div>
+                        {% if loop.index % 4 == 1 %}
+                        ✈️
+                        {% elif loop.index % 4 == 2 %}
+                        🌴
+                        {% elif loop.index % 4 == 3 %}
+                        🏔️
+                        {% else %}
+                        🌍
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+
+                <div class="journey-content">
+
+                    <span class="journey-status">
+                        PLANNED JOURNEY
+                    </span>
+
+                    <h2>
+                        {{ trip["name"] }}
+                    </h2>
+
+                    {% if trip["description"] %}
+
+                    <p>
+                        {{ trip["description"] }}
+                    </p>
+
+                    {% else %}
+
+                    <p>
+                        Your next adventure is waiting
+                        to be filled with memories.
+                    </p>
+
+                    {% endif %}
+
+
+                    <div class="journey-meta">
+
+                        {% if trip["start_date"] %}
+                        <span>
+                            📅 {{ trip["start_date"] }}
+                        </span>
+                        {% endif %}
+
+                        {% if trip["end_date"] %}
+                        <span>
+                            → {{ trip["end_date"] }}
+                        </span>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="journey-footer">
+
+                        <span>
+                            ✦ Your journey
+                        </span>
+
+                        <a href="{{ url_for('trip_details', trip_id=trip['id']) }}">
+                            View Journey →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
 
             {% endfor %}
 
-        </div>
+        </section>
 
         {% else %}
 
-        <p class="empty">
-            You haven't created any trips yet.
-        </p>
+        <section class="empty-journeys">
+
+            <div class="empty-globe">
+                🌍
+            </div>
+
+            <h2>
+                Your first adventure is waiting.
+            </h2>
+
+            <p>
+                Create a trip and start collecting
+                destinations.
+            </p>
+
+            <a href="{{ url_for('create_trip') }}" class="primary-action">
+
+                Create my first trip →
+
+            </a>
+
+        </section>
 
         {% endif %}
 
-    </div>
+    </main>
+
+
+    <footer>
+
+        <div class="footer-brand">
+
+            <span class="brand-icon">✦</span>
+
+            GlobeTrotter
+
+        </div>
+
+        <p>
+            Collect moments, not things. ✈
+        </p>
+
+    </footer>
 
 </body>
 
