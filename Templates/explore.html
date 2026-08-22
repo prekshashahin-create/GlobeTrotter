@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore | GlobeTrotter</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="/dashboard" class="brand">
+        <span class="brand-icon">✦</span>
+        <span>GlobeTrotter</span>
+    </a>
+
+    <nav class="nav-links">
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/explore" class="active">
+            Explore
+        </a>
+
+        <a href="/plan-trip">
+            Plan Trip
+        </a>
+
+    </nav>
+
+    <a href="/logout" class="logout-btn">
+        Logout
+    </a>
+
+</header>
+
+
+<main class="choice-page">
+
+    <section class="choice-hero">
+
+        <span class="eyebrow">
+            DISCOVER SOMETHING NEW
+        </span>
+
+        <h1>
+            What are you looking<br>
+            <span>for?</span>
+        </h1>
+
+        <p>
+            Discover amazing destinations and experiences
+            that can make your next journey unforgettable.
+        </p>
+
+    </section>
+
+
+    <section class="choice-grid explore-choice-grid">
+
+        <!-- CITIES -->
+
+        <a href="/cities" class="choice-card large-choice">
+
+            <div class="choice-icon">
+                🌎
+            </div>
+
+            <span class="choice-number">
+                01
+            </span>
+
+            <h2>
+                Discover Cities
+            </h2>
+
+            <p>
+                Explore cities around the world, discover
+                new destinations and find the perfect place
+                for your next adventure.
+            </p>
+
+            <span class="choice-link">
+                Explore cities <b>→</b>
+            </span>
+
+        </a>
+
+
+        <!-- EXPERIENCES -->
+
+        <a href="/experiences" class="choice-card large-choice">
+
+            <div class="choice-icon">
+                ✨
+            </div>
+
+            <span class="choice-number">
+                02
+            </span>
+
+            <h2>
+                Find Experiences
+            </h2>
+
+            <p>
+                Discover food, culture, nature, adventure
+                and unique experiences waiting for you
+                at your destination.
+            </p>
+
+            <span class="choice-link">
+                Discover experiences <b>→</b>
+            </span>
+
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-brand">
+        <span class="brand-icon">✦</span>
+        GlobeTrotter
+    </div>
+
+    <p>
+        Plan less. Travel more. ✈
+    </p>
+
+</footer>
+
+</body>
+</html>

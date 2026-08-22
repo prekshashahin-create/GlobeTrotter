@@ -2,191 +2,323 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Explore Cities - GlobeTrotter</title>
+    <title>Explore | GlobeTrotter</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #222;
-        }
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
 
-        .navbar {
-            background: #6c4df6;
-            color: white;
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-        .navbar h1 {
-            margin: 0;
-        }
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-        }
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
 
-        .container {
-            padding: 40px;
-        }
-
-        .search-box {
-            width: 100%;
-            max-width: 600px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            margin-bottom: 30px;
-        }
-
-        .view-city-btn {
-    display: inline-block;
-    margin-top: 18px;
-    padding: 12px 22px;
-    background: #6d45f5;
-    color: white;
-    text-decoration: none;
-    border-radius: 9px;
-    font-weight: 600;
-    transition: 0.2s;
-}
-
-.view-city-btn:hover {
-    background: #5937d8;
-    transform: translateY(-2px);
-}
-
-        .cities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .city-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .city-card h2 {
-            margin-top: 0;
-            color: #6c4df6;
-        }
-
-        .city-card p {
-            color: #666;
-        }
-
-        .view-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 18px;
-            background: #6c4df6;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-    </style>
 </head>
+
 
 <body>
 
-    <div class="navbar">
+    <!-- Navigation -->
 
-        <h1>🌍 GlobeTrotter</h1>
+    <header class="navbar">
 
-        <div>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/cities">Explore Cities</a>
+        <a href="/dashboard" class="brand">
+
+            <span class="brand-icon">✦</span>
+
+            <span>GlobeTrotter</span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/cities" class="active">
+                Explore
+            </a>
+
+            <a href="/create-trip">
+                Plan Trip
+            </a>
+
+        </nav>
+
+
+        <a href="/logout" class="logout-btn">
+            Logout
+        </a>
+
+    </header>
+
+
+
+    <!-- Hero -->
+
+    <section class="explore-hero">
+
+        <div class="hero-content">
+
+            <span class="eyebrow">
+                ✈ DISCOVER THE WORLD
+            </span>
+
+            <h1>
+                Where will you<br>
+                <span>go next?</span>
+            </h1>
+
+            <p>
+                Explore beautiful destinations, discover new experiences,
+                and create memories worth travelling for.
+            </p>
+
+
+            <div class="search-box">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    id="citySearch"
+                    placeholder="Search destinations..."
+                >
+
+            </div>
+
         </div>
 
-    </div>
+
+        <div class="hero-decoration">
+
+            <div class="floating-card card-one">
+                ✈️
+                <span>Adventure</span>
+            </div>
+
+            <div class="floating-card card-two">
+                🌎
+                <span>Explore</span>
+            </div>
+
+        </div>
+
+    </section>
 
 
-    <div class="container">
 
-        <h1>Explore Cities</h1>
+    <!-- Destinations -->
 
-        <p>Discover destinations and start planning your trip.</p>
+    <main class="cities-container">
 
-        <input
-            type="text"
-            id="searchInput"
-            class="search-box"
-            placeholder="Search for a city..."
-            onkeyup="searchCities()"
-        >
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    POPULAR DESTINATIONS
+                </span>
+
+                <h2>
+                    Explore places you'll love
+                </h2>
+
+            </div>
+
+            <span class="destination-count">
+                {{ cities|length }} destinations
+            </span>
+
+        </div>
 
 
-        <div class="cities-grid" id="citiesGrid">
+        {% if cities %}
+
+        <div class="city-grid" id="cityGrid">
 
             {% for city in cities %}
 
-    <div class="city-card">
+            <article class="city-card">
 
-        <h2>{{ city["name"] }}</h2>
+                <div class="city-image">
 
-        <p>
-            {{ city["country"] }}
-        </p>
+                    <div class="image-overlay"></div>
 
-        {% if city["description"] %}
-            <p>{{ city["description"] }}</p>
-        {% endif %}
+                    <span class="location-badge">
+                        📍 {{ city["country"] }}
+                    </span>
 
-        <a
-            href="{{ url_for('city_details', city_id=city['id']) }}"
-            class="view-city-btn"
-        >
-            View City
-        </a>
+                    <span class="heart">
+                        ♡
+                    </span>
 
-    </div>
+                </div>
 
-{% endfor %}
 
-                <a href="{{ url_for('city_details', city_id=city['id']) }}" class="view-btn">
-    View City
-</a>
+                <div class="city-content">
 
-            </div>
+                    <h3>
+                        {{ city["name"] }}
+                    </h3>
+
+                    {% if city["description"] %}
+
+                    <p>
+                        {{ city["description"] }}
+                    </p>
+
+                    {% else %}
+
+                    <p>
+                        Discover the beauty, culture and experiences
+                        of {{ city["name"] }}.
+                    </p>
+
+                    {% endif %}
+
+
+                    <div class="city-footer">
+
+                        <span class="discover">
+                            Explore destination
+                            <span>→</span>
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
 
             {% endfor %}
 
         </div>
 
-    </div>
+
+        <div id="noResults" class="no-results">
+
+            <div>🌍</div>
+
+            <h3>No destination found</h3>
+
+            <p>
+                Try searching for another city.
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                🌍
+            </div>
+
+            <h2>No destinations yet</h2>
+
+            <p>
+                Your destinations will appear here once they are added.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </main>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="footer-brand">
+
+            <span class="brand-icon">✦</span>
+
+            GlobeTrotter
+
+        </div>
+
+        <p>
+            Plan less. Travel more. ✈
+        </p>
+
+    </footer>
+
 
 
     <script>
 
-        function searchCities() {
+        const searchInput =
+            document.getElementById("citySearch");
 
-            let input =
-                document.getElementById("searchInput").value.toLowerCase();
+        const cards =
+            document.querySelectorAll(".city-card");
 
-            let cards =
-                document.querySelectorAll(".city-card");
+        const noResults =
+            document.getElementById("noResults");
 
-            cards.forEach(function(card) {
 
-                let cityName =
-                    card.querySelector("h2").textContent.toLowerCase();
+        if (searchInput) {
 
-                if (cityName.includes(input)) {
-                    card.style.display = "";
-                } else {
-                    card.style.display = "none";
+            searchInput.addEventListener("input", function () {
+
+                const search =
+                    this.value.toLowerCase().trim();
+
+                let visibleCards = 0;
+
+
+                cards.forEach(card => {
+
+                    const text =
+                        card.innerText.toLowerCase();
+
+
+                    if (text.includes(search)) {
+
+                        card.style.display = "block";
+
+                        visibleCards++;
+
+                    } else {
+
+                        card.style.display = "none";
+
+                    }
+
+                });
+
+
+                if (noResults) {
+
+                    noResults.style.display =
+                        visibleCards === 0
+                            ? "block"
+                            : "none";
+
                 }
 
             });

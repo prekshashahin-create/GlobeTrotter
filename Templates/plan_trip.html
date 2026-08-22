@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Plan Trip | GlobeTrotter</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="/dashboard" class="brand">
+        <span class="brand-icon">✦</span>
+        <span>GlobeTrotter</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/explore">Explore</a>
+        <a href="/plan-trip" class="active">Plan Trip</a>
+    </nav>
+
+    <a href="/logout" class="logout-btn">Logout</a>
+
+</header>
+
+
+<main class="choice-page">
+
+    <section class="choice-hero">
+
+        <span class="eyebrow">
+            YOUR JOURNEY STARTS HERE
+        </span>
+
+        <h1>
+            How do you want to<br>
+            <span>plan your trip?</span>
+        </h1>
+
+        <p>
+            Choose the planning style that works best for you.
+            You can always customize your journey later.
+        </p>
+
+    </section>
+
+
+    <section class="choice-grid">
+
+        <!-- OPTION 1 -->
+
+        <a href="/create-trip" class="choice-card">
+
+            <div class="choice-icon">
+                ✨
+            </div>
+
+            <span class="choice-number">
+                01
+            </span>
+
+            <h2>
+                Start from Scratch
+            </h2>
+
+            <p>
+                Build your perfect trip step by step.
+                Choose your dates, destinations and itinerary.
+            </p>
+
+            <span class="choice-link">
+                Start planning <b>→</b>
+            </span>
+
+        </a>
+
+
+        <!-- OPTION 2 -->
+
+        <a href="/cities" class="choice-card">
+
+            <div class="choice-icon">
+                🌍
+            </div>
+
+            <span class="choice-number">
+                02
+            </span>
+
+            <h2>
+                Explore Destinations
+            </h2>
+
+            <p>
+                Discover cities first and add the places
+                you love to your travel plan.
+            </p>
+
+            <span class="choice-link">
+                Explore cities <b>→</b>
+            </span>
+
+        </a>
+
+
+        <!-- OPTION 3 -->
+
+        <a href="/quick-plan" class="choice-card">
+
+            <div class="choice-icon">
+                🧭
+            </div>
+
+            <span class="choice-number">
+                03
+            </span>
+
+            <h2>
+                Quick Plan
+            </h2>
+
+            <p>
+                Short on time? Give us your destination
+                and dates and create a simple plan quickly.
+            </p>
+
+            <span class="choice-link">
+                Quick plan <b>→</b>
+            </span>
+
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-brand">
+        <span class="brand-icon">✦</span>
+        GlobeTrotter
+    </div>
+
+    <p>
+        Plan less. Travel more. ✈
+    </p>
+
+</footer>
+
+</body>
+</html>

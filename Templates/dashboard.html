@@ -2,267 +2,337 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>GlobeTrotter | Dashboard</title>
+    <title>Dashboard | GlobeTrotter</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #222;
-        }
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
 
-        .navbar {
-            background: #ffffff;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #5b4bdb;
-        }
-
-        .logout {
-            text-decoration: none;
-            color: #555;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .welcome {
-            margin-bottom: 30px;
-        }
-
-        .welcome h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-
-        .welcome p {
-            color: #777;
-        }
-
-        .create-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 20px;
-            background: #5b4bdb;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-
-        .trips-section {
-            margin-top: 40px;
-        }
-
-        .trips-section h2 {
-            margin-bottom: 20px;
-        }
-
-        .trip-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .trip-card {
-            background: white;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-        }
-
-        .trip-card h3 {
-            margin-bottom: 12px;
-            color: #333;
-        }
-
-        .trip-date {
-            color: #5b4bdb;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
-
-        .trip-description {
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .empty {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            color: #777;
-        }
-
-        .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-.stat-card {
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-}
-
-.stat-icon {
-    font-size: 32px;
-}
-
-.stat-card h3 {
-    font-size: 25px;
-    margin-bottom: 5px;
-}
-
-.stat-card p {
-    color: #777;
-}
-
-@media (max-width: 700px) {
-
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-}
-    </style>
 </head>
 
 <body>
 
-    <nav class="navbar">
+    <!-- NAVBAR -->
 
-        <div class="logo">
-            🌍 GlobeTrotter
-        </div>
+    <header class="navbar">
 
-        <a href="{{ url_for('logout') }}" class="logout">
+        <a href="/dashboard" class="brand">
+
+            <span class="brand-icon">✦</span>
+
+            <span>GlobeTrotter</span>
+
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="/dashboard" class="active">
+                Dashboard
+            </a>
+
+            <a href="/cities">
+                Explore
+            </a>
+
+            <a href="/create-trip">
+                Plan Trip
+            </a>
+
+        </nav>
+
+        <a href="/logout" class="logout-btn">
             Logout
         </a>
 
-    </nav>
+    </header>
 
 
-    <main class="container">
+    <!-- DASHBOARD HERO -->
 
-        <section class="welcome">
+    <main class="dashboard">
 
-            <h1>
-                Welcome, {{ user_name }}! 👋
-            </h1>
+        <section class="dashboard-hero">
 
-            <p>
-                Plan your next adventure with GlobeTrotter.
-            </p>
+            <div>
 
-            <a href="{{ url_for('create_trip') }}" class="create-btn">
-                + Create New Trip
+                <span class="eyebrow">
+                    YOUR TRAVEL SPACE
+                </span>
+
+                <h1>
+                    Welcome back,
+                    <span>{{ session["user_name"] }}</span> 👋
+                </h1>
+
+                <p>
+                    Your next adventure is closer than you think.
+                    Start planning something unforgettable.
+                </p>
+
+            </div>
+
+
+            <a href="/create-trip" class="primary-btn">
+                + Plan a Trip
             </a>
 
         </section>
 
-        <div class="stats-grid">
 
-    <div class="stat-card">
-        <div class="stat-icon">🧳</div>
-        <div>
-            <h3>{{ total_trips }}</h3>
-            <p>Total Trips</p>
-        </div>
-    </div>
+        <!-- STATS -->
 
-    <div class="stat-card">
-        <div class="stat-icon">🌍</div>
-        <div>
-            <h3>{{ total_trips }}</h3>
-            <p>Adventures Planned</p>
-        </div>
-    </div>
+        <section class="stats-grid">
 
-    <div class="stat-card">
-        <div class="stat-icon">✈️</div>
-        <div>
-            <h3>Plan</h3>
-            <p>Your Next Adventure</p>
-        </div>
-    </div>
+            <div class="stat-card">
 
-</div>
+                <div class="stat-icon purple">
+                    ✈
+                </div>
 
-        <section class="trips-section">
+                <div>
 
-            <h2>My Trips</h2>
+                    <span class="stat-label">
+                        MY TRIPS
+                    </span>
 
-            <a href="/trips">✈️ My Trips</a>
+                    <h2>
+                        {{ trips|length if trips is defined else 0 }}
+                    </h2>
 
-            {% if trips %}
+                </div>
 
-                <div class="trip-grid">
+            </div>
 
-                    {% for trip in trips %}
 
-                        <div class="trip-card">
+            <div class="stat-card">
 
-                            <h3>
-                                {{ trip["name"] }}
-                            </h3>
+                <div class="stat-icon orange">
+                    🌍
+                </div>
 
-                            <p class="trip-date">
-                                {{ trip["start_date"] }}
-                                →
-                                {{ trip["end_date"] }}
-                            </p>
+                <div>
 
-                            <p class="trip-description">
-                                {{ trip["description"] or "No description added." }}
-                            </p>
+                    <span class="stat-label">
+                        DESTINATIONS
+                    </span>
 
+                    <h2>
+                        {{ cities|length if cities is defined else 0 }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    🧳
+                </div>
+
+                <div>
+
+                    <span class="stat-label">
+                        ADVENTURES
+                    </span>
+
+                    <h2>
+                        Explore
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MAIN CONTENT -->
+
+        <section class="dashboard-grid">
+
+            <!-- TRIPS -->
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            YOUR JOURNEYS
+                        </span>
+
+                        <h2>
+                            Upcoming Trips
+                        </h2>
+
+                    </div>
+
+                    <a href="/create-trip" class="small-btn">
+                        + New Trip
+                    </a>
+
+                </div>
+
+
+                {% if trips is defined and trips %}
+
+                    <div class="trip-list">
+
+                        {% for trip in trips %}
+
+                            <div class="trip-card">
+
+                                <div class="trip-icon">
+                                    ✈️
+                                </div>
+
+                                <div class="trip-info">
+
+                                    <h3>
+                                        {{ trip["name"] }}
+                                    </h3>
+
+                                    <p>
+                                        {{ trip["start_date"] }}
+                                        →
+                                        {{ trip["end_date"] }}
+                                    </p>
+
+                                </div>
+
+                                <span class="trip-arrow">
+                                    →
+                                </span>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-dashboard">
+
+                        <div>
+                            🗺️
                         </div>
 
-                    {% endfor %}
+                        <h3>
+                            Your next adventure starts here
+                        </h3>
 
-                </div>
+                        <p>
+                            You haven't planned any trips yet.
+                        </p>
 
-            {% else %}
+                        <a href="/create-trip" class="primary-btn">
+                            Create your first trip
+                        </a>
 
-                <div class="empty">
+                    </div>
 
-                    <p>
-                        You haven't created any trips yet.
-                    </p>
+                {% endif %}
 
-                </div>
+            </div>
 
-            {% endif %}
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="dashboard-panel quick-panel">
+
+                <span class="section-label">
+                    QUICK ACTIONS
+                </span>
+
+                <h2>
+                    What do you want to do?
+                </h2>
+
+
+                <a href="/cities" class="quick-action">
+
+                    <span class="quick-action-icon">
+                        🌎
+                    </span>
+
+                    <span>
+                        <strong>Explore destinations</strong>
+                        <small>Find your next place</small>
+                    </span>
+
+                    <b>→</b>
+
+                </a>
+
+
+                <a href="/create-trip" class="quick-action">
+
+                    <span class="quick-action-icon">
+                        ✈️
+                    </span>
+
+                    <span>
+                        <strong>Plan a trip</strong>
+                        <small>Create a new journey</small>
+                    </span>
+
+                    <b>→</b>
+
+                </a>
+
+
+                <a href="/cities" class="quick-action">
+
+                    <span class="quick-action-icon">
+                        📍
+                    </span>
+
+                    <span>
+                        <strong>Discover cities</strong>
+                        <small>Browse destinations</small>
+                    </span>
+
+                    <b>→</b>
+
+                </a>
+
+            </div>
 
         </section>
 
     </main>
+
+
+    <footer>
+
+        <div class="footer-brand">
+
+            <span class="brand-icon">✦</span>
+
+            GlobeTrotter
+
+        </div>
+
+        <p>
+            Plan less. Travel more. ✈
+        </p>
+
+    </footer>
 
 </body>
 

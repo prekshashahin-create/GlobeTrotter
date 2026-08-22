@@ -2,115 +2,344 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ city["name"] }} - GlobeTrotter</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
+
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
         }
 
-        .navbar {
-            background: linear-gradient(135deg, #6d45f5, #7045ee);
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #6c4df6;
             color: white;
+
             padding: 20px 50px;
+
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
-        .navbar a {
+        header h1 {
+            font-size: 28px;
+        }
+
+        nav a {
             color: white;
             text-decoration: none;
             margin-left: 25px;
         }
 
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN */
+
         .container {
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 20px;
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
         }
 
-        .city-details {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-
-        h1 {
-            color: #6d45f5;
-            font-size: 42px;
-        }
-
-        .country {
-            font-size: 20px;
-            color: #64748b;
-        }
-
-        .description {
-            margin-top: 25px;
-            font-size: 17px;
-            line-height: 1.7;
-        }
-
-        .back-btn {
+        .back {
             display: inline-block;
             margin-bottom: 25px;
-            color: #6d45f5;
+
+            color: #6c4df6;
             text-decoration: none;
             font-weight: bold;
         }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        /* CITY HERO */
+
+        .city-hero {
+            background: white;
+            border-radius: 20px;
+
+            padding: 40px;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+            margin-bottom: 30px;
+        }
+
+        .city-icon {
+            width: 75px;
+            height: 75px;
+
+            background: #eee9ff;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 35px;
+
+            margin-bottom: 20px;
+        }
+
+        .city-hero h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .country {
+            color: #6c4df6;
+            font-size: 19px;
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        .description {
+            color: #666;
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* TRIPS */
+
+        .trips-section {
+            background: white;
+            border-radius: 20px;
+
+            padding: 30px;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .trips-section h3 {
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .trip-card {
+            border: 1px solid #eee;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            margin-bottom: 15px;
+        }
+
+        .trip-card h4 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .trip-card p {
+            color: #777;
+        }
+
+        .no-trips {
+            color: #777;
+            padding: 20px 0;
+        }
+
+        /* BUTTON */
+
+        .add-trip {
+            display: inline-block;
+
+            margin-top: 25px;
+
+            background: #6c4df6;
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .add-trip:hover {
+            background: #5739d6;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 18px 20px;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .city-hero {
+                padding: 25px;
+            }
+
+            .city-hero h2 {
+                font-size: 30px;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <div class="navbar">
 
-        <strong>🌍 GlobeTrotter</strong>
+<header>
 
-        <div>
-            <a href="{{ url_for('dashboard') }}">Dashboard</a>
-            <a href="{{ url_for('cities') }}">Explore Cities</a>
-        </div>
+    <h1>🌍 GlobeTrotter</h1>
 
-    </div>
+    <nav>
 
-
-    <div class="container">
-
-        <a
-            href="{{ url_for('cities') }}"
-            class="back-btn"
-        >
-            ← Back to Cities
+        <a href="/dashboard">
+            Dashboard
         </a>
 
-        <div class="city-details">
+        <a href="/cities">
+            Cities
+        </a>
 
-            <h1>
-                {{ city["name"] }}
-            </h1>
+        <a href="/logout">
+            Logout
+        </a>
 
-            <p class="country">
-                {{ city["country"] }}
-            </p>
+    </nav>
 
-            {% if city["description"] %}
+</header>
 
-                <p class="description">
-                    {{ city["description"] }}
-                </p>
 
-            {% endif %}
+<main class="container">
 
+
+    <a href="/cities" class="back">
+        ← Back to Cities
+    </a>
+
+
+    <!-- CITY INFORMATION -->
+
+    <section class="city-hero">
+
+        <div class="city-icon">
+            🌆
         </div>
 
-    </div>
+        <h2>
+            {{ city["name"] }}
+        </h2>
+
+        <p class="country">
+            📍 {{ city["country"] }}
+        </p>
+
+
+        {% if city["description"] %}
+
+            <p class="description">
+                {{ city["description"] }}
+            </p>
+
+        {% else %}
+
+            <p class="description">
+                Explore this amazing destination and
+                discover its attractions, culture and experiences.
+            </p>
+
+        {% endif %}
+
+
+        <a href="{{ url_for('create_trip') }}" class="add-trip">
+    + Add to Trip
+</a>
+
+    </section>
+
+
+    <!-- USER TRIPS -->
+
+    <section class="trips-section">
+
+        <h3>
+            ✈️ Your Trips
+        </h3>
+
+
+        {% if trips %}
+
+            {% for trip in trips %}
+
+                <div class="trip-card">
+
+                    <h4>
+                        {{ trip["name"] }}
+                    </h4>
+
+                    {% if trip["start_date"] %}
+
+                        <p>
+                            {{ trip["start_date"] }}
+
+                            {% if trip["end_date"] %}
+                                → {{ trip["end_date"] }}
+                            {% endif %}
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p class="no-trips">
+                You haven't created any trips yet.
+            </p>
+
+        {% endif %}
+
+
+    </section>
+
+
+</main>
+
 
 </body>
 

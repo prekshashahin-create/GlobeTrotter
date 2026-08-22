@@ -170,33 +170,6 @@ def cities():
         cities=cities
     )
 
-@app.route("/city/<int:city_id>")
-def city_details(city_id):
-
-    if "user_id" not in session:
-        return redirect(url_for("login"))
-
-    connection = get_db_connection()
-
-    city = connection.execute(
-        """
-        SELECT *
-        FROM cities
-        WHERE id = ?
-        """,
-        (city_id,)
-    ).fetchone()
-
-    connection.close()
-
-    if city is None:
-        return "City not found", 404
-
-    return render_template(
-        "city_details.html",
-        city=city
-    )
-
 @app.route("/cities/<int:city_id>")
 def get_city(city_id):
 
@@ -398,7 +371,7 @@ def create_trip():
         connection.commit()
         connection.close()
 
-    return redirect(url_for("dashboard"))
+        return redirect(url_for("dashboard"))
 
     return render_template("create_trip.html")
 
@@ -437,20 +410,25 @@ def dashboard():
         SELECT *
         FROM trips
         WHERE user_id = ?
-        ORDER BY start_date
+        ORDER BY id DESC
         """,
         (session["user_id"],)
     ).fetchall()
 
-    connection.close()
+    cities = connection.execute(
+        """
+        SELECT *
+        FROM cities
+        ORDER BY name
+        """
+    ).fetchall()
 
-    total_trips = len(trips)
+    connection.close()
 
     return render_template(
         "dashboard.html",
         trips=trips,
-        user_name=session["user_name"],
-        total_trips=total_trips
+        cities=cities
     )
 
 @app.route("/add-to-trip", methods=["POST"])
@@ -486,6 +464,41 @@ def add_to_trip():
     connection.close()
 
     return redirect(url_for("city_details", city_id=city_id))
+
+@app.route("/plan-trip")
+def plan_trip():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    return render_template("plan_trip.html")
+
+
+@app.route("/explore")
+def explore():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    return render_template("explore.html")
+
+
+@app.route("/experiences")
+def experiences():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    return render_template("experiences.html")
+
+
+@app.route("/quick-plan")
+def quick_plan():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    return render_template("quick_plan.html")
 
 @app.route("/logout")
 def logout():
