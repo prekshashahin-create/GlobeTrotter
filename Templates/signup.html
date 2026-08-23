@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | GlobeTrotter</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    rgba(15,23,42,0.45),
+                    rgba(15,23,42,0.65)
+                ),
+                url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=85");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .auth-container {
+
+            width: 100%;
+            max-width: 1050px;
+
+            min-height: 620px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            background: rgba(255,255,255,0.96);
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.25);
+        }
+
+        /* LEFT */
+
+        .auth-left {
+
+            padding: 55px;
+
+            color: white;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            background:
+                linear-gradient(
+                    rgba(8,145,178,0.78),
+                    rgba(37,99,235,0.82)
+                ),
+                url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=80");
+
+            background-size: cover;
+
+            background-position: center;
+        }
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 22px;
+
+            font-weight: 700;
+        }
+
+        .brand-icon {
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,0.2);
+
+            font-size: 24px;
+        }
+
+        .brand span {
+            color: #dbeafe;
+        }
+
+        .left-content h1 {
+
+            font-size: 46px;
+
+            line-height: 1.1;
+
+            margin-bottom: 20px;
+        }
+
+        .left-content p {
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            color: #e0f2fe;
+
+            max-width: 420px;
+        }
+
+        .benefits {
+
+            display: grid;
+
+            gap: 12px;
+        }
+
+        .benefit {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 14px;
+
+            color: #e0f2fe;
+        }
+
+        /* RIGHT */
+
+        .auth-right {
+
+            padding: 50px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+        .auth-right h2 {
+
+            font-size: 34px;
+
+            color: #0f172a;
+
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+
+            color: #64748b;
+
+            line-height: 1.6;
+
+            margin-bottom: 28px;
+        }
+
+        /* FORM */
+
+        .form-group {
+
+            margin-bottom: 17px;
+        }
+
+        label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #334155;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+        }
+
+        input {
+
+            width: 100%;
+
+            padding: 14px 15px 14px 45px;
+
+            border-radius: 11px;
+
+            border: 1px solid #dbe3ee;
+
+            background: #f8fafc;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        input:focus {
+
+            border-color: #2563eb;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px rgba(37,99,235,0.1);
+        }
+
+        .submit-btn {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 16px;
+
+            border-radius: 12px;
+
+            margin-top: 5px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0891b2
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+            box-shadow:
+                0 10px 25px rgba(37,99,235,0.25);
+        }
+
+        .submit-btn:hover {
+
+            transform: translateY(-2px);
+        }
+
+        .terms {
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            margin: 18px 0;
+
+            text-align: center;
+        }
+
+        .login-text {
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+        .login-text a {
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        .home-link {
+
+            position: absolute;
+
+            top: 25px;
+            left: 30px;
+
+            color: white;
+
+            text-decoration: none;
+
+            background: rgba(15,23,42,0.35);
+
+            padding: 10px 15px;
+
+            border-radius: 10px;
+
+            backdrop-filter: blur(8px);
+
+            font-size: 14px;
+        }
+
+        @media (max-width: 800px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .auth-container {
+
+                grid-template-columns: 1fr;
+
+                min-height: auto;
+            }
+
+            .auth-left {
+
+                min-height: 280px;
+
+                padding: 35px;
+            }
+
+            .left-content h1 {
+
+                font-size: 35px;
+            }
+
+            .benefits {
+
+                display: none;
+            }
+
+            .auth-right {
+
+                padding: 35px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<a href="/" class="home-link">
+    ← Back to Home
+</a>
+
+
+<div class="auth-container">
+
+
+    <!-- LEFT -->
+
+    <section class="auth-left">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🌍
+            </div>
+
+            Globe<span>Trotter</span>
+
+        </div>
+
+
+        <div class="left-content">
+
+            <h1>
+                Start your journey.
+            </h1>
+
+            <p>
+                Create your GlobeTrotter account and
+                turn your travel dreams into organized,
+                unforgettable adventures.
+            </p>
+
+        </div>
+
+
+        <div class="benefits">
+
+            <div class="benefit">
+                ✓ Discover amazing destinations
+            </div>
+
+            <div class="benefit">
+                ✓ Create personalized itineraries
+            </div>
+
+            <div class="benefit">
+                ✓ Organize all your trips
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT -->
+
+    <section class="auth-right">
+
+        <h2>
+            Create your account ✨
+        </h2>
+
+        <p class="subtitle">
+            Join GlobeTrotter and start planning
+            your next adventure.
+        </p>
+
+
+        <form method="POST">
+
+
+            <div class="form-group">
+
+                <label>
+                    Full name
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        👤
+                    </span>
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Your name"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email address
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        ✉️
+                    </span>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Create My Account →
+            </button>
+
+
+            <p class="terms">
+                By creating an account, you agree to
+                GlobeTrotter's terms and privacy policy.
+            </p>
+
+
+        </form>
+
+
+        <p class="login-text">
+
+            Already have an account?
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+        </p>
+
+    </section>
+
+
+</div>
+
+
+</body>
+
+</html>

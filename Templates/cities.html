@@ -4,34 +4,572 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Explore Cities | GlobeTrotter</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Explore Destinations | GlobeTrotter</title>
 
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+          href="{{ url_for('static', filename='Style.css') }}">
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-          rel="stylesheet">
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8fafc;
+            color: #172033;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #172033;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #06b6d4
+            );
+
+            color: white;
+            font-size: 22px;
+        }
+
+        .logo h2 {
+            font-size: 23px;
+        }
+
+        .logo span {
+            color: #2563eb;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .nav-button {
+            background: #2563eb;
+            color: white !important;
+            padding: 11px 18px;
+            border-radius: 10px;
+        }
+
+        /* ================= HERO ================= */
+
+        .destination-hero {
+            padding: 80px 7% 70px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #ecfeff
+                );
+
+            text-align: center;
+        }
+
+        .destination-hero .badge {
+            display: inline-block;
+
+            padding: 8px 15px;
+
+            background: #dbeafe;
+            color: #1d4ed8;
+
+            border-radius: 30px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            margin-bottom: 20px;
+        }
+
+        .destination-hero h1 {
+            font-size: clamp(40px, 6vw, 62px);
+            color: #0f172a;
+            margin-bottom: 18px;
+        }
+
+        .destination-hero h1 span {
+            color: #2563eb;
+        }
+
+        .destination-hero p {
+            max-width: 650px;
+            margin: auto;
+
+            color: #64748b;
+
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* ================= SEARCH ================= */
+
+        .search-container {
+            max-width: 700px;
+            margin: -28px auto 50px;
+
+            padding: 8px;
+
+            background: white;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 15px 40px rgba(15,23,42,0.12);
+
+            position: relative;
+            z-index: 5;
+
+            display: flex;
+        }
+
+        .search-container input {
+            flex: 1;
+
+            border: none;
+            outline: none;
+
+            padding: 16px;
+
+            font-size: 16px;
+            color: #172033;
+        }
+
+        .search-container button {
+            border: none;
+
+            background: #2563eb;
+            color: white;
+
+            padding: 0 25px;
+
+            border-radius: 10px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main-content {
+            width: 86%;
+            max-width: 1400px;
+
+            margin: auto;
+
+            padding-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-size: 30px;
+            color: #0f172a;
+        }
+
+        .section-header p {
+            color: #64748b;
+            margin-top: 7px;
+        }
+
+        .city-count {
+            background: #eff6ff;
+            color: #2563eb;
+
+            padding: 8px 14px;
+
+            border-radius: 20px;
+
+            font-weight: 700;
+        }
+
+        /* ================= CITY GRID ================= */
+
+        .city-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        .city-card {
+            background: white;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            border: 1px solid #e2e8f0;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 5px 20px rgba(15,23,42,0.04);
+        }
+
+        .city-card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 20px 45px rgba(15,23,42,0.12);
+        }
+
+        /* ================= CITY IMAGE AREA ================= */
+
+        .city-image {
+            height: 210px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 70px;
+
+            position: relative;
+        }
+
+        .city-image.one {
+            background:
+                linear-gradient(
+                    135deg,
+                    #bfdbfe,
+                    #bae6fd
+                );
+        }
+
+        .city-image.two {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fed7aa,
+                    #fde68a
+                );
+        }
+
+        .city-image.three {
+            background:
+                linear-gradient(
+                    135deg,
+                    #ddd6fe,
+                    #c4b5fd
+                );
+        }
+
+        .city-image.four {
+            background:
+                linear-gradient(
+                    135deg,
+                    #bbf7d0,
+                    #a7f3d0
+                );
+        }
+
+        .city-image.five {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fecdd3,
+                    #fbcfe8
+                );
+        }
+
+        .city-image.six {
+            background:
+                linear-gradient(
+                    135deg,
+                    #bae6fd,
+                    #a5f3fc
+                );
+        }
+
+        .location-badge {
+            position: absolute;
+
+            top: 15px;
+            left: 15px;
+
+            background: rgba(255,255,255,0.9);
+
+            padding: 7px 11px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #334155;
+        }
+
+        /* ================= CARD CONTENT ================= */
+
+        .city-content {
+            padding: 24px;
+        }
+
+        .city-content h3 {
+            font-size: 25px;
+            margin-bottom: 7px;
+            color: #0f172a;
+        }
+
+        .country {
+            color: #2563eb;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 13px;
+        }
+
+        .description {
+            color: #64748b;
+
+            line-height: 1.6;
+
+            min-height: 52px;
+
+            margin-bottom: 20px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-top: 1px solid #e2e8f0;
+
+            padding-top: 18px;
+        }
+
+        .explore-btn {
+            text-decoration: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 10px 17px;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .explore-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .plan-link {
+            text-decoration: none;
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .plan-link:hover {
+            color: #2563eb;
+        }
+
+        /* ================= EMPTY STATE ================= */
+
+        .empty-state {
+            text-align: center;
+
+            background: white;
+
+            padding: 70px 20px;
+
+            border-radius: 20px;
+
+            border: 1px solid #e2e8f0;
+        }
+
+        .empty-state div {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            color: #64748b;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #0f172a;
+
+            color: white;
+
+            padding: 35px 7%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        footer p {
+            color: #94a3b8;
+            margin-top: 6px;
+        }
+
+        footer a {
+            color: #cbd5e1;
+
+            text-decoration: none;
+
+            margin-left: 20px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .city-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .nav-links a:not(.nav-button) {
+                display: none;
+            }
+
+            .city-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-container {
+                width: 90%;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            footer a {
+                margin: 0 8px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-<header class="navbar">
 
-    <a href="{{ url_for('dashboard') }}" class="brand">
-        <span class="brand-icon">✦</span>
-        GlobeTrotter
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <a href="/" class="logo">
+
+        <div class="logo-icon">
+            🌍
+        </div>
+
+        <h2>
+            Globe<span>Trotter</span>
+        </h2>
+
     </a>
 
-    <nav class="nav-links">
 
-        <a href="{{ url_for('dashboard') }}">
-            Dashboard
+    <div class="nav-links">
+
+        <a href="/">
+            Home
         </a>
 
-        <a href="{{ url_for('explore') }}" class="active">
+        <a href="{{ url_for('cities') }}">
+            Destinations
+        </a>
+
+        <a href="{{ url_for('explore') }}">
             Explore
         </a>
 
@@ -39,280 +577,305 @@
             Plan Trip
         </a>
 
-    </nav>
+        <a href="{{ url_for('trips') }}"
+           class="nav-button">
+            My Trips
+        </a>
 
-    <a href="{{ url_for('logout') }}" class="logout-btn">
-        Logout
-    </a>
+    </div>
 
-</header>
-
-
-<main class="cities-page">
+</nav>
 
 
-    <!-- HERO -->
+<!-- ================= HERO ================= -->
 
-    <section class="cities-hero">
+<section class="destination-hero">
+
+    <div class="badge">
+        🌎 Explore the world
+    </div>
+
+    <h1>
+        Find your next <span>destination</span>
+    </h1>
+
+    <p>
+        Discover amazing cities, explore new places,
+        and choose the perfect destinations for your
+        next GlobeTrotter adventure.
+    </p>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<div class="search-container">
+
+    <input
+        type="text"
+        id="citySearch"
+        placeholder="Search for a city or country..."
+        onkeyup="searchCities()"
+    >
+
+    <button>
+        🔍 Search
+    </button>
+
+</div>
+
+
+<!-- ================= CITIES ================= -->
+
+<main class="main-content">
+
+    <div class="section-header">
 
         <div>
 
-            <span class="eyebrow">
-                DESTINATION LIBRARY
-            </span>
-
-            <h1>
-                Find somewhere<br>
-                <span>worth remembering.</span>
-            </h1>
+            <h2>
+                Popular Destinations
+            </h2>
 
             <p>
-                Explore destinations, discover new possibilities
-                and find the place that feels like your next story.
+                Choose a city and start planning your journey.
+            </p>
+
+        </div>
+
+        <div class="city-count">
+
+            {{ cities|length }} destinations
+
+        </div>
+
+    </div>
+
+
+    {% if cities %}
+
+        <div class="city-grid">
+
+            {% for city in cities %}
+
+                <article
+                    class="city-card"
+                    data-search="
+                        {{ city['name']|lower }}
+                        {{ city['country']|lower }}
+                    "
+                >
+
+                    <!-- IMAGE / VISUAL -->
+
+                    <div
+                        class="city-image
+                        {% if loop.index % 6 == 1 %}
+                            one
+                        {% elif loop.index % 6 == 2 %}
+                            two
+                        {% elif loop.index % 6 == 3 %}
+                            three
+                        {% elif loop.index % 6 == 4 %}
+                            four
+                        {% elif loop.index % 6 == 5 %}
+                            five
+                        {% else %}
+                            six
+                        {% endif %}"
+                    >
+
+                        <span class="location-badge">
+                            📍 {{ city["country"] }}
+                        </span>
+
+                        {% if loop.index % 6 == 1 %}
+                            🗼
+                        {% elif loop.index % 6 == 2 %}
+                            🏙️
+                        {% elif loop.index % 6 == 3 %}
+                            🏯
+                        {% elif loop.index % 6 == 4 %}
+                            🌴
+                        {% elif loop.index % 6 == 5 %}
+                            🏰
+                        {% else %}
+                            🌆
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- CONTENT -->
+
+                    <div class="city-content">
+
+                        <h3>
+                            {{ city["name"] }}
+                        </h3>
+
+                        <div class="country">
+                            {{ city["country"] }}
+                        </div>
+
+
+                        {% if city["description"] %}
+
+                            <p class="description">
+                                {{ city["description"] }}
+                            </p>
+
+                        {% else %}
+
+                            <p class="description">
+                                Discover amazing places,
+                                experiences and attractions
+                                in {{ city["name"] }}.
+                            </p>
+
+                        {% endif %}
+
+
+                        <div class="card-footer">
+
+                            <a
+                                href="{{ url_for('city_details', city_id=city['id']) }}"
+                                class="explore-btn"
+                            >
+                                Explore →
+                            </a>
+
+                            <a
+                                href="{{ url_for('plan_trip') }}"
+                                class="plan-link"
+                            >
+                                Plan a trip
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- NO SEARCH RESULTS -->
+
+        <div
+            id="noResults"
+            class="empty-state"
+            style="display:none; margin-top:30px;"
+        >
+
+            <div>
+                🔎
+            </div>
+
+            <h3>
+                No destinations found
+            </h3>
+
+            <p>
+                Try searching for another city or country.
             </p>
 
         </div>
 
 
-        <div class="cities-count">
+    {% else %}
 
-            <strong>
-                {{ cities|length }}
-            </strong>
+        <div class="empty-state">
 
-            <span>
-                destinations<br>
-                waiting for you
-            </span>
-
-        </div>
-
-    </section>
-
-
-    <!-- SEARCH -->
-
-    <section class="city-tools">
-
-        <div class="city-search">
-
-            <span>
-                ⌕
-            </span>
-
-            <input
-                type="text"
-                id="citySearch"
-                placeholder="Search a city or country..."
-                onkeyup="filterCities()"
-            >
-
-        </div>
-
-
-        <div class="city-filter">
-
-            <button
-                class="filter-btn active"
-                onclick="showAll(this)">
-                All
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterCountry('India', this)">
-                India
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterCountry('Japan', this)">
-                Japan
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterCountry('France', this)">
-                France
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- CITY GRID -->
-
-    <section class="cities-grid" id="citiesGrid">
-
-        {% for city in cities %}
-
-        <article
-            class="city-card-premium"
-            data-city="{{ city['name']|lower }}"
-            data-country="{{ city['country']|lower }}">
-
-
-            <div class="city-art">
-
-                <span class="city-number">
-                    {{ "%02d"|format(loop.index) }}
-                </span>
-
-                <span class="city-symbol">
-
-                    {% if loop.index % 4 == 1 %}
-                        🏙
-                    {% elif loop.index % 4 == 2 %}
-                        🏯
-                    {% elif loop.index % 4 == 3 %}
-                        🌴
-                    {% else %}
-                        🏔
-                    {% endif %}
-
-                </span>
-
-                <div class="city-glow"></div>
-
+            <div>
+                🌍
             </div>
 
+            <h3>
+                No destinations available
+            </h3>
 
-            <div class="city-card-content">
+            <p>
+                Destinations will appear here once they
+                are added to the database.
+            </p>
 
-                <div class="city-title-row">
-
-                    <div>
-
-                        <span class="city-country">
-                            {{ city["country"] }}
-                        </span>
-
-                        <h2>
-                            {{ city["name"] }}
-                        </h2>
-
-                    </div>
-
-                    <span class="city-pin">
-                        📍
-                    </span>
-
-                </div>
-
-
-                {% if city["description"] %}
-
-                <p>
-                    {{ city["description"] }}
-                </p>
-
-                {% else %}
-
-                <p>
-                    Discover the sights, flavours and
-                    stories of {{ city["name"] }}.
-                </p>
-
-                {% endif %}
-
-
-                <div class="city-card-bottom">
-
-                    <a href="{{ url_for('city_details', city_id=city['id']) }}"
-                       class="city-explore-btn">
-
-                        Explore
-
-                        <span>→</span>
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </article>
-
-        {% endfor %}
-
-    </section>
-
-
-    <!-- NO RESULTS -->
-
-    <div id="noCities"
-         class="no-cities"
-         style="display:none;">
-
-        <div>
-            🌍
         </div>
 
-        <h3>
-            No destinations found
-        </h3>
+    {% endif %}
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div>
+
+        <strong>
+            🌍 GlobeTrotter
+        </strong>
 
         <p>
-            Try searching for another city or country.
+            Plan your journey. Explore the world.
         </p>
 
     </div>
 
 
-</main>
+    <div>
 
+        <a href="/">
+            Home
+        </a>
 
-<footer>
+        <a href="{{ url_for('explore') }}">
+            Explore
+        </a>
 
-    <div class="footer-brand">
-
-        <span class="brand-icon">
-            ✦
-        </span>
-
-        GlobeTrotter
+        <a href="{{ url_for('plan_trip') }}">
+            Plan Trip
+        </a>
 
     </div>
-
-    <p>
-        Your next destination is closer than you think. ✈
-    </p>
 
 </footer>
 
 
+<!-- ================= SEARCH SCRIPT ================= -->
+
 <script>
 
-function filterCities() {
+function searchCities() {
 
-    const search =
+    const input =
         document
         .getElementById("citySearch")
         .value
-        .toLowerCase();
+        .toLowerCase()
+        .trim();
 
     const cards =
-        document.querySelectorAll(".city-card-premium");
+        document.querySelectorAll(".city-card");
 
-    let visible = 0;
+    let visibleCount = 0;
 
-    cards.forEach(card => {
 
-        const city =
-            card.dataset.city;
+    cards.forEach(function(card) {
 
-        const country =
-            card.dataset.country;
+        const text =
+            card.getAttribute("data-search");
 
-        if (
-            city.includes(search) ||
-            country.includes(search)
-        ) {
+        if (text.includes(input)) {
 
-            card.style.display = "";
+            card.style.display = "block";
 
-            visible++;
+            visibleCount++;
 
         } else {
 
@@ -322,76 +885,29 @@ function filterCities() {
 
     });
 
-    document.getElementById("noCities").style.display =
-        visible === 0 ? "block" : "none";
 
-}
-
-
-function showAll(button) {
-
-    setActive(button);
-
-    document
-        .querySelectorAll(".city-card-premium")
-        .forEach(card => {
-            card.style.display = "";
-        });
-
-    document.getElementById("noCities").style.display =
-        "none";
-
-}
+    const noResults =
+        document.getElementById("noResults");
 
 
-function filterCountry(country, button) {
+    if (noResults) {
 
-    setActive(button);
+        if (visibleCount === 0) {
 
-    const cards =
-        document.querySelectorAll(".city-card-premium");
-
-    let visible = 0;
-
-    cards.forEach(card => {
-
-        if (
-            card.dataset.country
-            === country.toLowerCase()
-        ) {
-
-            card.style.display = "";
-
-            visible++;
+            noResults.style.display = "block";
 
         } else {
 
-            card.style.display = "none";
+            noResults.style.display = "none";
 
         }
 
-    });
-
-    document.getElementById("noCities").style.display =
-        visible === 0 ? "block" : "none";
-
-}
-
-
-function setActive(button) {
-
-    document
-        .querySelectorAll(".filter-btn")
-        .forEach(btn =>
-            btn.classList.remove("active")
-        );
-
-    button.classList.add("active");
+    }
 
 }
 
 </script>
 
-</body>
 
+</body>
 </html>

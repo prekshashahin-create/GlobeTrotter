@@ -1,3 +1,4 @@
+import sqlite3
 from flask import Flask, request, redirect, url_for, session, render_template
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -13,7 +14,7 @@ init_db()
 
 @app.route("/")
 def home():
-    return "GlobeTrotter backend is running!"
+    return render_template("home.html")
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -25,8 +26,6 @@ def signup():
         email = request.form["email"]
         password = request.form["password"]
 
-        password_hash = generate_password_hash(password)
-
         connection = get_db_connection()
 
         try:
@@ -35,57 +34,21 @@ def signup():
                 INSERT INTO users (name, email, password)
                 VALUES (?, ?, ?)
                 """,
-                (name, email, password_hash)
+                (name, email, password)
             )
 
             connection.commit()
 
-        except Exception as error:
+        except sqlite3.IntegrityError:
             connection.close()
-            return f"Signup failed: {error}"
+
+            return "An account with this email already exists. Please use a different email or log in."
 
         connection.close()
 
         return redirect(url_for("login"))
 
-    return """
-        <h1>GlobeTrotter Signup</h1>
-
-        <form method="POST">
-
-            <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                required
-            >
-
-            <br><br>
-
-            <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required
-            >
-
-            <br><br>
-
-            <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-            >
-
-            <br><br>
-
-            <button type="submit">
-                Sign Up
-            </button>
-
-        </form>
-    """
+    return render_template("signup.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -118,35 +81,7 @@ def login():
 
         return "Invalid email or password"
 
-    return """
-        <h1>GlobeTrotter Login</h1>
-
-        <form method="POST">
-
-            <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required
-            >
-
-            <br><br>
-
-            <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-            >
-
-            <br><br>
-
-            <button type="submit">
-                Login
-            </button>
-
-        </form>
-    """
+    return render_template("login.html")
 
 @app.route("/cities")
 def cities():

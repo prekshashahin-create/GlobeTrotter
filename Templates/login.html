@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | GlobeTrotter</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    rgba(15, 23, 42, 0.45),
+                    rgba(15, 23, 42, 0.65)
+                ),
+                url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=85");
+
+            background-size: cover;
+            background-position: center;
+
+            padding: 30px;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .auth-container {
+
+            width: 100%;
+            max-width: 1050px;
+
+            min-height: 620px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            background: rgba(255,255,255,0.96);
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.25);
+        }
+
+        /* ================= LEFT ================= */
+
+        .auth-left {
+
+            padding: 55px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    rgba(37,99,235,0.78),
+                    rgba(8,145,178,0.82)
+                ),
+                url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1000&q=80");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .brand {
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .brand-icon {
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,0.2);
+
+            backdrop-filter: blur(10px);
+
+            font-size: 24px;
+        }
+
+        .brand span {
+            color: #dbeafe;
+        }
+
+        .left-content h1 {
+
+            font-size: 48px;
+
+            line-height: 1.1;
+
+            margin-bottom: 20px;
+        }
+
+        .left-content p {
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            color: #e0f2fe;
+
+            max-width: 420px;
+        }
+
+        .travel-points {
+
+            display: flex;
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .travel-point {
+
+            padding: 9px 13px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.16);
+
+            backdrop-filter: blur(10px);
+
+            font-size: 13px;
+        }
+
+        /* ================= RIGHT ================= */
+
+        .auth-right {
+
+            padding: 55px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .auth-right h2 {
+
+            font-size: 34px;
+
+            color: #0f172a;
+
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+
+            color: #64748b;
+
+            margin-bottom: 35px;
+
+            line-height: 1.6;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #334155;
+        }
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 18px;
+        }
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 15px 15px 15px 47px;
+
+            border: 1px solid #dbe3ee;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            transition: 0.2s;
+
+            background: #f8fafc;
+        }
+
+        .form-group input:focus {
+
+            border-color: #2563eb;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px rgba(37,99,235,0.1);
+        }
+
+        /* ================= OPTIONS ================= */
+
+        .form-options {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin: 5px 0 25px;
+
+            font-size: 13px;
+        }
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #64748b;
+        }
+
+        .forgot {
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .submit-btn {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 16px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0891b2
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px rgba(37,99,235,0.25);
+
+            transition: 0.25s;
+        }
+
+        .submit-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 15px 30px rgba(37,99,235,0.3);
+        }
+
+        /* ================= DIVIDER ================= */
+
+        .divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 25px 0;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+
+            content: "";
+
+            height: 1px;
+
+            flex: 1;
+
+            background: #e2e8f0;
+        }
+
+        /* ================= SIGNUP ================= */
+
+        .signup-text {
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+        .signup-text a {
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        /* ================= HOME ================= */
+
+        .home-link {
+
+            position: absolute;
+
+            top: 25px;
+
+            left: 30px;
+
+            color: white;
+
+            text-decoration: none;
+
+            background: rgba(15,23,42,0.35);
+
+            padding: 10px 15px;
+
+            border-radius: 10px;
+
+            backdrop-filter: blur(8px);
+
+            font-size: 14px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .auth-container {
+
+                grid-template-columns: 1fr;
+
+                min-height: auto;
+            }
+
+            .auth-left {
+
+                min-height: 300px;
+
+                padding: 35px;
+            }
+
+            .left-content h1 {
+
+                font-size: 36px;
+            }
+
+            .travel-points {
+
+                display: none;
+            }
+
+            .auth-right {
+
+                padding: 35px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<a href="/" class="home-link">
+    ← Back to Home
+</a>
+
+
+<div class="auth-container">
+
+
+    <!-- ================= LEFT ================= -->
+
+    <section class="auth-left">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🌍
+            </div>
+
+            Globe<span>Trotter</span>
+
+        </div>
+
+
+        <div class="left-content">
+
+            <h1>
+                Your next adventure starts here.
+            </h1>
+
+            <p>
+                Discover destinations, create personalized
+                itineraries and keep your entire journey
+                organized in one place.
+            </p>
+
+        </div>
+
+
+        <div class="travel-points">
+
+            <span class="travel-point">
+                🗺️ Explore
+            </span>
+
+            <span class="travel-point">
+                📅 Plan
+            </span>
+
+            <span class="travel-point">
+                ✈️ Travel
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= RIGHT ================= -->
+
+    <section class="auth-right">
+
+        <h2>
+            Welcome back 👋
+        </h2>
+
+        <p class="subtitle">
+            Sign in to continue planning your next journey.
+        </p>
+
+
+        <form method="POST">
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email address
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        ✉️
+                    </span>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-options">
+
+                <label class="remember">
+
+                    <input
+                        type="checkbox"
+                        name="remember"
+                    >
+
+                    Remember me
+
+                </label>
+
+
+                <a href="#"
+                   class="forgot">
+                    Forgot password?
+                </a>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Login to GlobeTrotter →
+            </button>
+
+        </form>
+
+
+        <div class="divider">
+            or
+        </div>
+
+
+        <p class="signup-text">
+
+            Don't have an account?
+
+            <a href="{{ url_for('signup') }}">
+                Create one
+            </a>
+
+        </p>
+
+    </section>
+
+
+</div>
+
+
+</body>
+
+</html>

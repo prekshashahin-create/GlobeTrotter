@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>GlobeTrotter | Plan Your Journey</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='Style.css') }}">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8fafc;
+            color: #172033;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .home-navbar {
+            width: 100%;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+        }
+
+        .home-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #172033;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+        }
+
+        .home-logo h2 {
+            font-size: 23px;
+        }
+
+        .home-logo span {
+            color: #2563eb;
+        }
+
+        .home-nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .home-nav a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .home-nav a:hover {
+            color: #2563eb;
+        }
+
+        .nav-login {
+            padding: 10px 18px;
+            border: 1px solid #2563eb;
+            border-radius: 10px;
+            color: #2563eb !important;
+        }
+
+        .nav-signup {
+            padding: 11px 19px;
+            background: #2563eb;
+            color: white !important;
+            border-radius: 10px;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 650px;
+            padding: 80px 7%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(239,246,255,0.95),
+                    rgba(236,254,255,0.9)
+                );
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 6vw, 72px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+            color: #0f172a;
+        }
+
+        .hero h1 span {
+            color: #2563eb;
+        }
+
+        .hero-text {
+            font-size: 19px;
+            line-height: 1.7;
+            color: #64748b;
+            max-width: 570px;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            text-decoration: none;
+            padding: 15px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            display: inline-block;
+            transition: 0.25s;
+        }
+
+        .primary-btn {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 10px 25px rgba(37,99,235,0.25);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            background: #1d4ed8;
+        }
+
+        .secondary-btn {
+            background: white;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+        }
+
+        .secondary-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* ================= HERO VISUAL ================= */
+
+        .hero-visual {
+            position: relative;
+            min-height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .travel-card {
+            width: 430px;
+            height: 380px;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+
+            background:
+                linear-gradient(
+                    rgba(15,23,42,0.08),
+                    rgba(15,23,42,0.35)
+                ),
+                url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80");
+
+            background-size: cover;
+            background-position: center;
+
+            box-shadow: 0 25px 60px rgba(15,23,42,0.2);
+        }
+
+        .travel-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            color: white;
+            background: linear-gradient(
+                transparent,
+                rgba(15,23,42,0.8)
+            );
+        }
+
+        .travel-card-content h2 {
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            padding: 18px;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(15,23,42,0.15);
+        }
+
+        .floating-card.one {
+            left: 0;
+            top: 40px;
+        }
+
+        .floating-card.two {
+            right: 0;
+            bottom: 35px;
+        }
+
+        .floating-card strong {
+            display: block;
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .floating-card small {
+            color: #64748b;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .section {
+            padding: 90px 7%;
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 50px;
+        }
+
+        .section-heading h2 {
+            font-size: 40px;
+            margin-bottom: 14px;
+            color: #0f172a;
+        }
+
+        .section-heading p {
+            color: #64748b;
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            transition: 0.25s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 40px rgba(15,23,42,0.08);
+        }
+
+        .feature-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eff6ff;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            margin: 20px 7% 80px;
+            padding: 70px 40px;
+            text-align: center;
+            border-radius: 30px;
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0891b2
+                );
+        }
+
+        .cta h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 28px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 14px 25px;
+            background: white;
+            color: #2563eb;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 35px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer p {
+            color: #94a3b8;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content {
+                margin: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                min-height: 400px;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .home-nav {
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .home-navbar {
+                padding: 15px 5%;
+            }
+
+            .home-nav a:not(.nav-login):not(.nav-signup) {
+                display: none;
+            }
+
+            .hero {
+                padding: 60px 5%;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .travel-card {
+                width: 100%;
+                height: 330px;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 65px 5%;
+            }
+
+            .cta {
+                margin: 10px 5% 60px;
+                padding: 55px 20px;
+            }
+
+            .cta h2 {
+                font-size: 32px;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="home-navbar">
+
+    <a href="/" class="home-logo">
+
+        <div class="logo-icon">
+            🌍
+        </div>
+
+        <h2>
+            Globe<span>Trotter</span>
+        </h2>
+
+    </a>
+
+
+    <div class="home-nav">
+
+        <a href="/">Home</a>
+
+        <a href="{{ url_for('explore') }}">
+            Explore
+        </a>
+
+        <a href="{{ url_for('plan_trip') }}">
+            Plan Trip
+        </a>
+
+        <a href="{{ url_for('trips') }}">
+            My Trips
+        </a>
+
+        <a href="{{ url_for('login') }}"
+           class="nav-login">
+            Login
+        </a>
+
+        <a href="{{ url_for('signup') }}"
+           class="nav-signup">
+            Sign Up
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            ✈️ Your journey starts here
+        </div>
+
+        <h1>
+            Plan less.<br>
+            <span>Travel more.</span>
+        </h1>
+
+        <p class="hero-text">
+            GlobeTrotter helps you discover amazing destinations,
+            create personalized itineraries, organize your trips,
+            and turn your travel ideas into unforgettable journeys.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{{ url_for('login') }}"
+               class="primary-btn">
+                Start Planning →
+            </a>
+
+            <a href="{{ url_for('login') }}"
+               class="secondary-btn">
+                Explore Destinations
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="floating-card one">
+
+            <strong>📍 Smart Planning</strong>
+
+            <small>
+                Organize every stop
+            </small>
+
+        </div>
+
+
+        <div class="travel-card">
+
+            <div class="travel-card-content">
+
+                <h2>
+                    Discover the World
+                </h2>
+
+                <p>
+                    Your next adventure is waiting.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="floating-card two">
+
+            <strong>🗓️ Your Itinerary</strong>
+
+            <small>
+                Everything in one place
+            </small>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <h2>
+            Everything you need to travel smarter
+        </h2>
+
+        <p>
+            From discovering destinations to organizing
+            your complete itinerary, GlobeTrotter keeps
+            your journey simple and organized.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🗺️
+            </div>
+
+            <h3>
+                Explore Destinations
+            </h3>
+
+            <p>
+                Discover cities, attractions and
+                experiences that match your travel plans.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📅
+            </div>
+
+            <h3>
+                Build Itineraries
+            </h3>
+
+            <p>
+                Organize destinations, dates and
+                activities into a clear travel plan.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💰
+            </div>
+
+            <h3>
+                Plan Your Budget
+            </h3>
+
+            <p>
+                Keep your trip organized and make
+                smarter decisions about your expenses.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ✨
+            </div>
+
+            <h3>
+                Quick Planning
+            </h3>
+
+            <p>
+                Use our quick planner to turn your
+                destination idea into a trip faster.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <h2>
+        Ready for your next adventure?
+    </h2>
+
+    <p>
+        Create your trip and start exploring the world.
+    </p>
+
+    <a href="{{ url_for('login') }}"
+       class="cta-btn">
+        Plan My Trip →
+    </a>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div>
+        <strong>
+            🌍 GlobeTrotter
+        </strong>
+
+        <p>
+            Plan your journey. Explore the world.
+        </p>
+    </div>
+
+
+    <div class="footer-links">
+
+        <a href="{{ url_for('explore') }}">
+            Explore
+        </a>
+
+        <a href="{{ url_for('login') }}">
+            Login
+        </a>
+
+        <a href="{{ url_for('signup') }}">
+            Sign Up
+        </a>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
