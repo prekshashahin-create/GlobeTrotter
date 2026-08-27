@@ -4,250 +4,204 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <title>Explore Cities | GlobeTrotter</title>
 
-    <title>Explore Destinations | GlobeTrotter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='Style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f8fafc;
-            color: #172033;
+            font-family: "Poppins", sans-serif;
+            background: #f5f7fb;
+            color: #172b4d;
         }
 
-        /* ================= NAVBAR ================= */
+
+        /* ==================================================
+           NAVBAR
+        ================================================== */
 
         .navbar {
+            width: 100%;
+            padding: 18px 6%;
+
             background: white;
-            padding: 18px 7%;
+
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+            align-items: center;
+
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
+
         .logo {
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #172033;
+            font-size: 25px;
+            font-weight: 800;
+            color: #4f46e5;
         }
 
-        .logo-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: linear-gradient(
-                135deg,
-                #2563eb,
-                #06b6d4
-            );
-
-            color: white;
-            font-size: 22px;
-        }
-
-        .logo h2 {
-            font-size: 23px;
-        }
-
-        .logo span {
-            color: #2563eb;
-        }
 
         .nav-links {
             display: flex;
+            gap: 28px;
             align-items: center;
-            gap: 25px;
         }
+
 
         .nav-links a {
             text-decoration: none;
-            color: #475569;
-            font-weight: 600;
+            color: #53627a;
+            font-size: 14px;
+            font-weight: 500;
+
+            transition: 0.2s ease;
         }
+
 
         .nav-links a:hover {
-            color: #2563eb;
+            color: #4f46e5;
         }
 
-        .nav-button {
-            background: #2563eb;
-            color: white !important;
-            padding: 11px 18px;
-            border-radius: 10px;
-        }
 
-        /* ================= HERO ================= */
+        /* ==================================================
+           HERO
+        ================================================== */
 
-        .destination-hero {
-            padding: 80px 7% 70px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #eff6ff,
-                    #ecfeff
-                );
-
+        .hero {
             text-align: center;
+            padding: 55px 20px 25px;
         }
 
-        .destination-hero .badge {
-            display: inline-block;
 
-            padding: 8px 15px;
-
-            background: #dbeafe;
-            color: #1d4ed8;
-
-            border-radius: 30px;
-
-            font-size: 14px;
-            font-weight: 700;
-
-            margin-bottom: 20px;
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 12px;
         }
 
-        .destination-hero h1 {
-            font-size: clamp(40px, 6vw, 62px);
-            color: #0f172a;
-            margin-bottom: 18px;
+
+        .hero h1 span {
+            color: #635bff;
         }
 
-        .destination-hero h1 span {
-            color: #2563eb;
-        }
 
-        .destination-hero p {
+        .hero p {
+            color: #718096;
+            font-size: 16px;
             max-width: 650px;
             margin: auto;
-
-            color: #64748b;
-
-            font-size: 18px;
             line-height: 1.7;
         }
 
-        /* ================= SEARCH ================= */
+
+        /* ==================================================
+           SEARCH
+        ================================================== */
 
         .search-container {
+            width: 92%;
             max-width: 700px;
-            margin: -28px auto 50px;
 
-            padding: 8px;
-
-            background: white;
-
-            border-radius: 15px;
-
-            box-shadow:
-                0 15px 40px rgba(15,23,42,0.12);
-
-            position: relative;
-            z-index: 5;
+            margin: 15px auto 35px;
 
             display: flex;
+            gap: 10px;
         }
+
 
         .search-container input {
             flex: 1;
 
-            border: none;
+            padding: 14px 18px;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+
+            background: white;
+
+            font-family: "Poppins", sans-serif;
+            font-size: 14px;
+
             outline: none;
 
-            padding: 16px;
-
-            font-size: 16px;
-            color: #172033;
+            box-shadow: 0 5px 20px rgba(31, 41, 55, 0.05);
         }
 
-        .search-container button {
+
+        .search-container input:focus {
+            border-color: #635bff;
+        }
+
+
+        .search-btn {
             border: none;
 
-            background: #2563eb;
+            padding: 14px 24px;
+
+            border-radius: 12px;
+
+            background: #4f46e5;
             color: white;
 
-            padding: 0 25px;
-
-            border-radius: 10px;
-
-            font-weight: 700;
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
 
             cursor: pointer;
+
+            transition: 0.2s ease;
         }
 
-        /* ================= MAIN ================= */
 
-        .main-content {
-            width: 86%;
-            max-width: 1400px;
-
-            margin: auto;
-
-            padding-bottom: 80px;
+        .search-btn:hover {
+            background: #3730a3;
+            transform: translateY(-1px);
         }
 
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: end;
 
-            margin-bottom: 30px;
-        }
+        /* ==================================================
+           CITY GRID
+        ================================================== */
 
-        .section-header h2 {
-            font-size: 30px;
-            color: #0f172a;
-        }
+        .cities-container {
+            width: 92%;
+            max-width: 1450px;
 
-        .section-header p {
-            color: #64748b;
-            margin-top: 7px;
-        }
+            margin: 20px auto 70px;
 
-        .city-count {
-            background: #eff6ff;
-            color: #2563eb;
-
-            padding: 8px 14px;
-
-            border-radius: 20px;
-
-            font-weight: 700;
-        }
-
-        /* ================= CITY GRID ================= */
-
-        .city-grid {
             display: grid;
 
-            grid-template-columns:
-                repeat(3, 1fr);
+            /*
+                Every card gets an equal column width.
+            */
+            grid-template-columns: repeat(auto-fit,
+                    minmax(300px, 1fr));
 
-            gap: 25px;
+            gap: 28px;
+
+            align-items: stretch;
         }
+
+
+        /* ==================================================
+           CITY CARD
+        ================================================== */
 
         .city-card {
             background: white;
@@ -256,284 +210,297 @@
 
             overflow: hidden;
 
-            border: 1px solid #e2e8f0;
-
-            transition: 0.3s;
-
             box-shadow:
-                0 5px 20px rgba(15,23,42,0.04);
+                0 8px 30px rgba(31, 41, 55, 0.08);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+
+            min-width: 0;
+
+            display: flex;
+            flex-direction: column;
         }
+
 
         .city-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-7px);
 
             box-shadow:
-                0 20px 45px rgba(15,23,42,0.12);
+                0 18px 40px rgba(31, 41, 55, 0.15);
         }
 
-        /* ================= CITY IMAGE AREA ================= */
+
+        /* ==================================================
+           IMAGE
+        ================================================== */
+
+        .city-image-wrapper {
+            position: relative;
+
+            width: 100%;
+            height: 220px;
+
+            overflow: hidden;
+
+            background: #e9edf5;
+        }
+
 
         .city-image {
-            height: 210px;
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: transform 0.5s ease;
+        }
+
+
+        .city-card:hover .city-image {
+            transform: scale(1.06);
+        }
+
+
+        /* ==================================================
+           FAVORITE
+        ================================================== */
+
+        .favorite-btn {
+            position: absolute;
+
+            top: 16px;
+            right: 16px;
+
+            width: 43px;
+            height: 43px;
+
+            border-radius: 50%;
+
+            border: none;
+
+            background: rgba(255, 255, 255, 0.92);
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            font-size: 70px;
+            font-size: 21px;
 
-            position: relative;
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.12);
+
+            transition: 0.2s ease;
         }
 
-        .city-image.one {
-            background:
-                linear-gradient(
-                    135deg,
-                    #bfdbfe,
-                    #bae6fd
-                );
+
+        .favorite-btn:hover {
+            transform: scale(1.1);
         }
 
-        .city-image.two {
-            background:
-                linear-gradient(
-                    135deg,
-                    #fed7aa,
-                    #fde68a
-                );
-        }
 
-        .city-image.three {
-            background:
-                linear-gradient(
-                    135deg,
-                    #ddd6fe,
-                    #c4b5fd
-                );
-        }
-
-        .city-image.four {
-            background:
-                linear-gradient(
-                    135deg,
-                    #bbf7d0,
-                    #a7f3d0
-                );
-        }
-
-        .city-image.five {
-            background:
-                linear-gradient(
-                    135deg,
-                    #fecdd3,
-                    #fbcfe8
-                );
-        }
-
-        .city-image.six {
-            background:
-                linear-gradient(
-                    135deg,
-                    #bae6fd,
-                    #a5f3fc
-                );
-        }
-
-        .location-badge {
-            position: absolute;
-
-            top: 15px;
-            left: 15px;
-
-            background: rgba(255,255,255,0.9);
-
-            padding: 7px 11px;
-
-            border-radius: 20px;
-
-            font-size: 13px;
-
-            font-weight: 700;
-
-            color: #334155;
-        }
-
-        /* ================= CARD CONTENT ================= */
+        /* ==================================================
+           CONTENT
+        ================================================== */
 
         .city-content {
-            padding: 24px;
+            padding: 22px;
+
+            display: flex;
+            flex-direction: column;
+
+            flex: 1;
         }
 
-        .city-content h3 {
-            font-size: 25px;
-            margin-bottom: 7px;
-            color: #0f172a;
+
+        .city-name {
+            font-size: 23px;
+            font-weight: 700;
+
+            margin-bottom: 5px;
+
+            color: #172b4d;
         }
 
-        .country {
-            color: #2563eb;
+
+        .city-country {
+            color: #68758a;
 
             font-size: 14px;
 
-            font-weight: 700;
-
-            margin-bottom: 13px;
+            margin-bottom: 12px;
         }
 
-        .description {
-            color: #64748b;
 
-            line-height: 1.6;
+        /* ==================================================
+           FAMOUS PLACE
+        ================================================== */
 
-            min-height: 52px;
-
-            margin-bottom: 20px;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
+        .famous-place {
+            display: inline-flex;
             align-items: center;
 
-            border-top: 1px solid #e2e8f0;
+            width: fit-content;
 
-            padding-top: 18px;
-        }
+            padding: 6px 10px;
 
-        .explore-btn {
-            text-decoration: none;
+            margin-bottom: 12px;
 
-            background: #2563eb;
+            border-radius: 8px;
 
-            color: white;
+            background: #f0f2ff;
 
-            padding: 10px 17px;
+            color: #4f46e5;
 
-            border-radius: 9px;
-
-            font-weight: 700;
-
-            transition: 0.2s;
-        }
-
-        .explore-btn:hover {
-            background: #1d4ed8;
-        }
-
-        .plan-link {
-            text-decoration: none;
-
-            color: #64748b;
-
-            font-size: 14px;
-
+            font-size: 12px;
             font-weight: 600;
         }
 
-        .plan-link:hover {
-            color: #2563eb;
+
+        /* ==================================================
+           DESCRIPTION
+        ================================================== */
+
+        .city-description {
+            color: #68758a;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            min-height: 72px;
         }
 
-        /* ================= EMPTY STATE ================= */
 
-        .empty-state {
-            text-align: center;
+        /* ==================================================
+           BOTTOM
+        ================================================== */
 
-            background: white;
-
-            padding: 70px 20px;
-
-            border-radius: 20px;
-
-            border: 1px solid #e2e8f0;
-        }
-
-        .empty-state div {
-            font-size: 60px;
-            margin-bottom: 20px;
-        }
-
-        .empty-state h3 {
-            font-size: 25px;
-            margin-bottom: 10px;
-        }
-
-        .empty-state p {
-            color: #64748b;
-        }
-
-        /* ================= FOOTER ================= */
-
-        footer {
-            background: #0f172a;
-
-            color: white;
-
-            padding: 35px 7%;
+        .city-bottom {
+            margin-top: auto;
+            padding-top: 20px;
 
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
         }
 
-        footer p {
-            color: #94a3b8;
-            margin-top: 6px;
+
+        .plane {
+            font-size: 20px;
         }
 
-        footer a {
-            color: #cbd5e1;
+
+        .explore-btn {
+            background: #eef2ff;
+
+            color: #4f46e5;
 
             text-decoration: none;
 
-            margin-left: 20px;
+            padding: 10px 17px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.2s ease;
         }
 
-        /* ================= RESPONSIVE ================= */
 
-        @media (max-width: 1000px) {
+        .explore-btn:hover {
+            background: #4f46e5;
+            color: white;
+        }
 
-            .city-grid {
+
+        /* ==================================================
+           NO RESULTS
+        ================================================== */
+
+        .no-results {
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            color: #68758a;
+        }
+
+
+        .no-results h2 {
+            margin-bottom: 8px;
+
+            color: #172b4d;
+        }
+
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 900px) {
+
+            .cities-container {
                 grid-template-columns:
-                    repeat(2, 1fr);
+                    repeat(auto-fit,
+                        minmax(280px, 1fr));
             }
 
         }
+
 
         @media (max-width: 700px) {
 
-            .nav-links a:not(.nav-button) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+
+            .cities-container {
+                width: 90%;
+
+                grid-template-columns: 1fr;
+
+                gap: 22px;
+            }
+
+
+            .nav-links {
                 display: none;
             }
 
-            .city-grid {
-                grid-template-columns: 1fr;
-            }
 
             .search-container {
                 width: 90%;
             }
 
-            .section-header {
+        }
+
+
+        @media (max-width: 500px) {
+
+            .search-container {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
             }
 
-            footer {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-            }
 
-            footer a {
-                margin: 0 8px;
+            .search-btn {
+                width: 100%;
             }
 
         }
-
     </style>
 
 </head>
@@ -542,243 +509,186 @@
 <body>
 
 
-<!-- ================= NAVBAR ================= -->
+    <!-- ==================================================
+         NAVBAR
+    ================================================== -->
 
-<nav class="navbar">
+    <nav class="navbar">
 
-    <a href="/" class="logo">
-
-        <div class="logo-icon">
-            🌍
-        </div>
-
-        <h2>
-            Globe<span>Trotter</span>
-        </h2>
-
-    </a>
-
-
-    <div class="nav-links">
-
-        <a href="/">
-            Home
-        </a>
-
-        <a href="{{ url_for('cities') }}">
-            Destinations
-        </a>
-
-        <a href="{{ url_for('explore') }}">
-            Explore
-        </a>
-
-        <a href="{{ url_for('plan_trip') }}">
-            Plan Trip
-        </a>
-
-        <a href="{{ url_for('trips') }}"
-           class="nav-button">
-            My Trips
-        </a>
-
-    </div>
-
-</nav>
-
-
-<!-- ================= HERO ================= -->
-
-<section class="destination-hero">
-
-    <div class="badge">
-        🌎 Explore the world
-    </div>
-
-    <h1>
-        Find your next <span>destination</span>
-    </h1>
-
-    <p>
-        Discover amazing cities, explore new places,
-        and choose the perfect destinations for your
-        next GlobeTrotter adventure.
-    </p>
-
-</section>
-
-
-<!-- ================= SEARCH ================= -->
-
-<div class="search-container">
-
-    <input
-        type="text"
-        id="citySearch"
-        placeholder="Search for a city or country..."
-        onkeyup="searchCities()"
-    >
-
-    <button>
-        🔍 Search
-    </button>
-
-</div>
-
-
-<!-- ================= CITIES ================= -->
-
-<main class="main-content">
-
-    <div class="section-header">
-
-        <div>
-
-            <h2>
-                Popular Destinations
-            </h2>
-
-            <p>
-                Choose a city and start planning your journey.
-            </p>
-
-        </div>
-
-        <div class="city-count">
-
-            {{ cities|length }} destinations
-
-        </div>
-
-    </div>
-
-
-    {% if cities %}
-
-        <div class="city-grid">
-
-            {% for city in cities %}
-
-                <article
-                    class="city-card"
-                    data-search="
-                        {{ city['name']|lower }}
-                        {{ city['country']|lower }}
-                    "
-                >
-
-                    <!-- IMAGE / VISUAL -->
-
-                    <div
-                        class="city-image
-                        {% if loop.index % 6 == 1 %}
-                            one
-                        {% elif loop.index % 6 == 2 %}
-                            two
-                        {% elif loop.index % 6 == 3 %}
-                            three
-                        {% elif loop.index % 6 == 4 %}
-                            four
-                        {% elif loop.index % 6 == 5 %}
-                            five
-                        {% else %}
-                            six
-                        {% endif %}"
-                    >
-
-                        <span class="location-badge">
-                            📍 {{ city["country"] }}
-                        </span>
-
-                        {% if loop.index % 6 == 1 %}
-                            🗼
-                        {% elif loop.index % 6 == 2 %}
-                            🏙️
-                        {% elif loop.index % 6 == 3 %}
-                            🏯
-                        {% elif loop.index % 6 == 4 %}
-                            🌴
-                        {% elif loop.index % 6 == 5 %}
-                            🏰
-                        {% else %}
-                            🌆
-                        {% endif %}
-
-                    </div>
-
-
-                    <!-- CONTENT -->
-
-                    <div class="city-content">
-
-                        <h3>
-                            {{ city["name"] }}
-                        </h3>
-
-                        <div class="country">
-                            {{ city["country"] }}
-                        </div>
-
-
-                        {% if city["description"] %}
-
-                            <p class="description">
-                                {{ city["description"] }}
-                            </p>
-
-                        {% else %}
-
-                            <p class="description">
-                                Discover amazing places,
-                                experiences and attractions
-                                in {{ city["name"] }}.
-                            </p>
-
-                        {% endif %}
-
-
-                        <div class="card-footer">
-
-                            <a
-                                href="{{ url_for('city_details', city_id=city['id']) }}"
-                                class="explore-btn"
-                            >
-                                Explore →
-                            </a>
-
-                            <a
-                                href="{{ url_for('plan_trip') }}"
-                                class="plan-link"
-                            >
-                                Plan a trip
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-            {% endfor %}
-
+        <div class="logo">
+            🌍 GlobeTrotter
         </div>
 
 
-        <!-- NO SEARCH RESULTS -->
+        <div class="nav-links">
 
-        <div
-            id="noResults"
-            class="empty-state"
-            style="display:none; margin-top:30px;"
-        >
+            <a href="{{ url_for('dashboard') }}">Home</a>
 
-            <div>
-                🔎
+            <a href="/cities">
+                Explore
+            </a>
+
+            <a href="/trips">
+                My Trips
+            </a>
+
+            <a href="{{ url_for('dashboard') }}">
+                Dashboard
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==================================================
+         HERO
+    ================================================== -->
+
+    <section class="hero">
+
+        <h1>
+            Explore <span>Destinations</span>
+        </h1>
+
+        <p>
+            Discover beautiful cities, iconic landmarks,
+            rich culture, delicious food and unforgettable
+            travel experiences.
+        </p>
+
+    </section>
+
+
+    <!-- ==================================================
+         SEARCH
+    ================================================== -->
+
+    <form class="search-container" action="{{ url_for('cities') }}" method="GET">
+
+        <input type="text" name="search" value="{{ search or '' }}" placeholder="Search cities or countries..."
+            autocomplete="off">
+
+        <button type="submit" class="search-btn">
+            🔍 Search
+        </button>
+
+    </form>
+
+
+    <!-- ==================================================
+         CITY GRID
+    ================================================== -->
+
+    <main class="cities-container">
+
+
+        {% if cities %}
+
+
+        {% for city in cities %}
+
+        <article class="city-card">
+
+            <!-- IMAGE -->
+
+            <div class="city-image-wrapper">
+
+                {% if city["image"] %}
+
+                <img class="city-image" src="{{ city['image'] }}" alt="{{ city['city'] }}" loading="lazy"
+                    onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80';">
+
+                {% else %}
+
+                <img class="city-image"
+                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+                    alt="{{ city['city'] }}" loading="lazy">
+
+                {% endif %}
+
+                <button class="favorite-btn" type="button" onclick="toggleFavorite(this)" aria-label="Add to favorites">
+                    ♡
+                </button>
+
             </div>
 
-            <h3>
+
+            <!-- CONTENT -->
+
+            <div class="city-content">
+
+                <h2 class="city-name">
+                    {{ city["city"] }}
+                </h2>
+
+
+                <div class="city-country">
+
+                    📍 {{ city["state"] }}, {{ city["country"] }}
+
+                </div>
+
+
+                {% if city["popular_place"] %}
+
+                <div class="famous-place">
+
+                    📍 Famous for:
+                    &nbsp;
+                    {{ city["popular_place"] }}
+
+                </div>
+
+                {% endif %}
+
+
+                <p class="city-description">
+
+                    {% if city["description"] %}
+
+                    {{ city["description"] }}
+
+                    {% else %}
+
+                    Discover this amazing destination
+                    and create unforgettable memories.
+
+                    {% endif %}
+
+                </p>
+
+
+                <!-- BOTTOM -->
+
+                <div class="city-bottom">
+
+                    <span class="plane">
+                        ✈️
+                    </span>
+
+
+                    <a href="{{ url_for('city_details', city_id=city['id']) }}" class="explore-btn">
+                        Explore City →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+
+        {% else %}
+
+
+        <div class="no-results">
+
+            <h2>
                 No destinations found
-            </h3>
+            </h2>
 
             <p>
                 Try searching for another city or country.
@@ -787,127 +697,39 @@
         </div>
 
 
-    {% else %}
-
-        <div class="empty-state">
-
-            <div>
-                🌍
-            </div>
-
-            <h3>
-                No destinations available
-            </h3>
-
-            <p>
-                Destinations will appear here once they
-                are added to the database.
-            </p>
-
-        </div>
-
-    {% endif %}
-
-</main>
+        {% endif %}
 
 
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-    <div>
-
-        <strong>
-            🌍 GlobeTrotter
-        </strong>
-
-        <p>
-            Plan your journey. Explore the world.
-        </p>
-
-    </div>
+    </main>
 
 
-    <div>
+    <!-- ==================================================
+         JAVASCRIPT
+    ================================================== -->
 
-        <a href="/">
-            Home
-        </a>
+    <script>
 
-        <a href="{{ url_for('explore') }}">
-            Explore
-        </a>
+        function toggleFavorite(button) {
 
-        <a href="{{ url_for('plan_trip') }}">
-            Plan Trip
-        </a>
+            if (button.innerHTML.trim() === "♡") {
 
-    </div>
+                button.innerHTML = "♥";
 
-</footer>
+                button.style.color = "#ef4444";
 
+            } else {
 
-<!-- ================= SEARCH SCRIPT ================= -->
+                button.innerHTML = "♡";
 
-<script>
+                button.style.color = "";
 
-function searchCities() {
-
-    const input =
-        document
-        .getElementById("citySearch")
-        .value
-        .toLowerCase()
-        .trim();
-
-    const cards =
-        document.querySelectorAll(".city-card");
-
-    let visibleCount = 0;
-
-
-    cards.forEach(function(card) {
-
-        const text =
-            card.getAttribute("data-search");
-
-        if (text.includes(input)) {
-
-            card.style.display = "block";
-
-            visibleCount++;
-
-        } else {
-
-            card.style.display = "none";
+            }
 
         }
 
-    });
-
-
-    const noResults =
-        document.getElementById("noResults");
-
-
-    if (noResults) {
-
-        if (visibleCount === 0) {
-
-            noResults.style.display = "block";
-
-        } else {
-
-            noResults.style.display = "none";
-
-        }
-
-    }
-
-}
-
-</script>
+    </script>
 
 
 </body>
+
 </html>

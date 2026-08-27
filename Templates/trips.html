@@ -2,219 +2,1709 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Journeys | GlobeTrotter</title>
+    <title>My Trips | GlobeTrotter</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+
+            height: 76px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            border-bottom: 1px solid #e8edf4;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #172033;
+        }
+
+
+        .logo-icon {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-size: 21px;
+
+            box-shadow:
+                0 7px 18px rgba(37, 99, 235, 0.22);
+        }
+
+
+        .logo h2 {
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.4px;
+        }
+
+
+        .logo span {
+            color: #2563eb;
+        }
+
+
+        .nav {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 26px;
+        }
+
+
+        .nav a {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+
+        .nav a:hover {
+            color: #2563eb;
+        }
+
+
+        .nav .active {
+            color: #2563eb;
+        }
+
+
+        .logout {
+
+            padding: 9px 16px;
+
+            background: #eff6ff;
+
+            border-radius: 10px;
+
+            color: #2563eb !important;
+
+            transition: 0.2s ease;
+        }
+
+
+        .logout:hover {
+
+            background: #dbeafe;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+        .container {
+
+            width: 88%;
+
+            max-width: 1400px;
+
+            margin: auto;
+
+            padding: 30px 0 70px;
+        }
+
+
+        /* =====================================================
+           PAGE HERO
+        ===================================================== */
+
+        .page-hero {
+
+            min-height: 330px;
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 35px;
+
+            padding: 50px 55px;
+
+            color: white;
+
+            box-shadow:
+                0 20px 50px rgba(15, 23, 42, 0.14);
+
+            isolation: isolate;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #172554,
+                    #075985,
+                    #0e7490
+                );
+        }
+
+
+        .page-hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            right: -150px;
+            top: -220px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            z-index: -1;
+        }
+
+
+        .page-hero::after {
+
+            content: "✈️";
+
+            position: absolute;
+
+            right: 40px;
+            bottom: -40px;
+
+            font-size: 170px;
+
+            opacity: 0.08;
+
+            transform: rotate(-8deg);
+
+            z-index: -1;
+        }
+
+
+        .page-hero-content {
+
+            max-width: 700px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .hero-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            padding: 8px 14px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.25);
+
+            backdrop-filter: blur(12px);
+
+            -webkit-backdrop-filter: blur(12px);
+
+            color: #e0f2fe;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.4px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .page-hero h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(42px, 5vw, 62px);
+
+            line-height: 1.08;
+
+            letter-spacing: -1.5px;
+
+            color: white;
+
+            margin-bottom: 15px;
+
+            text-shadow:
+                0 3px 18px rgba(0, 0, 0, 0.28);
+        }
+
+
+        .page-hero h1 span {
+            color: #a5f3fc;
+        }
+
+
+        .page-hero-description {
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            color:
+                rgba(255, 255, 255, 0.88);
+
+            max-width: 570px;
+        }
+
+
+        /* =====================================================
+           CREATE BUTTON
+        ===================================================== */
+
+        .create-button {
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 14px 22px;
+
+            border-radius: 12px;
+
+            background: white;
+
+            color: #155eef !important;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.18);
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .create-button:hover {
+
+            background: #f0f9ff;
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* =====================================================
+           SECTION HEADER
+        ===================================================== */
+
+        .section {
+
+            margin-top: 55px;
+        }
+
+
+        .section-heading {
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            margin-bottom: 22px;
+        }
+
+
+        .section-heading h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 30px;
+
+            color: #0f172a;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .section-heading p {
+
+            color: #64748b;
+
+            margin-top: 6px;
+
+            font-size: 14px;
+        }
+
+
+        .trip-count {
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           TRIP GRID
+        ===================================================== */
+
+        .trip-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        /* =====================================================
+           TRIP CARD
+        ===================================================== */
+
+        .trip-card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            border:
+                1px solid #e4eaf2;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .trip-card:hover {
+
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 20px 45px rgba(15, 23, 42, 0.10);
+        }
+
+
+        /* =====================================================
+           CARD IMAGE / VISUAL
+        ===================================================== */
+
+        .trip-image {
+
+            height: 185px;
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            font-size: 70px;
+        }
+
+
+        .trip-card:nth-child(1) .trip-image {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #bfdbfe,
+                    #a5f3fc
+                );
+        }
+
+
+        .trip-card:nth-child(2) .trip-image {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dbeafe,
+                    #c7d2fe
+                );
+        }
+
+
+        .trip-card:nth-child(3) .trip-image {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ddd6fe,
+                    #e9d5ff
+                );
+        }
+
+
+        .trip-card:nth-child(4) .trip-image {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ccfbf1,
+                    #dbeafe
+                );
+        }
+
+
+        .trip-card:nth-child(5) .trip-image {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dbeafe,
+                    #e0e7ff
+                );
+        }
+
+
+        .trip-card:nth-child(6) .trip-image {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #cffafe,
+                    #bfdbfe
+                );
+        }
+
+
+        .trip-image::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.25);
+
+            top: -120px;
+            right: -70px;
+        }
+
+
+        .trip-image::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 160px;
+            height: 160px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.18);
+
+            bottom: -100px;
+            left: -50px;
+        }
+
+
+        .trip-icon {
+
+            position: relative;
+
+            z-index: 2;
+
+            transition:
+                transform 0.3s ease;
+
+            filter:
+                drop-shadow(
+                    0 8px 10px
+                    rgba(15, 23, 42, 0.12)
+                );
+        }
+
+
+        .trip-card:hover .trip-icon {
+
+            transform:
+                translateY(-6px)
+                rotate(-3deg);
+        }
+
+
+        .trip-number {
+
+            position: absolute;
+
+            left: 14px;
+            top: 14px;
+
+            z-index: 3;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255, 255, 255, 0.92);
+
+            color: #2563eb;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.7px;
+        }
+
+
+        .trip-tag {
+
+            position: absolute;
+
+            right: 14px;
+            top: 14px;
+
+            z-index: 3;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255, 255, 255, 0.92);
+
+            color: #0891b2;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =====================================================
+           CARD BODY
+        ===================================================== */
+
+        .trip-body {
+
+            padding: 20px;
+        }
+
+
+        .trip-body h3 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 21px;
+
+            color: #0f172a;
+
+            margin-bottom: 8px;
+
+            line-height: 1.25;
+        }
+
+
+        .trip-description {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin-bottom: 16px;
+
+            min-height: 42px;
+        }
+
+
+        /* =====================================================
+           DATE
+        ===================================================== */
+
+        .trip-date {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 10px 12px;
+
+            background: #f8fafc;
+
+            border-radius: 10px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =====================================================
+           CARD FOOTER
+        ===================================================== */
+
+        .trip-footer {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-top:
+                1px solid #edf1f5;
+
+            padding-top: 15px;
+        }
+
+
+        .trip-label {
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        .view-trip {
+
+            color: #2563eb;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+
+        .view-trip:hover {
+
+            color: #1d4ed8;
+
+            transform: translateX(3px);
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty {
+
+            background: white;
+
+            border:
+                1px solid #e2e8f0;
+
+            border-radius: 20px;
+
+            padding: 65px 30px;
+
+            text-align: center;
+        }
+
+
+        .empty-icon {
+
+            width: 90px;
+            height: 90px;
+
+            margin:
+                0 auto 18px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dbeafe,
+                    #cffafe
+                );
+
+            font-size: 45px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(37, 99, 235, 0.10);
+        }
+
+
+        .empty h3 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 25px;
+
+            color: #0f172a;
+
+            margin-bottom: 8px;
+        }
+
+
+        .empty p {
+
+            color: #64748b;
+
+            margin-bottom: 23px;
+
+            font-size: 14px;
+        }
+
+
+        .empty-button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            padding: 13px 20px;
+
+            background: #2563eb;
+
+            color: white !important;
+
+            border-radius: 11px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition: 0.25s ease;
+        }
+
+
+        .empty-button:hover {
+
+            background: #1d4ed8;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(37, 99, 235, 0.22);
+        }
+
+
+        /* =====================================================
+           TRAVEL PLANNER BANNER
+        ===================================================== */
+
+        .planner {
+
+            margin-top: 50px;
+
+            border-radius: 25px;
+
+            padding: 40px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #172554,
+                    #0e7490
+                );
+
+            color: white;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 30px;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+
+        .planner::after {
+
+            content: "🗺️";
+
+            position: absolute;
+
+            right: 35px;
+
+            bottom: -35px;
+
+            font-size: 150px;
+
+            opacity: 0.09;
+        }
+
+
+        .planner-content {
+
+            max-width: 650px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .planner small {
+
+            color: #a5f3fc;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+        }
+
+
+        .planner h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 32px;
+
+            margin: 10px 0;
+        }
+
+
+        .planner p {
+
+            color: #dbeafe;
+
+            line-height: 1.6;
+
+            font-size: 14px;
+        }
+
+
+        .planner-button {
+
+            position: relative;
+
+            z-index: 3;
+
+            background: white;
+
+            color: #2563eb !important;
+
+            padding: 14px 22px;
+
+            border-radius: 11px;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            white-space: nowrap;
+
+            transition: 0.25s ease;
+        }
+
+
+        .planner-button:hover {
+
+            transform: translateY(-3px);
+
+            background: #f0f9ff;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+
+            margin-top: 70px;
+
+            background: #0f172a;
+
+            color: white;
+
+            padding: 32px 6%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        footer strong {
+
+            font-size: 16px;
+        }
+
+
+        footer p {
+
+            color: #94a3b8;
+
+            margin-top: 5px;
+
+            font-size: 12px;
+        }
+
+
+        footer a {
+
+            color: #cbd5e1;
+
+            margin-left: 20px;
+
+            font-size: 13px;
+        }
+
+
+        footer a:hover {
+            color: white;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .trip-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+
+            .nav {
+                gap: 10px;
+            }
+
+
+            .nav a:not(.logout) {
+                display: none;
+            }
+
+
+            .container {
+                width: 92%;
+            }
+
+
+            .page-hero {
+
+                min-height: 400px;
+
+                padding: 35px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                justify-content: center;
+            }
+
+
+            .page-hero h1 {
+                font-size: 42px;
+            }
+
+
+            .create-button {
+                width: 100%;
+            }
+
+
+            .trip-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .section-heading {
+
+                align-items: flex-start;
+
+                gap: 12px;
+
+                flex-direction: column;
+            }
+
+
+            .planner {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+
+            .planner h2 {
+                font-size: 28px;
+            }
+
+
+            footer {
+
+                flex-direction: column;
+
+                text-align: center;
+
+                gap: 15px;
+            }
+
+
+            footer a {
+                margin: 0 8px;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .page-hero {
+                padding: 28px;
+            }
+
+
+            .page-hero h1 {
+                font-size: 35px;
+            }
+
+
+            .trip-image {
+                height: 170px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <header class="navbar">
 
-        <a href="{{ url_for('dashboard') }}" class="brand">
-            <span class="brand-icon">✦</span>
-            GlobeTrotter
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <nav class="navbar">
+
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="logo"
+        >
+
+            <div class="logo-icon">
+                🌍
+            </div>
+
+
+            <h2>
+                Globe<span>Trotter</span>
+            </h2>
+
         </a>
 
-        <nav class="nav-links">
+
+        <div class="nav">
+
 
             <a href="{{ url_for('dashboard') }}">
                 Dashboard
             </a>
 
+
+            <a href="{{ url_for('cities') }}">
+                Destinations
+            </a>
+
+
             <a href="{{ url_for('explore') }}">
                 Explore
             </a>
 
-            <a href="{{ url_for('plan_trip') }}">
-                Plan Trip
+
+            <a
+                href="{{ url_for('trips') }}"
+                class="active"
+            >
+                My Trips
             </a>
 
-        </nav>
 
-        <a href="{{ url_for('logout') }}" class="logout-btn">
-            Logout
-        </a>
+            <a
+                href="{{ url_for('logout') }}"
+                class="logout"
+            >
+                Logout
+            </a>
 
-    </header>
+
+        </div>
+
+    </nav>
 
 
-    <main class="trips-page">
 
-        <section class="trips-hero">
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
 
-            <div>
+    <main class="container">
 
-                <span class="eyebrow">
-                    YOUR TRAVEL COLLECTION
-                </span>
+
+        <!-- =================================================
+             HERO
+        ================================================= -->
+
+        <section class="page-hero">
+
+
+            <div class="page-hero-content">
+
+
+                <div class="hero-badge">
+
+                    ✈️ &nbsp; YOUR TRAVEL COLLECTION
+
+                </div>
+
 
                 <h1>
-                    My <span>Journeys.</span>
+
+                    My
+                    <span>Journeys.</span>
+
                 </h1>
 
-                <p>
-                    Every destination you've planned,
-                    all in one place.
+
+                <p class="page-hero-description">
+
+                    Every adventure you've planned,
+                    all in one place. Keep your trips
+                    organized and your next destination
+                    always within reach.
+
                 </p>
 
             </div>
 
-            <a href="{{ url_for('create_trip') }}" class="primary-action">
 
-                + Create Trip
+            <a
+                href="{{ url_for('create_trip') }}"
+                class="create-button"
+            >
+
+                ✈️ &nbsp; Create New Trip
 
             </a>
+
 
         </section>
 
 
-        {% if trips %}
 
-        <section class="journey-grid">
+        <!-- =================================================
+             JOURNEYS
+        ================================================= -->
 
-            {% for trip in trips %}
-
-            <article class="journey-card">
-
-                <div class="journey-cover">
-
-                    <span class="journey-number">
-                        {{ "%02d"|format(loop.index) }}
-                    </span>
-
-                    <span class="journey-icon">
-
-                        {% if loop.index % 4 == 1 %}
-                        ✈️
-                        {% elif loop.index % 4 == 2 %}
-                        🌴
-                        {% elif loop.index % 4 == 3 %}
-                        🏔️
-                        {% else %}
-                        🌍
-                        {% endif %}
-
-                    </span>
-
-                </div>
+        <section class="section">
 
 
-                <div class="journey-content">
+            <div class="section-heading">
 
-                    <span class="journey-status">
-                        PLANNED JOURNEY
-                    </span>
+
+                <div>
 
                     <h2>
-                        {{ trip["name"] }}
+                        Your Journeys
                     </h2>
 
-                    {% if trip["description"] %}
-
                     <p>
-                        {{ trip["description"] }}
+                        Your upcoming adventures, all in one place.
                     </p>
-
-                    {% else %}
-
-                    <p>
-                        Your next adventure is waiting
-                        to be filled with memories.
-                    </p>
-
-                    {% endif %}
-
-
-                    <div class="journey-meta">
-
-                        {% if trip["start_date"] %}
-                        <span>
-                            📅 {{ trip["start_date"] }}
-                        </span>
-                        {% endif %}
-
-                        {% if trip["end_date"] %}
-                        <span>
-                            → {{ trip["end_date"] }}
-                        </span>
-                        {% endif %}
-
-                    </div>
-
-
-                    <div class="journey-footer">
-
-                        <span>
-                            ✦ Your journey
-                        </span>
-
-                        <a href="{{ url_for('trip_details', trip_id=trip['id']) }}">
-                            View Journey →
-                        </a>
-
-                    </div>
 
                 </div>
 
-            </article>
 
-            {% endfor %}
+                <span class="trip-count">
+
+                    {{ trips|length }}
+                    {% if trips|length == 1 %}
+                        Trip
+                    {% else %}
+                        Trips
+                    {% endif %}
+
+                </span>
+
+
+            </div>
+
+
+
+            {% if trips %}
+
+
+            <div class="trip-grid">
+
+
+                {% for trip in trips %}
+
+
+                <article class="trip-card">
+
+
+                    <!-- CARD VISUAL -->
+
+                    <div class="trip-image">
+
+
+                        <span class="trip-number">
+
+                            TRIP {{ "%02d"|format(loop.index) }}
+
+                        </span>
+
+
+                        <span class="trip-tag">
+                            PLANNED
+                        </span>
+
+
+                        <span class="trip-icon">
+
+
+                            {% if loop.index % 4 == 1 %}
+
+                                🏝️
+
+                            {% elif loop.index % 4 == 2 %}
+
+                                🏔️
+
+                            {% elif loop.index % 4 == 3 %}
+
+                                🏙️
+
+                            {% else %}
+
+                                ✈️
+
+                            {% endif %}
+
+
+                        </span>
+
+
+                    </div>
+
+
+
+                    <!-- CARD CONTENT -->
+
+                    <div class="trip-body">
+
+
+                        <h3>
+
+                            {{ trip["name"] }}
+
+                        </h3>
+
+
+                        <p class="trip-description">
+
+
+                            {% if trip["description"] %}
+
+                                {{ trip["description"] }}
+
+                            {% else %}
+
+                                Your GlobeTrotter adventure
+                                is waiting to be filled
+                                with unforgettable memories.
+
+                            {% endif %}
+
+
+                        </p>
+
+
+
+                        <div class="trip-date">
+
+
+                            📅
+
+
+                            {% if trip["start_date"] %}
+
+                                <span>
+                                    {{ trip["start_date"] }}
+
+                                    {% if trip["end_date"] %}
+
+                                        &nbsp; → &nbsp;
+                                        {{ trip["end_date"] }}
+
+                                    {% endif %}
+
+                                </span>
+
+                            {% else %}
+
+                                <span>
+                                    Dates not set
+                                </span>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+
+                        <div class="trip-footer">
+
+
+                            <span class="trip-label">
+
+                                ✦ Your journey
+
+                            </span>
+
+
+                            <a
+                                href="{{ url_for('trip_details', trip_id=trip['id']) }}"
+                                class="view-trip"
+                            >
+
+                                View journey →
+
+                            </a>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </article>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================= -->
+
+            <div class="empty">
+
+
+                <div class="empty-icon">
+                    🧳
+                </div>
+
+
+                <h3>
+                    Your travel story starts here
+                </h3>
+
+
+                <p>
+
+                    Create your first trip and start
+                    building your perfect itinerary.
+
+                </p>
+
+
+                <a
+                    href="{{ url_for('create_trip') }}"
+                    class="empty-button"
+                >
+
+                    ✈️ &nbsp; Create My First Trip
+
+                </a>
+
+
+            </div>
+
+
+            {% endif %}
+
 
         </section>
 
-        {% else %}
 
-        <section class="empty-journeys">
 
-            <div class="empty-globe">
-                🌍
+        <!-- =================================================
+             PLANNER
+        ================================================= -->
+
+        <section class="planner">
+
+
+            <div class="planner-content">
+
+
+                <small>
+                    ✨ TRAVEL SMARTER
+                </small>
+
+
+                <h2>
+                    Ready for your next adventure?
+                </h2>
+
+
+                <p>
+
+                    Discover new destinations and turn
+                    your travel ideas into a memorable
+                    journey with GlobeTrotter.
+
+                </p>
+
             </div>
 
-            <h2>
-                Your first adventure is waiting.
-            </h2>
 
-            <p>
-                Create a trip and start collecting
-                destinations.
-            </p>
+            <a
+                href="{{ url_for('quick_plan') }}"
+                class="planner-button"
+            >
 
-            <a href="{{ url_for('create_trip') }}" class="primary-action">
-
-                Create my first trip →
+                ⚡ &nbsp; Try Quick Planner →
 
             </a>
 
+
         </section>
 
-        {% endif %}
 
     </main>
 
 
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
     <footer>
 
-        <div class="footer-brand">
 
-            <span class="brand-icon">✦</span>
+        <div>
 
-            GlobeTrotter
+            <strong>
+                🌍 GlobeTrotter
+            </strong>
+
+            <p>
+                Plan your journey. Explore the world.
+            </p>
 
         </div>
 
-        <p>
-            Collect moments, not things. ✈
-        </p>
+
+        <div>
+
+            <a href="{{ url_for('cities') }}">
+                Destinations
+            </a>
+
+            <a href="{{ url_for('trips') }}">
+                My Trips
+            </a>
+
+            <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+        </div>
+
 
     </footer>
+
 
 </body>
 

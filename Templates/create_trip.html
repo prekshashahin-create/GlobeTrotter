@@ -8,272 +8,1346 @@
 
     <title>Create Trip | GlobeTrotter</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <!-- GOOGLE FONTS -->
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-          rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family: "DM Sans", sans-serif;
+
+            background: #f5f7fb;
+
+            color: #172033;
+
+            line-height: 1.5;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+
+            height: 76px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            backdrop-filter: blur(12px);
+
+            -webkit-backdrop-filter: blur(12px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            border-bottom: 1px solid #e8edf4;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #172033;
+        }
+
+
+        .logo-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+
+            font-size: 21px;
+
+            box-shadow:
+                0 7px 18px rgba(37, 99, 235, 0.22);
+        }
+
+
+        .logo h2 {
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.4px;
+        }
+
+
+        .logo span {
+            color: #2563eb;
+        }
+
+
+        .nav {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 26px;
+        }
+
+
+        .nav a {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+
+        .nav a:hover {
+            color: #2563eb;
+        }
+
+
+        .nav .active {
+            color: #2563eb;
+        }
+
+
+        .logout {
+
+            padding: 9px 16px;
+
+            background: #eff6ff;
+
+            border-radius: 10px;
+
+            color: #2563eb !important;
+
+            transition: 0.2s ease;
+        }
+
+
+        .logout:hover {
+
+            background: #dbeafe;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .container {
+
+            width: 88%;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 30px 0 70px;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .form-hero {
+
+            border-radius: 28px;
+
+            min-height: 300px;
+
+            padding: 50px;
+
+            color: white;
+
+            position: relative;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #172554,
+                    #075985,
+                    #0e7490
+                );
+
+            box-shadow:
+                0 20px 50px rgba(15, 23, 42, 0.14);
+        }
+
+
+        .form-hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 430px;
+
+            height: 430px;
+
+            border-radius: 50%;
+
+            right: -170px;
+
+            top: -230px;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+        }
+
+
+        .form-hero::after {
+
+            content: "✈️";
+
+            position: absolute;
+
+            right: 55px;
+
+            bottom: -45px;
+
+            font-size: 170px;
+
+            opacity: 0.09;
+
+            transform: rotate(-8deg);
+        }
+
+
+        .hero-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 720px;
+        }
+
+
+        .hero-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            padding: 8px 14px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.25);
+
+            backdrop-filter: blur(12px);
+
+            color: #e0f2fe;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.4px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .form-hero h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(40px, 5vw, 60px);
+
+            line-height: 1.08;
+
+            letter-spacing: -1.5px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .form-hero h1 span {
+            color: #a5f3fc;
+        }
+
+
+        .form-hero p {
+
+            color:
+                rgba(255, 255, 255, 0.88);
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            max-width: 620px;
+        }
+
+
+        /* =====================================================
+           FORM LAYOUT
+        ===================================================== */
+
+        .form-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                1.7fr 0.8fr;
+
+            gap: 25px;
+
+            margin-top: 35px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           FORM CARD
+        ===================================================== */
+
+        .form-card {
+
+            background: white;
+
+            border: 1px solid #e4eaf2;
+
+            border-radius: 22px;
+
+            padding: 32px;
+
+            box-shadow:
+                0 10px 30px rgba(15, 23, 42, 0.06);
+        }
+
+
+        .form-title {
+
+            margin-bottom: 25px;
+        }
+
+
+        .form-title h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 28px;
+
+            color: #0f172a;
+        }
+
+
+        .form-title p {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-top: 5px;
+        }
+
+
+        /* =====================================================
+           FORM GROUP
+        ===================================================== */
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #334155;
+
+            margin-bottom: 8px;
+        }
+
+
+        .required {
+            color: #2563eb;
+        }
+
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+
+            width: 100%;
+
+            border: 1px solid #dbe3ed;
+
+            background: #f8fafc;
+
+            border-radius: 11px;
+
+            padding: 13px 14px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 13px;
+
+            color: #172033;
+
+            outline: none;
+
+            transition:
+                border 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+
+            background: white;
+
+            border-color: #60a5fa;
+
+            box-shadow:
+                0 0 0 4px rgba(37, 99, 235, 0.08);
+        }
+
+
+        .form-group textarea {
+
+            min-height: 125px;
+
+            resize: vertical;
+        }
+
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+
+            color: #94a3b8;
+        }
+
+
+        /* =====================================================
+           DATE GRID
+        ===================================================== */
+
+        .date-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 15px;
+        }
+
+
+        /* =====================================================
+           FORM FOOTER
+        ===================================================== */
+
+        .form-actions {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            border-top:
+                1px solid #edf1f5;
+
+            margin-top: 25px;
+
+            padding-top: 22px;
+        }
+
+
+        .cancel-button {
+
+            padding: 12px 18px;
+
+            border-radius: 10px;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+
+        .cancel-button:hover {
+
+            background: #f1f5f9;
+
+            color: #334155;
+        }
+
+
+        .submit-button {
+
+            border: none;
+
+            cursor: pointer;
+
+            padding: 13px 21px;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0891b2
+                );
+
+            color: white;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 8px 20px rgba(37, 99, 235, 0.20);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .submit-button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px rgba(37, 99, 235, 0.28);
+        }
+
+
+        /* =====================================================
+           SIDE PANEL
+        ===================================================== */
+
+        .side-panel {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 18px;
+        }
+
+
+        .info-card {
+
+            background: white;
+
+            border:
+                1px solid #e4eaf2;
+
+            border-radius: 20px;
+
+            padding: 23px;
+
+            box-shadow:
+                0 10px 30px rgba(15, 23, 42, 0.05);
+        }
+
+
+        .info-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #eff6ff;
+
+            font-size: 21px;
+
+            margin-bottom: 13px;
+        }
+
+
+        .info-card h3 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 20px;
+
+            color: #0f172a;
+
+            margin-bottom: 6px;
+        }
+
+
+        .info-card p {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           TIPS
+        ===================================================== */
+
+        .tips-card {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #ecfeff
+                );
+
+            border:
+                1px solid #dbeafe;
+
+            border-radius: 20px;
+
+            padding: 23px;
+        }
+
+
+        .tips-card h3 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 20px;
+
+            color: #0f172a;
+
+            margin-bottom: 15px;
+        }
+
+
+        .tip {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-bottom: 13px;
+        }
+
+
+        .tip:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .tip-icon {
+            font-size: 16px;
+        }
+
+
+        .tip p {
+
+            color: #475569;
+
+            font-size: 11px;
+
+            line-height: 1.55;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+
+            margin-top: 70px;
+
+            background: #0f172a;
+
+            color: white;
+
+            padding: 32px 6%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        footer strong {
+            font-size: 16px;
+        }
+
+
+        footer p {
+
+            color: #94a3b8;
+
+            margin-top: 5px;
+
+            font-size: 12px;
+        }
+
+
+        footer a {
+
+            color: #cbd5e1;
+
+            margin-left: 20px;
+
+            font-size: 13px;
+        }
+
+
+        footer a:hover {
+            color: white;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .form-layout {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+
+            .nav {
+                gap: 10px;
+            }
+
+
+            .nav a:not(.logout) {
+                display: none;
+            }
+
+
+            .container {
+                width: 92%;
+            }
+
+
+            .form-hero {
+
+                padding: 35px;
+
+                min-height: 350px;
+            }
+
+
+            .form-hero h1 {
+                font-size: 42px;
+            }
+
+
+            .form-card {
+                padding: 24px;
+            }
+
+
+            .date-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .form-actions {
+
+                flex-direction: column-reverse;
+
+                align-items: stretch;
+            }
+
+
+            .submit-button,
+            .cancel-button {
+
+                width: 100%;
+
+                text-align: center;
+            }
+
+
+            footer {
+
+                flex-direction: column;
+
+                text-align: center;
+
+                gap: 15px;
+            }
+
+
+            footer a {
+                margin: 0 8px;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .form-hero {
+                padding: 28px;
+            }
+
+
+            .form-hero h1 {
+                font-size: 35px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-<header class="navbar">
 
-    <a href="{{ url_for('dashboard') }}" class="brand">
-        <span class="brand-icon">✦</span>
-        GlobeTrotter
-    </a>
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
 
-    <nav class="nav-links">
+    <nav class="navbar">
 
-        <a href="{{ url_for('dashboard') }}">
-            Dashboard
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="logo"
+        >
+
+            <div class="logo-icon">
+                🌍
+            </div>
+
+
+            <h2>
+                Globe<span>Trotter</span>
+            </h2>
+
         </a>
 
-        <a href="{{ url_for('explore') }}">
-            Explore
-        </a>
 
-        <a href="{{ url_for('plan_trip') }}" class="active">
-            Plan Trip
-        </a>
+        <div class="nav">
+
+
+            <a href="{{ url_for('dashboard') }}">
+                Dashboard
+            </a>
+
+
+            <a href="{{ url_for('cities') }}">
+                Destinations
+            </a>
+
+
+            <a href="{{ url_for('explore') }}">
+                Explore
+            </a>
+
+
+            <a
+                href="{{ url_for('trips') }}"
+                class="active"
+            >
+                My Trips
+            </a>
+
+
+            <a
+                href="{{ url_for('logout') }}"
+                class="logout"
+            >
+                Logout
+            </a>
+
+
+        </div>
 
     </nav>
 
-    <a href="{{ url_for('logout') }}" class="logout-btn">
-        Logout
-    </a>
-
-</header>
 
 
-<main class="create-page">
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
+
+    <main class="container">
 
 
-    <!-- LEFT SIDE -->
+        <!-- =================================================
+             HERO
+        ================================================= -->
 
-    <section class="create-intro">
-
-        <span class="eyebrow">
-            NEW JOURNEY
-        </span>
-
-        <h1>
-            Let's give your<br>
-            next adventure<br>
-            a <span>name.</span>
-        </h1>
-
-        <p>
-            Every great journey starts with a simple idea.
-            Tell us the basics and we'll take it from there.
-        </p>
+        <section class="form-hero">
 
 
-        <div class="journey-decoration">
-
-            <div class="route-line"></div>
-
-            <div class="route-point point-a">
-                <span>✈</span>
-            </div>
-
-            <div class="route-point point-b">
-                <span>📍</span>
-            </div>
-
-            <div class="route-point point-c">
-                <span>✦</span>
-            </div>
-
-        </div>
-
-    </section>
+            <div class="hero-content">
 
 
-    <!-- FORM -->
+                <div class="hero-badge">
 
-    <section class="create-form-card">
+                    ✨ &nbsp; CREATE YOUR ADVENTURE
 
-        <div class="form-top">
+                </div>
 
-            <div>
 
-                <span class="form-step">
-                    STEP 01 / 03
-                </span>
+                <h1>
 
-                <h2>
-                    Trip basics
-                </h2>
+                    Plan a journey
+                    <span>worth remembering.</span>
+
+                </h1>
+
+
+                <p>
+
+                    Give your trip a name, choose your dates
+                    and add a few details. You can build the
+                    rest of your adventure step by step.
+
+                </p>
 
             </div>
 
-            <span class="form-icon">
-                🧳
-            </span>
 
-        </div>
+        </section>
 
 
-        <form method="POST"
-              action="{{ url_for('create_trip') }}">
+
+        <!-- =================================================
+             FORM AREA
+        ================================================= -->
+
+        <section class="form-layout">
 
 
-            <div class="form-group">
+            <!-- =================================================
+                 FORM
+            ================================================= -->
 
-                <label for="name">
-                    What should we call this trip?
-                </label>
+            <div class="form-card">
 
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="e.g. Summer in Japan"
-                    required
+
+                <div class="form-title">
+
+                    <h2>
+                        Trip details
+                    </h2>
+
+                    <p>
+                        Start with the basics of your journey.
+                    </p>
+
+                </div>
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for('create_trip') }}"
                 >
 
+
+                    <!-- TRIP NAME -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+
+                            Trip name
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="e.g. Summer in Europe"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group">
+
+                        <label for="description">
+
+                            Tell us about your trip
+
+                        </label>
+
+
+                        <textarea
+                            id="description"
+                            name="description"
+                            placeholder="What are you hoping to experience on this journey?"
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <!-- DATES -->
+
+                    <div class="date-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="start_date">
+
+                                Start date
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                type="date"
+                                id="start_date"
+                                name="start_date"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="end_date">
+
+                                End date
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                type="date"
+                                id="end_date"
+                                name="end_date"
+                                required
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="form-actions">
+
+
+                        <a
+                            href="{{ url_for('trips') }}"
+                            class="cancel-button"
+                        >
+
+                            ← Back to My Trips
+
+                        </a>
+
+
+                        <button
+                            type="submit"
+                            class="submit-button"
+                        >
+
+                            ✈️ &nbsp; Create My Trip
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
             </div>
 
 
-            <div class="date-row">
 
-                <div class="form-group">
+            <!-- =================================================
+                 SIDE PANEL
+            ================================================= -->
 
-                    <label for="start_date">
-                        Leaving
-                    </label>
+            <aside class="side-panel">
 
-                    <input
-                        type="date"
-                        id="start_date"
-                        name="start_date"
-                        required
-                    >
+
+                <div class="info-card">
+
+
+                    <div class="info-icon">
+                        🗺️
+                    </div>
+
+
+                    <h3>
+                        Your journey starts here
+                    </h3>
+
+
+                    <p>
+
+                        Don't worry about getting everything
+                        perfect now. Once your trip is created,
+                        you can continue adding destinations
+                        and experiences.
+
+                    </p>
+
 
                 </div>
 
 
-                <div class="date-arrow">
-                    →
+
+                <div class="tips-card">
+
+
+                    <h3>
+                        ✨ Quick tips
+                    </h3>
+
+
+                    <div class="tip">
+
+                        <span class="tip-icon">
+                            📍
+                        </span>
+
+                        <p>
+                            Give your trip a name you'll
+                            instantly recognize.
+                        </p>
+
+                    </div>
+
+
+                    <div class="tip">
+
+                        <span class="tip-icon">
+                            📅
+                        </span>
+
+                        <p>
+                            Add accurate dates so your
+                            itinerary stays organized.
+                        </p>
+
+                    </div>
+
+
+                    <div class="tip">
+
+                        <span class="tip-icon">
+                            💭
+                        </span>
+
+                        <p>
+                            Add a short description to
+                            remember what inspired the trip.
+                        </p>
+
+                    </div>
+
+
                 </div>
 
 
-                <div class="form-group">
-
-                    <label for="end_date">
-                        Coming back
-                    </label>
-
-                    <input
-                        type="date"
-                        id="end_date"
-                        name="end_date"
-                        required
-                    >
-
-                </div>
-
-            </div>
+            </aside>
 
 
-            <div class="form-group">
-
-                <div class="label-row">
-
-                    <label for="description">
-                        What's the vibe?
-                    </label>
-
-                    <span>
-                        OPTIONAL
-                    </span>
-
-                </div>
-
-                <textarea
-                    id="description"
-                    name="description"
-                    rows="5"
-                    placeholder="Beach escape, food adventure, family holiday..."
-                ></textarea>
-
-            </div>
+        </section>
 
 
-            <div class="vibe-suggestions">
-
-                <button type="button"
-                        onclick="setVibe('Beach escape')">
-                    🏖 Beach
-                </button>
-
-                <button type="button"
-                        onclick="setVibe('Food adventure')">
-                    🍜 Food
-                </button>
-
-                <button type="button"
-                        onclick="setVibe('Adventure trip')">
-                    🏔 Adventure
-                </button>
-
-                <button type="button"
-                        onclick="setVibe('Cultural exploration')">
-                    🏛 Culture
-                </button>
-
-            </div>
+    </main>
 
 
-            <button
-                type="submit"
-                class="create-submit">
 
-                Create my journey
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
 
-                <span>→</span>
-
-            </button>
+    <footer>
 
 
-        </form>
+        <div>
 
-    </section>
+            <strong>
+                🌍 GlobeTrotter
+            </strong>
 
-</main>
+            <p>
+                Plan your journey. Explore the world.
+            </p>
 
-
-<footer>
-
-    <div class="footer-brand">
-
-        <span class="brand-icon">
-            ✦
-        </span>
-
-        GlobeTrotter
-
-    </div>
-
-    <p>
-        Your story starts here. ✈
-    </p>
-
-</footer>
+        </div>
 
 
-<script>
+        <div>
 
-function setVibe(text) {
+            <a href="{{ url_for('cities') }}">
+                Destinations
+            </a>
 
-    document.getElementById("description").value = text;
+            <a href="{{ url_for('trips') }}">
+                My Trips
+            </a>
 
-}
+            <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
 
-</script>
+        </div>
+
+
+    </footer>
+
 
 </body>
 

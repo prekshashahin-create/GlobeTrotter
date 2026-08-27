@@ -4,17 +4,613 @@
 <head>
 
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ trip["name"] }} | GlobeTrotter</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 76px;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            border-bottom: 1px solid #e8edf4;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #172033;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: linear-gradient(135deg,#2563eb,#06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 21px;
+            box-shadow: 0 7px 18px rgba(37,99,235,0.22);
+        }
+
+        .logo h2 {
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #2563eb;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+        }
+
+        .nav a {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .nav a:hover,
+        .nav .active {
+            color: #2563eb;
+        }
+
+        .logout {
+            padding: 9px 16px;
+            background: #eff6ff;
+            border-radius: 10px;
+            color: #2563eb !important;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 88%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 30px 0 70px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            transition: 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #2563eb;
+            transform: translateX(-3px);
+        }
+
+
+        /* ================= HERO ================= */
+
+        .trip-hero {
+            min-height: 350px;
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 48px 55px;
+            color: white;
+            isolation: isolate;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #172554,
+                    #075985,
+                    #0e7490
+                );
+
+            box-shadow:
+                0 20px 50px rgba(15,23,42,0.14);
+        }
+
+        .trip-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(165,243,252,0.25),
+                    transparent 30%
+                );
+
+            z-index: -1;
+        }
+
+        .trip-hero::after {
+            content: "🗺️";
+            position: absolute;
+            right: 45px;
+            bottom: -45px;
+            font-size: 190px;
+            opacity: 0.08;
+            transform: rotate(-8deg);
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 14px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #e0f2fe;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.3px;
+            margin-bottom: 17px;
+        }
+
+        .trip-hero h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(40px,5vw,62px);
+            line-height: 1.08;
+            margin-bottom: 13px;
+            color: white;
+        }
+
+        .trip-hero p {
+            color: rgba(255,255,255,0.88);
+            font-size: 15px;
+            max-width: 650px;
+            line-height: 1.7;
+        }
+
+        .trip-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .meta-item {
+            padding: 8px 13px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.20);
+            color: #e0f2fe;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+
+        /* ================= CONTENT ================= */
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.7fr 0.8fr;
+            gap: 25px;
+            margin-top: 35px;
+            align-items: start;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e4eaf2;
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(15,23,42,0.05);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .card-header h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 27px;
+            color: #0f172a;
+        }
+
+        .card-header p {
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .add-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 15px;
+            border-radius: 10px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 12px;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .add-button:hover {
+            background: #dbeafe;
+            transform: translateY(-2px);
+        }
+
+
+        /* ================= ITINERARY ================= */
+
+        .itinerary-item {
+            display: flex;
+            gap: 16px;
+            padding: 17px;
+            border: 1px solid #e8edf4;
+            border-radius: 16px;
+            margin-bottom: 13px;
+            transition: 0.25s ease;
+            background: #fff;
+        }
+
+        .itinerary-item:hover {
+            transform: translateX(4px);
+            border-color: #bfdbfe;
+            box-shadow: 0 8px 22px rgba(15,23,42,0.06);
+        }
+
+        .day-number {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #06b6d4
+            );
+
+            color: white;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .itinerary-content {
+            flex: 1;
+        }
+
+        .itinerary-content h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 20px;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .country {
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        .date {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .empty-itinerary {
+            border: 1px dashed #cbd5e1;
+            border-radius: 17px;
+            padding: 45px 25px;
+            text-align: center;
+            background: #f8fafc;
+        }
+
+        .empty-itinerary-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg,#dbeafe,#cffafe);
+            font-size: 35px;
+        }
+
+        .empty-itinerary h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 21px;
+            color: #0f172a;
+            margin-bottom: 7px;
+        }
+
+        .empty-itinerary p {
+            color: #64748b;
+            font-size: 12px;
+            max-width: 430px;
+            margin: auto;
+        }
+
+
+        /* ================= SIDE ================= */
+
+        .side-column {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .info-card {
+            background: white;
+            border: 1px solid #e4eaf2;
+            border-radius: 20px;
+            padding: 23px;
+            box-shadow: 0 10px 30px rgba(15,23,42,0.05);
+        }
+
+        .info-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 13px;
+            background: #eff6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            margin-bottom: 13px;
+        }
+
+        .info-card h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 20px;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .info-card p {
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .action-list {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            margin-top: 15px;
+        }
+
+        .action {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 12px;
+            background: #f8fafc;
+            border-radius: 10px;
+            color: #475569;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .action:hover {
+            background: #eff6ff;
+            color: #2563eb;
+            transform: translateX(3px);
+        }
+
+
+        /* ================= PLANNER ================= */
+
+        .planner {
+            margin-top: 25px;
+            border-radius: 22px;
+            padding: 32px;
+            background: linear-gradient(135deg,#172554,#0e7490);
+            color: white;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .planner small {
+            color: #a5f3fc;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .planner h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 28px;
+            margin: 7px 0;
+        }
+
+        .planner p {
+            color: #dbeafe;
+            font-size: 13px;
+        }
+
+        .planner-button {
+            background: white;
+            color: #2563eb !important;
+            padding: 13px 20px;
+            border-radius: 11px;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: 0.25s ease;
+        }
+
+        .planner-button:hover {
+            transform: translateY(-3px);
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 70px;
+            background: #0f172a;
+            color: white;
+            padding: 32px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer strong {
+            font-size: 16px;
+        }
+
+        footer p {
+            color: #94a3b8;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            margin-left: 20px;
+            font-size: 13px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .nav {
+                gap: 10px;
+            }
+
+            .nav a:not(.logout) {
+                display: none;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .trip-hero {
+                padding: 35px;
+                min-height: 390px;
+            }
+
+            .trip-hero h1 {
+                font-size: 42px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .card-header {
+                align-items: flex-start;
+                gap: 15px;
+                flex-direction: column;
+            }
+
+            .planner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            footer a {
+                margin: 0 8px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -22,68 +618,89 @@
 <body>
 
 
-<header class="navbar">
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
-    <a href="{{ url_for('dashboard') }}"
-       class="brand">
+<nav class="navbar">
 
-        <span class="brand-icon">✦</span>
+    <a
+        href="{{ url_for('dashboard') }}"
+        class="logo"
+    >
 
-        GlobeTrotter
+        <div class="logo-icon">
+            🌍
+        </div>
+
+        <h2>
+            Globe<span>Trotter</span>
+        </h2>
 
     </a>
 
 
-    <nav class="nav-links">
+    <div class="nav">
 
         <a href="{{ url_for('dashboard') }}">
             Dashboard
+        </a>
+
+        <a href="{{ url_for('cities') }}">
+            Destinations
         </a>
 
         <a href="{{ url_for('explore') }}">
             Explore
         </a>
 
-        <a href="{{ url_for('plan_trip') }}">
-            Plan Trip
+        <a
+            href="{{ url_for('trips') }}"
+            class="active"
+        >
+            My Trips
         </a>
 
-    </nav>
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout"
+        >
+            Logout
+        </a>
+
+    </div>
+
+</nav>
 
 
-    <a href="{{ url_for('logout') }}"
-       class="logout-btn">
 
-        Logout
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
+<main class="container">
+
+
+    <a
+        href="{{ url_for('trips') }}"
+        class="back-link"
+    >
+        ← Back to My Trips
     </a>
 
-</header>
 
 
+    <!-- =================================================
+         HERO
+    ================================================== -->
 
-<main class="trip-detail-page">
+    <section class="trip-hero">
 
+        <div class="hero-content">
 
-    <a href="{{ url_for('trips') }}"
-       class="back-link">
-
-        ← Back to my journeys
-
-    </a>
-
-
-
-    <!-- HERO -->
-
-    <section class="trip-detail-header">
-
-
-        <div>
-
-            <span class="eyebrow">
-                YOUR JOURNEY
-            </span>
+            <div class="hero-badge">
+                ✈️ &nbsp; PLANNED JOURNEY
+            </div>
 
 
             <h1>
@@ -91,54 +708,50 @@
             </h1>
 
 
-            {% if trip["description"] %}
-
             <p>
-                {{ trip["description"] }}
+
+                {% if trip["description"] %}
+
+                    {{ trip["description"] }}
+
+                {% else %}
+
+                    Your GlobeTrotter adventure is ready
+                    to become a collection of unforgettable
+                    experiences.
+
+                {% endif %}
+
             </p>
 
-            {% else %}
 
-            <p>
-                A journey created with GlobeTrotter.
-            </p>
-
-            {% endif %}
-
-
-            <div class="trip-date-pills">
+            <div class="trip-meta">
 
                 {% if trip["start_date"] %}
 
-                <span>
-                    📅 {{ trip["start_date"] }}
-                </span>
+                    <span class="meta-item">
+                        📅 {{ trip["start_date"] }}
+                    </span>
 
                 {% endif %}
 
 
                 {% if trip["end_date"] %}
 
-                <span>
-                    → {{ trip["end_date"] }}
-                </span>
+                    <span class="meta-item">
+                        → {{ trip["end_date"] }}
+                    </span>
 
                 {% endif %}
 
+
+                <span class="meta-item">
+                    🌍
+                    {{ stops|length }}
+                    destination{% if stops|length != 1 %}s{% endif %}
+                </span>
+
             </div>
-
-        </div>
-
-
-        <div class="trip-big-number">
-
-            <strong>
-                {{ stops|length }}
-            </strong>
-
-            <span>
-                destinations
-            </span>
 
         </div>
 
@@ -146,172 +759,266 @@
 
 
 
-    <!-- ITINERARY -->
+    <!-- =================================================
+         CONTENT
+    ================================================= -->
 
-    <section class="itinerary-section">
-
-
-        <div class="itinerary-title">
-
-            <div>
-
-                <span class="section-label">
-                    YOUR ROUTE
-                </span>
-
-                <h2>
-                    Journey timeline
-                </h2>
-
-            </div>
-
-        </div>
+    <section class="content-grid">
 
 
+        <!-- =================================================
+             ITINERARY
+        ================================================= -->
 
-        {% if stops %}
-
-
-        <div class="timeline">
-
-
-            {% for stop in stops %}
-
-            <div class="timeline-item">
+        <div class="card">
 
 
-                <div class="timeline-marker">
+            <div class="card-header">
 
-                    <span>
-                        {{ "%02d"|format(loop.index) }}
-                    </span>
+                <div>
+
+                    <h2>
+                        Your Itinerary
+                    </h2>
+
+                    <p>
+                        Build your journey one destination at a time.
+                    </p>
 
                 </div>
 
 
-                <div class="timeline-card">
+                <a
+                    href="{{ url_for('cities') }}"
+                    class="add-button"
+                >
+                    + Add Destination
+                </a>
+
+            </div>
 
 
-                    <div class="timeline-card-top">
 
-                        <div>
+            <!-- =================================================
+                 REAL TRIP STOPS
+            ================================================= -->
 
-                            <span class="timeline-day">
-                                STOP {{ "%02d"|format(loop.index) }}
-                            </span>
+            {% if stops %}
 
+
+                {% for stop in stops %}
+
+                    <div class="itinerary-item">
+
+
+                        <div class="day-number">
+
+                            {{ "%02d"|format(loop.index) }}
+
+                        </div>
+
+
+                        <div class="itinerary-content">
 
                             <h3>
                                 {{ stop["city_name"] }}
                             </h3>
 
 
-                            <span class="timeline-country">
+                            <div class="country">
 
                                 📍 {{ stop["country"] }}
+
+                            </div>
+
+
+                            <span class="date">
+
+                                📅 {{ stop["start_date"] }}
+
+                                →
+
+                                {{ stop["end_date"] }}
 
                             </span>
 
                         </div>
 
 
-                        <span class="timeline-arrow">
-                            {% if not loop.last %}
-                                ↓
-                            {% else %}
-                                ✦
-                            {% endif %}
-                        </span>
+                    </div>
 
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <div class="empty-itinerary">
+
+                    <div class="empty-itinerary-icon">
+                        🗺️
                     </div>
 
 
-                    <div class="timeline-dates">
+                    <h3>
+                        Your itinerary is empty
+                    </h3>
 
 
-                        {% if stop["start_date"] %}
+                    <p>
 
-                        <span>
-                            {{ stop["start_date"] }}
-                        </span>
+                        Start exploring destinations and
+                        add places to this journey. Your
+                        adventure will appear here.
 
-                        {% endif %}
-
-
-                        {% if stop["end_date"] %}
-
-                        <span>
-                            →
-                        </span>
-
-                        <span>
-                            {{ stop["end_date"] }}
-                        </span>
-
-                        {% endif %}
-
-
-                    </div>
-
+                    </p>
 
                 </div>
 
-
-            </div>
-
-            {% endfor %}
+            {% endif %}
 
 
         </div>
 
 
-        {% else %}
+
+        <!-- =================================================
+             SIDE COLUMN
+        ================================================= -->
+
+        <aside class="side-column">
 
 
-        <div class="empty-itinerary">
+            <!-- SUMMARY -->
 
-            <div>
-                🧭
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🧳
+                </div>
+
+
+                <h3>
+                    Trip summary
+                </h3>
+
+
+                <p>
+
+                    Your journey currently contains
+                    <strong>
+                        {{ stops|length }}
+                    </strong>
+
+                    destination{% if stops|length != 1 %}s{% endif %}.
+
+                </p>
+
+
+                <div class="action-list">
+
+                    <a
+                        href="{{ url_for('cities') }}"
+                        class="action"
+                    >
+                        🌍
+                        <span>
+                            Explore destinations
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="{{ url_for('explore') }}"
+                        class="action"
+                    >
+                        ✨
+                        <span>
+                            Find experiences
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="{{ url_for('quick_plan') }}"
+                        class="action"
+                    >
+                        ⚡
+                        <span>
+                            Use Quick Planner
+                        </span>
+                    </a>
+
+                </div>
+
             </div>
 
-            <h3>
-                Your route is still empty.
-            </h3>
-
-            <p>
-                Explore destinations and add them
-                to this journey.
-            </p>
 
 
-            <a href="{{ url_for('cities') }}"
-               class="primary-action">
+            <!-- TRAVEL TIP -->
 
-                Explore destinations →
+            <div class="info-card">
 
-            </a>
+                <div class="info-icon">
+                    💡
+                </div>
 
-        </div>
+
+                <h3>
+                    Travel tip
+                </h3>
 
 
-        {% endif %}
+                <p>
+
+                    Don't try to plan every minute.
+                    Leave some space in your itinerary
+                    for spontaneous discoveries.
+
+                </p>
+
+            </div>
+
+
+        </aside>
 
 
     </section>
 
 
 
-    <!-- END -->
+    <!-- =================================================
+         PLANNER
+    ================================================== -->
 
-    <section class="journey-end">
+    <section class="planner">
 
-        <span>
-            ✦
-        </span>
+        <div>
 
-        <p>
-            Every great journey begins with one destination.
-        </p>
+            <small>
+                ✨ KEEP EXPLORING
+            </small>
+
+
+            <h2>
+                Your next destination is waiting.
+            </h2>
+
+
+            <p>
+                Discover new places and continue
+                building your perfect journey.
+            </p>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('cities') }}"
+            class="planner-button"
+        >
+            🌎 &nbsp; Explore Destinations →
+        </a>
 
     </section>
 
@@ -320,21 +1027,40 @@
 
 
 
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <footer>
 
-    <div class="footer-brand">
+    <div>
 
-        <span class="brand-icon">
-            ✦
-        </span>
+        <strong>
+            🌍 GlobeTrotter
+        </strong>
 
-        GlobeTrotter
+        <p>
+            Plan your journey. Explore the world.
+        </p>
 
     </div>
 
-    <p>
-        Plan less. Experience more. ✈
-    </p>
+
+    <div>
+
+        <a href="{{ url_for('cities') }}">
+            Destinations
+        </a>
+
+        <a href="{{ url_for('trips') }}">
+            My Trips
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
 
 </footer>
 

@@ -2,291 +2,896 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ city["name"] }} | GlobeTrotter</title>
+    <title>{{ city.name }} | GlobeTrotter</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-          rel="stylesheet">
+    <style>
+        /* =========================================================
+           RESET
+        ========================================================= */
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #f6f8fb;
+            color: #172033;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+   .navbar {
+            width: 100%;
+            padding: 18px 6%;
+
+            background: white;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #4f46e5;
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+
+        .nav-links a {
+            text-decoration: none;
+            color: #53627a;
+            font-size: 14px;
+            font-weight: 500;
+
+            transition: 0.2s ease;
+        }
+
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+            .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-avatar {
+            width: 39px;
+            height: 39px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            font-weight: 800;
+        }
+
+        .profile-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #273247;
+        }
+
+        /* =========================================================
+           PAGE
+        ========================================================= */
+
+        .page {
+            width: min(1180px, 92%);
+            margin: 38px auto 70px;
+        }
+
+        /* =========================================================
+           BREADCRUMB
+        ========================================================= */
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 22px;
+            color: #8a93a3;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .breadcrumb a {
+            color: #667085;
+            transition: 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #2563eb;
+        }
+
+        .breadcrumb span {
+            color: #b3bac6;
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .city-hero {
+            position: relative;
+            height: 470px;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 18px 45px rgba(27, 39, 61, 0.12);
+            background: #dfe4ea;
+        }
+
+        .city-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(8, 17, 32, 0.88) 0%,
+                    rgba(8, 17, 32, 0.42) 42%,
+                    rgba(8, 17, 32, 0.05) 78%
+                );
+        }
+
+        .hero-content {
+            position: absolute;
+            left: 45px;
+            right: 45px;
+            bottom: 38px;
+            color: white;
+        }
+
+        .country-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+            margin-bottom: 13px;
+        }
+
+        .hero-content h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(42px, 6vw, 70px);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            max-width: 650px;
+            font-size: 16px;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        /* =========================================================
+           QUICK INFO
+        ========================================================= */
+
+        .quick-info {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: white;
+            border: 1px solid #e8ebf0;
+            border-radius: 18px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            box-shadow: 0 6px 20px rgba(30, 41, 59, 0.045);
+        }
+
+        .info-icon {
+            width: 43px;
+            height: 43px;
+            min-width: 43px;
+            border-radius: 13px;
+            background: #eff6ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .info-text small {
+            display: block;
+            color: #9299a7;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .info-text strong {
+            display: block;
+            color: #202b3d;
+            font-size: 14px;
+        }
+
+        /* =========================================================
+           CONTENT GRID
+        ========================================================= */
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.55fr 0.85fr;
+            gap: 22px;
+            margin-top: 25px;
+        }
+
+        .section-card {
+            background: white;
+            border: 1px solid #e8ebf0;
+            border-radius: 22px;
+            padding: 30px;
+            box-shadow: 0 7px 25px rgba(30, 41, 59, 0.045);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .section-title h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 27px;
+            color: #182235;
+        }
+
+        .section-title span {
+            font-size: 12px;
+            color: #8a93a3;
+            font-weight: 700;
+        }
+
+        .description {
+            color: #697386;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           FAMOUS PLACE
+        ========================================================= */
+
+        .famous-place {
+            margin-top: 28px;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #f8fafc;
+            border: 1px solid #edf0f4;
+        }
+
+        .famous-place-image {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .famous-place-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .famous-place-content {
+            padding: 20px;
+        }
+
+        .famous-place-content small {
+            color: #2563eb;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+        }
+
+        .famous-place-content h3 {
+            margin: 5px 0 7px;
+            font-size: 20px;
+            color: #202a3c;
+        }
+
+        .famous-place-content p {
+            color: #737d8e;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
+
+        .side-card {
+            background: white;
+            border: 1px solid #e8ebf0;
+            border-radius: 22px;
+            padding: 26px;
+            box-shadow: 0 7px 25px rgba(30, 41, 59, 0.045);
+            margin-bottom: 20px;
+        }
+
+        .side-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .side-card h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 22px;
+            color: #1b2638;
+            margin-bottom: 18px;
+        }
+
+        .tip-list {
+            list-style: none;
+        }
+
+        .tip-list li {
+            display: flex;
+            gap: 11px;
+            padding: 12px 0;
+            border-bottom: 1px solid #edf0f4;
+            color: #687386;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .tip-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tip-list li::before {
+            content: "✓";
+            color: #2563eb;
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .action-card {
+            background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+            color: white;
+            border: none;
+        }
+
+        .action-card h3 {
+            color: white;
+        }
+
+        .action-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            border: none;
+            border-radius: 13px;
+            padding: 13px 18px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.25s ease;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #2452c7;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline {
+            background: #f8fafc;
+            color: #344054;
+            border: 1px solid #e3e7ed;
+            margin-top: 10px;
+        }
+
+        .btn-outline:hover {
+            background: #eef4ff;
+            color: #2563eb;
+            border-color: #c9d9ff;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .footer {
+            text-align: center;
+            padding: 35px 0 5px;
+            color: #929aaa;
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .profile-name {
+                display: none;
+            }
+
+            .quick-info {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page {
+                width: 94%;
+                margin-top: 22px;
+            }
+
+            .city-hero {
+                height: 430px;
+                border-radius: 20px;
+            }
+
+            .hero-content {
+                left: 25px;
+                right: 25px;
+                bottom: 27px;
+            }
+
+            .hero-content h1 {
+                font-size: 45px;
+            }
+
+            .hero-content p {
+                font-size: 14px;
+            }
+
+            .quick-info {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .info-card {
+                padding: 15px;
+            }
+
+            .info-text strong {
+                font-size: 12px;
+            }
+
+            .section-card,
+            .side-card {
+                padding: 21px;
+                border-radius: 18px;
+            }
+
+            .famous-place-image {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 420px) {
+
+            .quick-info {
+                grid-template-columns: 1fr;
+            }
+
+            .city-hero {
+                height: 400px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="navbar">
+    <!-- ==================================================
+         NAVBAR
+    ================================================== -->
 
-    <a href="{{ url_for('dashboard') }}" class="brand">
-        <span class="brand-icon">✦</span>
-        GlobeTrotter
-    </a>
+    <nav class="navbar">
 
-    <nav class="nav-links">
-
-        <a href="{{ url_for('dashboard') }}">
-            Dashboard
-        </a>
-
-        <a href="{{ url_for('explore') }}" class="active">
-            Explore
-        </a>
-
-        <a href="{{ url_for('plan_trip') }}">
-            Plan Trip
-        </a>
-
-    </nav>
-
-    <a href="{{ url_for('logout') }}" class="logout-btn">
-        Logout
-    </a>
-
-</header>
-
-
-<main class="city-detail-page">
-
-
-    <!-- BACK -->
-
-    <a href="{{ url_for('cities') }}"
-       class="back-link">
-
-        ← Back to destinations
-
-    </a>
-
-
-    <!-- HERO -->
-
-    <section class="city-detail-hero">
-
-        <div class="city-detail-art">
-
-            <span class="detail-art-number">
-                DESTINATION
-            </span>
-
-            <span class="detail-art-icon">
-                🌍
-            </span>
-
-            <div class="detail-ring ring-one"></div>
-            <div class="detail-ring ring-two"></div>
-
+        <div class="logo">
+            🌍 GlobeTrotter
         </div>
 
 
-        <div class="city-detail-info">
+        <div class="nav-links">
 
-            <span class="city-country">
-                {{ city["country"] }}
-            </span>
+            <a href="{{ url_for('dashboard') }}">Home</a>
 
-            <h1>
-                {{ city["name"] }}
-            </h1>
+            <a href="/cities">
+                Explore
+            </a>
 
-            <p>
-                {% if city["description"] %}
-                    {{ city["description"] }}
-                {% else %}
-                    Discover the sights, flavours, culture and
-                    experiences of {{ city["name"] }}.
-                {% endif %}
-            </p>
+            <a href="/trips">
+                My Trips
+            </a>
 
-            <div class="city-detail-tags">
-
-                <span>📍 {{ city["country"] }}</span>
-
-                <span>✦ Discover</span>
-
-                <span>✈ Travel</span>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- PLAN BOX -->
-
-    <section class="add-trip-panel">
-
-        <div>
-
-            <span class="section-label">
-                ADD TO YOUR JOURNEY
-            </span>
-
-            <h2>
-                Make {{ city["name"] }} part of your trip.
-            </h2>
-
-            <p>
-                Choose one of your existing trips to save
-                this destination.
-            </p>
-
-        </div>
-
-
-        {% if trips %}
-
-        <form method="POST"
-              action="{{ url_for('add_to_trip') }}"
-              class="add-trip-form">
-
-            <input
-                type="hidden"
-                name="city_id"
-                value="{{ city['id'] }}"
-            >
-
-            <select name="trip_id" required>
-
-                <option value="">
-                    Choose a trip...
-                </option>
-
-                {% for trip in trips %}
-
-                <option value="{{ trip['id'] }}">
-                    {{ trip['name'] }}
-                </option>
-
-                {% endfor %}
-
-            </select>
-
-
-            <button type="submit">
-
-                Add to Trip
-
-                <span>→</span>
-
-            </button>
-
-        </form>
-
-        {% else %}
-
-        <div class="no-trip-box">
-
-            <p>
-                You don't have a trip yet.
-            </p>
-
-            <a href="{{ url_for('create_trip') }}"
-               class="primary-action">
-
-                Create your first trip →
-
+            <a href="{{ url_for('dashboard') }}">
+                Dashboard
             </a>
 
         </div>
 
-        {% endif %}
-
-    </section>
+    </nav>
 
 
-    <!-- EXPERIENCE PREVIEW -->
+    <!-- =========================================================
+         MAIN PAGE
+    ========================================================= -->
 
-    <section class="city-detail-section">
+    <main class="page">
 
-        <div class="detail-heading">
+        <!-- BREADCRUMB -->
 
-            <span class="section-label">
-                WHY GO
-            </span>
+        <div class="breadcrumb">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <span>›</span>
+            <a href="{{ url_for('cities') }}">Explore</a>
+            <span>›</span>
+            <span>{{ city.name }}</span>
+        </div>
 
-            <h2>
-                Imagine your time here.
-            </h2>
+
+        <!-- =====================================================
+             CITY HERO
+        ===================================================== -->
+
+        <section class="city-hero">
+
+            {% if city.image_url %}
+
+            <img
+                src="{{ city.image_url }}"
+                alt="{{ city.name }}"
+                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=85';">
+
+            {% else %}
+
+            <img
+                src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=85"
+                alt="{{ city.name }}">
+
+            {% endif %}
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+
+                <div class="country-tag">
+                    📍 {{ city.country or 'India' }}
+                </div>
+
+                <h1>{{ city.name }}</h1>
+
+                {% if city.description %}
+                    <p>{{ city.description }}</p>
+                {% else %}
+                    <p>
+                        Discover the culture, landmarks, food and unforgettable
+                        experiences waiting for you in {{ city.name }}.
+                    </p>
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             QUICK INFORMATION
+        ===================================================== -->
+
+        <section class="quick-info">
+
+            <div class="info-card">
+
+                <div class="info-icon">📍</div>
+
+                <div class="info-text">
+                    <small>Destination</small>
+                    <strong>{{ city.name }}</strong>
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">🌍</div>
+
+                <div class="info-text">
+                    <small>Country</small>
+                    <strong>{{ city.country or 'India' }}</strong>
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">🏛️</div>
+
+                <div class="info-text">
+                    <small>Famous For</small>
+                    <strong>{{ city.famous_place or 'Local attractions' }}</strong>
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">✈️</div>
+
+                <div class="info-text">
+                    <small>Travel</small>
+                    <strong>Explore & Plan</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CONTENT
+        ===================================================== -->
+
+        <div class="content-grid">
+
+
+            <!-- LEFT -->
+
+            <div>
+
+                <section class="section-card">
+
+                    <div class="section-title">
+                        <h2>About {{ city.name }}</h2>
+                        <span>DESTINATION GUIDE</span>
+                    </div>
+
+                    <p class="description">
+
+                        {% if city.description %}
+
+                            {{ city.description }}
+
+                        {% else %}
+
+                            {{ city.name }} is a fascinating destination filled
+                            with unique culture, beautiful places, delicious food
+                            and memorable experiences. Whether you are looking
+                            for historical landmarks, local experiences or
+                            relaxing places to explore, this destination has
+                            something for every traveler.
+
+                        {% endif %}
+
+                    </p>
+
+
+                    <!-- FAMOUS PLACE -->
+
+                    <div class="famous-place">
+
+                        <div class="famous-place-image">
+
+                            {% if city.image_url %}
+
+                            <img
+                                src="{{ city.image_url }}"
+                                alt="{{ city.famous_place or city.name }}"
+                                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1000&q=80';">
+
+                            {% else %}
+
+                            <img
+                                src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1000&q=80"
+                                alt="{{ city.name }}">
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="famous-place-content">
+
+                            <small>Must Visit</small>
+
+                            <h3>
+                                {{ city.famous_place or 'Explore the best of ' ~ city.name }}
+                            </h3>
+
+                            <p>
+                                Add this destination to your itinerary and
+                                discover one of the highlights of {{ city.name }}.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- RIGHT SIDEBAR -->
+
+            <aside>
+
+
+                <!-- PLAN TRIP -->
+
+                <section class="side-card action-card">
+
+                    <h3>Ready to explore?</h3>
+
+                    <p>
+                        Build your personalized itinerary and add
+                        {{ city.name }} to your next adventure.
+                    </p>
+
+                    <a href="{{ url_for('plan_trip') }}" class="btn btn-primary">
+                        ✈ Plan a Trip
+                    </a>
+
+                </section>
+
+
+                <!-- TRAVEL TIPS -->
+
+                <section class="side-card">
+
+                    <h3>Travel Tips</h3>
+
+                    <ul class="tip-list">
+
+                        <li>
+                            Check the local weather before travelling.
+                        </li>
+
+                        <li>
+                            Keep important documents and bookings accessible.
+                        </li>
+
+                        <li>
+                            Try local food and explore beyond the main attractions.
+                        </li>
+
+                        <li>
+                            Respect local culture, traditions and public spaces.
+                        </li>
+
+                        <li>
+                            Keep some flexible time in your itinerary.
+                        </li>
+
+                    </ul>
+
+                </section>
+
+
+                <!-- BACK -->
+
+                <section class="side-card">
+
+                    <h3>Keep exploring</h3>
+
+                    <p class="description">
+                        Discover more destinations and find the perfect place
+                        for your next adventure.
+                    </p>
+
+                    <a href="{{ url_for('cities') }}" class="btn btn-outline">
+                        ← Explore More Cities
+                    </a>
+
+                </section>
+
+            </aside>
 
         </div>
 
 
-        <div class="detail-mini-grid">
+        <!-- FOOTER -->
 
-            <div class="detail-mini-card">
-
-                <span>🌅</span>
-
-                <h3>
-                    Discover
-                </h3>
-
-                <p>
-                    Explore places you've never seen before.
-                </p>
-
-            </div>
-
-
-            <div class="detail-mini-card">
-
-                <span>🍜</span>
-
-                <h3>
-                    Taste
-                </h3>
-
-                <p>
-                    Experience the local flavours and culture.
-                </p>
-
-            </div>
-
-
-            <div class="detail-mini-card">
-
-                <span>📸</span>
-
-                <h3>
-                    Remember
-                </h3>
-
-                <p>
-                    Turn your journey into memories worth keeping.
-                </p>
-
-            </div>
-
+        <div class="footer">
+            © 2026 GlobeTrotter · Your journey, beautifully planned.
         </div>
 
-    </section>
-
-
-</main>
-
-
-<footer>
-
-    <div class="footer-brand">
-
-        <span class="brand-icon">
-            ✦
-        </span>
-
-        GlobeTrotter
-
-    </div>
-
-    <p>
-        Your journey starts with one destination. ✈
-    </p>
-
-</footer>
+    </main>
 
 </body>
-
 </html>
