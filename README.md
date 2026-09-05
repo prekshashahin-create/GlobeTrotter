@@ -1,73 +1,75 @@
 # 🌍 GlobeTrotter
 
-> Plan less. Travel more. ✈️
+> **Plan less. Travel more. ✈️**
 
-GlobeTrotter is a travel planning web application that helps users discover destinations, create trips, organize itineraries, and explore travel experiences — all from one place.
+GlobeTrotter is a travel planning web application built to make discovering destinations and organizing trips simple, interactive, and enjoyable.
+
+The platform allows users to explore cities, discover famous destinations, create personalized trips, and manage their travel plans through a clean and user-friendly interface.
 
 ---
 
 ## ✨ Features
 
+### 🏠 Home Page
+- Attractive landing page
+- Introduction to GlobeTrotter
+- Easy access to travel exploration and planning
+
 ### 🔐 User Authentication
-- User signup and login
+- User Sign Up
+- User Login
 - Secure password hashing
 - Session-based authentication
 - Logout functionality
 
-### 🗺️ Destination Explorer
-- Browse available cities and destinations
-- View detailed information about destinations
-- Explore different travel possibilities
+### 🌎 Explore Cities
+Users can explore different destinations and discover:
 
-### ✈️ Trip Planning
-GlobeTrotter provides multiple ways to start planning a trip:
+- 🏙️ City information
+- 🌍 Country and region
+- 📍 Famous places
+- 📝 Destination descriptions
+- 🖼️ Destination images
+- 🔎 City search
+- 🧭 Detailed city exploration
 
-- **I know where I want to go**
-- **Help me choose a destination**
-- **Explore and get inspired**
+### 🗺️ Trip Planning
+GlobeTrotter provides different ways to plan a trip.
 
-Users can select destinations and build their own travel plans.
+Users can:
+- Explore destinations before planning
+- Create their own travel plan
+- Select destinations
+- Add trip stops
+- Organize activities
+- View trip details
 
-### 🧳 Trip Management
-- Create personal trips
-- Add descriptions and travel dates
-- Add destinations to trips
-- View planned trips
-- View individual trip details
+### ⚡ Quick Planning
+A simpler way to start planning a journey quickly.
 
-### 🎨 Modern UI
-- Premium travel-inspired design
-- Responsive layout
-- Animated interactions
-- Glassmorphism effects
-- Interactive destination and trip cards
-- Clean and aesthetic dashboard
+### 🧳 My Trips
+Users can view their created trips and access their trip details.
+
+### 🎯 Trip Details
+Users can view the details of individual trips, including destinations and planned activities.
+
+### 💰 Expense Management
+The database supports storing and managing trip-related expenses.
 
 ---
 
 ## 🛠️ Technology Stack
 
-### Frontend
-- HTML5
-- CSS3
-- Jinja2 Templates
-- Google Fonts
-
-### Backend
-- Python
-- Flask
-
-### Database
-- SQLite
-
-### Authentication
-- Werkzeug password hashing
-- Flask sessions
-
-### Development Tools
-- Visual Studio Code
-- Git
-- GitHub
+| Technology | Purpose |
+|------------|---------|
+| 🐍 Python | Backend programming |
+| 🌶️ Flask | Web framework |
+| 🗄️ SQLite | Database |
+| 🌐 HTML5 | Web page structure |
+| 🎨 CSS3 | Website styling |
+| 🧩 Jinja2 | Dynamic HTML templates |
+| 🔧 Git | Version control |
+| 🐙 GitHub | Code hosting |
 
 ---
 
@@ -82,23 +84,26 @@ GlobeTrotter/
 ├── Templates/
 │   ├── cities.html
 │   ├── city_details.html
+│   ├── city_images.py
 │   ├── create_trip.html
 │   ├── dashboard.html
 │   ├── experiences.html
-│   ├── explore.html
+│   ├── home.html
 │   ├── login.html
 │   ├── plan_trip.html
-│   ├── quick_plan.html
-│   ├── quick_plan_result.html
 │   ├── select_destinations.html
 │   ├── signup.html
 │   ├── trip_details.html
 │   └── trips.html
 │
+├── venv/
+│
 ├── app.py
+├── city_images.py
 ├── database.py
-├── logic.py
-├── seed.py
 ├── globetrotter.db
+├── logic.py
+├── README.md
 ├── requirements.txt
-└── README.md
+├── seed.py
+└── test_logic.py
