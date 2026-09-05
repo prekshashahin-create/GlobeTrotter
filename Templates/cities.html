@@ -29,55 +29,178 @@
         }
 
 
-        /* ==================================================
-           NAVBAR
-        ================================================== */
+        /* ================= COMMON NAVBAR ================= */
 
-        .navbar {
-            width: 100%;
-            padding: 18px 6%;
+.navbar {
+    width: 100%;
+    height: 94px;
 
-            background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+    padding: 0 7%;
 
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+    background: #ffffff;
 
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    border-bottom: 1px solid #e5eaf2;
 
-
-        .logo {
-            font-size: 25px;
-            font-weight: 800;
-            color: #4f46e5;
-        }
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
 
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            align-items: center;
-        }
+/* ================= LOGO ================= */
+
+.brand {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+
+    gap: 13px;
+
+    text-decoration: none;
+
+    flex-shrink: 0;
+}
 
 
-        .nav-links a {
-            text-decoration: none;
-            color: #53627a;
-            font-size: 14px;
-            font-weight: 500;
+/* LOGO BOX */
 
-            transition: 0.2s ease;
-        }
+.brand-icon {
+    width: 50px !important;
+    height: 50px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+
+    font-size: 24px;
+
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+}
 
 
-        .nav-links a:hover {
-            color: #4f46e5;
-        }
+/* LOGO TEXT */
+
+.brand-text {
+    display: inline-block;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 27px;
+    font-weight: 700;
+
+    line-height: 1;
+
+    letter-spacing: -1px;
+
+    color: #17213c;
+}
+
+
+.brand-text span {
+    color: #2563eb;
+}
+
+
+/* ================= NAV LINKS ================= */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+
+    gap: 36px;
+
+    margin-left: auto;
+    margin-right: 42px;
+}
+
+
+.nav-links a {
+    position: relative;
+
+    text-decoration: none;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: #64748b;
+}
+
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #2563eb;
+}
+
+
+/* ACTIVE UNDERLINE */
+
+.nav-links a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: -14px;
+
+    transform: translateX(-50%);
+
+    width: 27px;
+    height: 3px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #2563eb,
+        #06b6d4
+    );
+}
+
+
+/* ================= RIGHT SIDE ================= */
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+}
+
+
+.logout-btn {
+    padding: 13px 25px;
+
+    border-radius: 14px;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+.logout-btn:hover {
+    background: #2563eb;
+    color: white;
+}
 
 
         /* ==================================================
@@ -509,36 +632,43 @@
 <body>
 
 
-    <!-- ==================================================
-         NAVBAR
-    ================================================== -->
+    <header class="navbar">
 
-    <nav class="navbar">
+    <a href="{{ url_for('dashboard') }}" class="brand">
 
-        <div class="logo">
-            🌍 GlobeTrotter
-        </div>
+        <span class="brand-icon">🌍</span>
 
+        <span class="brand-text">
+            Globe<span>Trotter</span>
+        </span>
 
-        <div class="nav-links">
+    </a>
 
-            <a href="{{ url_for('dashboard') }}">Home</a>
+    <nav class="nav-links">
 
-            <a href="/cities">
-                Explore
-            </a>
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
 
-            <a href="/trips">
-                My Trips
-            </a>
+        <a href="{{ url_for('plan_trip') }}">
+            Plan Trip
+        </a>
 
-            <a href="{{ url_for('dashboard') }}">
-                Dashboard
-            </a>
-
-        </div>
+        <a href="{{ url_for('trips') }}">
+            My Trips
+        </a>
 
     </nav>
+
+    <div class="nav-actions">
+
+        <a href="{{ url_for('logout') }}" class="logout-btn">
+            Logout
+        </a>
+
+    </div>
+
+</header>
 
 
     <!-- ==================================================

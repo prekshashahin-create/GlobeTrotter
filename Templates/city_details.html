@@ -45,74 +45,356 @@
             font-family: inherit;
         }
 
-   .navbar {
-            width: 100%;
-            padding: 18px 6%;
+   /* =========================================================
+   COMMON GLOBETROTTER NAVBAR
+========================================================= */
 
-            background: white;
+.navbar {
+    width: 100%;
+    height: 94px;
 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+    display: flex;
+    align-items: center;
 
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+    padding: 0 7%;
 
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    background: #ffffff;
 
+    border-bottom: 1px solid rgba(20, 33, 61, 0.06);
 
-        .logo {
-            font-size: 25px;
-            font-weight: 800;
-            color: #4f46e5;
-        }
+    position: sticky;
+    top: 0;
 
+    z-index: 1000;
 
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            align-items: center;
-        }
+    box-shadow: 0 2px 15px rgba(30, 64, 175, 0.03);
+}
 
 
-        .nav-links a {
-            text-decoration: none;
-            color: #53627a;
-            font-size: 14px;
-            font-weight: 500;
+/* =========================================================
+   LOGO
+========================================================= */
 
-            transition: 0.2s ease;
-        }
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    text-decoration: none;
+
+    flex-shrink: 0;
+}
 
 
-        .nav-links a:hover {
-            color: #4f46e5;
-        }
-            .profile {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+/* LOGO ICON */
 
-        .profile-avatar {
-            width: 39px;
-            height: 39px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #dbeafe, #ede9fe);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #2563eb;
-            font-weight: 800;
-        }
+.brand-icon {
+    width: 50px;
+    height: 50px;
 
-        .profile-name {
-            font-size: 14px;
-            font-weight: 700;
-            color: #273247;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+
+    font-size: 24px;
+
+    box-shadow:
+        0 10px 25px rgba(37, 99, 235, 0.25);
+}
+
+
+/* LOGO TEXT */
+
+.brand-text {
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 27px;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+    color: #17213c;
+}
+
+
+/* BLUE PART */
+
+.brand-text span {
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   NAVIGATION LINKS
+========================================================= */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+
+    gap: 36px;
+
+    margin-left: auto;
+    margin-right: 42px;
+}
+
+
+.nav-links a {
+    position: relative;
+
+    text-decoration: none;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: #64748b;
+
+    transition: all 0.25s ease;
+}
+
+
+/* HOVER */
+
+.nav-links a:hover {
+    color: #2563eb;
+}
+
+
+/* ACTIVE PAGE */
+
+.nav-links a.active {
+    color: #2563eb;
+}
+
+
+/* ACTIVE UNDERLINE */
+
+.nav-links a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: -14px;
+
+    transform: translateX(-50%);
+
+    width: 27px;
+    height: 3px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #2563eb,
+        #06b6d4
+    );
+}
+
+
+/* =========================================================
+   RIGHT SIDE BUTTONS
+========================================================= */
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+/* LOGIN */
+
+.login-btn {
+    padding: 12px 23px;
+
+    border: 1px solid #bfdbfe;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    color: #2563eb;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: all 0.25s ease;
+}
+
+
+.login-btn:hover {
+    background: #eff6ff;
+
+    transform: translateY(-2px);
+}
+
+
+/* SIGN UP */
+
+.signup-btn {
+    padding: 13px 24px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #2563eb
+    );
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.20);
+
+    transition: all 0.25s ease;
+}
+
+
+.signup-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(37, 99, 235, 0.28);
+}
+
+
+/* LOGOUT */
+
+.logout-btn {
+    padding: 13px 25px;
+
+    border-radius: 14px;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: all 0.25s ease;
+}
+
+
+.logout-btn:hover {
+    background: #2563eb;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.20);
+}
+
+
+/* =========================================================
+   RESPONSIVE NAVBAR
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .nav-links {
+        gap: 20px;
+        margin-right: 20px;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+    .brand-text {
+        font-size: 23px;
+    }
+
+    .brand-icon {
+        width: 44px;
+        height: 44px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .navbar {
+        height: auto;
+
+        min-height: 80px;
+
+        padding: 14px 5%;
+
+        flex-wrap: wrap;
+
+        gap: 12px;
+    }
+
+
+    .nav-links {
+        order: 3;
+
+        width: 100%;
+
+        justify-content: center;
+
+        margin: 5px 0 0;
+
+        gap: 22px;
+    }
+
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+
+    .nav-actions {
+        margin-left: auto;
+    }
+
+
+    .login-btn,
+    .signup-btn,
+    .logout-btn {
+        padding: 9px 14px;
+
+        font-size: 13px;
+    }
+
+}
 
         /* =========================================================
            PAGE
@@ -574,36 +856,78 @@
 
 <body>
 
-    <!-- ==================================================
-         NAVBAR
-    ================================================== -->
+    <!-- ================= COMMON NAVBAR ================= -->
 
-    <nav class="navbar">
+<header class="navbar">
 
-        <div class="logo">
-            🌍 GlobeTrotter
-        </div>
+    <!-- LOGO -->
+    <a href="{{ url_for('dashboard') if session.get('user_id') else '/' }}"
+       class="brand">
+
+        <span class="brand-icon">
+            🌍
+        </span>
+
+        <span class="brand-text">
+            Globe<span>Trotter</span>
+        </span>
+
+    </a>
 
 
-        <div class="nav-links">
+    <!-- NAVIGATION -->
+    <nav class="nav-links">
 
-            <a href="{{ url_for('dashboard') }}">Home</a>
+        <a href="{{ url_for('dashboard') if session.get('user_id') else '/' }}">
+            Home
+        </a>
 
-            <a href="/cities">
-                Explore
-            </a>
+        <a href="{{ url_for('cities') }}">
+            Explore
+        </a>
 
-            <a href="/trips">
+        <a href="{{ url_for('plan_trip') }}">
+            Plan Trip
+        </a>
+
+        {% if session.get('user_id') %}
+
+            <a href="{{ url_for('trips') }}">
                 My Trips
             </a>
 
-            <a href="{{ url_for('dashboard') }}">
-                Dashboard
-            </a>
-
-        </div>
+        {% endif %}
 
     </nav>
+
+
+    <!-- RIGHT SIDE -->
+    <div class="nav-actions">
+
+        {% if session.get('user_id') %}
+
+            <a href="{{ url_for('logout') }}"
+               class="logout-btn">
+                Logout
+            </a>
+
+        {% else %}
+
+            <a href="{{ url_for('login') }}"
+               class="login-btn">
+                Login
+            </a>
+
+            <a href="{{ url_for('signup') }}"
+               class="signup-btn">
+                Sign Up
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</header>
 
 
     <!-- =========================================================

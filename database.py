@@ -1137,6 +1137,16 @@ def seed_activities(connection):
             "History",
             1000,
             4
+        ),
+
+        # Dubai
+        (
+            "Dubai",
+            "Burj Khalifa",
+            "Experience spectacular views from the world's tallest building.",
+            "Sightseeing",
+            4000,
+            3
         )
     ]
 

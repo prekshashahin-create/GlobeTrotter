@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>GlobeTrotter | Plan Your Journey</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='Style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Style.css') }}">
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --text: #334155;
+            --muted: #64748b;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
 
         * {
             margin: 0;
@@ -24,273 +35,780 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: "Manrope", sans-serif;
             background: #f8fafc;
-            color: #172033;
+            color: var(--dark);
+            overflow-x: hidden;
         }
 
-        /* ================= NAVBAR ================= */
-
-        .home-navbar {
-            width: 100%;
-            padding: 18px 7%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
-        }
-
-        .home-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        a {
             text-decoration: none;
-            color: #172033;
         }
 
-        .logo-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #2563eb, #06b6d4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 22px;
-        }
+        /* =========================================================
+   COMMON GLOBETROTTER NAVBAR
+========================================================= */
 
-        .home-logo h2 {
-            font-size: 23px;
-        }
+.navbar {
+    width: 100%;
+    height: 94px;
 
-        .home-logo span {
-            color: #2563eb;
-        }
+    display: flex;
+    align-items: center;
 
-        .home-nav {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
+    padding: 0 7%;
 
-        .home-nav a {
-            text-decoration: none;
-            color: #475569;
-            font-weight: 600;
-            transition: 0.2s;
-        }
+    background: #ffffff;
 
-        .home-nav a:hover {
-            color: #2563eb;
-        }
+    border-bottom: 1px solid rgba(20, 33, 61, 0.06);
 
-        .nav-login {
-            padding: 10px 18px;
-            border: 1px solid #2563eb;
-            border-radius: 10px;
-            color: #2563eb !important;
-        }
+    position: sticky;
+    top: 0;
 
-        .nav-signup {
-            padding: 11px 19px;
-            background: #2563eb;
-            color: white !important;
-            border-radius: 10px;
-        }
+    z-index: 1000;
+
+    box-shadow: 0 2px 15px rgba(30, 64, 175, 0.03);
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    text-decoration: none;
+
+    flex-shrink: 0;
+}
+
+
+/* LOGO ICON */
+
+.brand-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+
+    font-size: 24px;
+
+    box-shadow:
+        0 10px 25px rgba(37, 99, 235, 0.25);
+}
+
+
+/* LOGO TEXT */
+
+.brand-text {
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 27px;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+    color: #17213c;
+}
+
+
+/* BLUE PART */
+
+.brand-text span {
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   NAVIGATION LINKS
+========================================================= */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+
+    gap: 36px;
+
+    margin-left: auto;
+    margin-right: 42px;
+}
+
+
+.nav-links a {
+    position: relative;
+
+    text-decoration: none;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: #64748b;
+
+    transition: all 0.25s ease;
+}
+
+
+/* HOVER */
+
+.nav-links a:hover {
+    color: #2563eb;
+}
+
+
+/* ACTIVE PAGE */
+
+.nav-links a.active {
+    color: #2563eb;
+}
+
+
+/* ACTIVE UNDERLINE */
+
+.nav-links a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: -14px;
+
+    transform: translateX(-50%);
+
+    width: 27px;
+    height: 3px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #2563eb,
+        #06b6d4
+    );
+}
+
+
+/* =========================================================
+   RIGHT SIDE BUTTONS
+========================================================= */
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+/* LOGIN */
+
+.login-btn {
+    padding: 12px 23px;
+
+    border: 1px solid #bfdbfe;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    color: #2563eb;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: all 0.25s ease;
+}
+
+
+.login-btn:hover {
+    background: #eff6ff;
+
+    transform: translateY(-2px);
+}
+
+
+/* SIGN UP */
+
+.signup-btn {
+    padding: 13px 24px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #2563eb
+    );
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.20);
+
+    transition: all 0.25s ease;
+}
+
+
+.signup-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(37, 99, 235, 0.28);
+}
+
+
+/* LOGOUT */
+
+.logout-btn {
+    padding: 13px 25px;
+
+    border-radius: 14px;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: all 0.25s ease;
+}
+
+
+.logout-btn:hover {
+    background: #2563eb;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.20);
+}
+
+
+/* =========================================================
+   RESPONSIVE NAVBAR
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .nav-links {
+        gap: 20px;
+        margin-right: 20px;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+    .brand-text {
+        font-size: 23px;
+    }
+
+    .brand-icon {
+        width: 44px;
+        height: 44px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .navbar {
+        height: auto;
+
+        min-height: 80px;
+
+        padding: 14px 5%;
+
+        flex-wrap: wrap;
+
+        gap: 12px;
+    }
+
+
+    .nav-links {
+        order: 3;
+
+        width: 100%;
+
+        justify-content: center;
+
+        margin: 5px 0 0;
+
+        gap: 22px;
+    }
+
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+
+    .nav-actions {
+        margin-left: auto;
+    }
+
+
+    .login-btn,
+    .signup-btn,
+    .logout-btn {
+        padding: 9px 14px;
+
+        font-size: 13px;
+    }
+
+}
 
         /* ================= HERO ================= */
 
         .hero {
-            min-height: 650px;
-            padding: 80px 7%;
+            min-height: 720px;
+            padding: 70px 7% 85px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.05fr .95fr;
             align-items: center;
-            gap: 60px;
-
+            gap: 70px;
+            position: relative;
+            overflow: hidden;
             background:
-                linear-gradient(
-                    135deg,
-                    rgba(239,246,255,0.95),
-                    rgba(236,254,255,0.9)
-                );
+                radial-gradient(circle at 0% 10%, rgba(37, 99, 235, 0.13), transparent 34%),
+                radial-gradient(circle at 90% 15%, rgba(6, 182, 212, 0.16), transparent 35%),
+                linear-gradient(135deg, #f8fbff 0%, #eff9ff 45%, #f7fcff 100%);
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(3px);
+            pointer-events: none;
+        }
+
+        .hero::before {
+            width: 320px;
+            height: 320px;
+            background: rgba(59, 130, 246, 0.08);
+            left: -140px;
+            bottom: -100px;
+        }
+
+        .hero::after {
+            width: 240px;
+            height: 240px;
+            background: rgba(6, 182, 212, 0.09);
+            right: -80px;
+            top: 40px;
         }
 
         .hero-content {
-            max-width: 650px;
+            max-width: 680px;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-badge {
-            display: inline-block;
-            background: #dbeafe;
-            color: #1d4ed8;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             padding: 9px 15px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 700;
             margin-bottom: 22px;
+            border-radius: 999px;
+            color: #1d4ed8;
+            background: rgba(219, 234, 254, 0.85);
+            border: 1px solid rgba(147, 197, 253, .35);
+            font-size: 13px;
+            font-weight: 800;
         }
 
         .hero h1 {
-            font-size: clamp(45px, 6vw, 72px);
-            line-height: 1.05;
-            margin-bottom: 25px;
-            color: #0f172a;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(52px, 6vw, 82px);
+            line-height: .98;
+            letter-spacing: -2px;
+            margin-bottom: 26px;
         }
 
         .hero h1 span {
-            color: #2563eb;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero-text {
-            font-size: 19px;
-            line-height: 1.7;
-            color: #64748b;
-            max-width: 570px;
-            margin-bottom: 35px;
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--muted);
+            max-width: 600px;
+            margin-bottom: 32px;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 15px;
+            gap: 14px;
             flex-wrap: wrap;
+            margin-bottom: 32px;
         }
 
         .primary-btn,
         .secondary-btn {
-            text-decoration: none;
             padding: 15px 24px;
-            border-radius: 12px;
-            font-weight: 700;
-            display: inline-block;
-            transition: 0.25s;
+            border-radius: 14px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: .25s ease;
         }
 
         .primary-btn {
-            background: #2563eb;
             color: white;
-            box-shadow: 0 10px 25px rgba(37,99,235,0.25);
+            background: linear-gradient(135deg, var(--primary), #3b82f6);
+            box-shadow: 0 14px 30px rgba(37, 99, 235, .24);
+        }
+
+        .primary-btn:hover,
+        .secondary-btn:hover {
+            transform: translateY(-3px);
         }
 
         .primary-btn:hover {
-            transform: translateY(-3px);
-            background: #1d4ed8;
+            box-shadow: 0 18px 34px rgba(37, 99, 235, .3);
         }
 
         .secondary-btn {
-            background: white;
-            color: #2563eb;
-            border: 1px solid #bfdbfe;
+            color: var(--primary);
+            background: rgba(255, 255, 255, .85);
+            border: 1px solid #dbeafe;
         }
 
-        .secondary-btn:hover {
-            transform: translateY(-3px);
+        .hero-trust {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .trust-pill {
+            background: rgba(255,255,255,.8);
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            border-radius: 999px;
+            padding: 8px 13px;
+            font-size: 12px;
+            font-weight: 700;
         }
 
         /* ================= HERO VISUAL ================= */
 
         .hero-visual {
             position: relative;
-            min-height: 450px;
+            min-height: 535px;
             display: flex;
+            align-items: center;
             justify-content: center;
+            z-index: 2;
+        }
+
+        .main-travel-card {
+            width: min(100%, 480px);
+            height: 510px;
+            border-radius: 34px;
+            overflow: hidden;
+            position: relative;
+            background:
+                linear-gradient(to top, rgba(15, 23, 42, .82), rgba(15, 23, 42, .04) 55%),
+                url("https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=85");
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 30px 75px rgba(15, 23, 42, .24);
+            animation: floatCard 5s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .travel-card-top {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .travel-card {
-            width: 430px;
-            height: 380px;
-            border-radius: 30px;
-            overflow: hidden;
-            position: relative;
+        .photo-badge,
+        .photo-heart {
+            background: rgba(255,255,255,.9);
+            backdrop-filter: blur(8px);
+            color: var(--dark);
+            border-radius: 999px;
+            padding: 9px 13px;
+            font-size: 12px;
+            font-weight: 800;
+        }
 
-            background:
-                linear-gradient(
-                    rgba(15,23,42,0.08),
-                    rgba(15,23,42,0.35)
-                ),
-                url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80");
-
-            background-size: cover;
-            background-position: center;
-
-            box-shadow: 0 25px 60px rgba(15,23,42,0.2);
+        .photo-heart {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            padding: 0;
+            font-size: 18px;
         }
 
         .travel-card-content {
             position: absolute;
-            bottom: 0;
             left: 0;
             right: 0;
-            padding: 30px;
+            bottom: 0;
+            padding: 32px;
             color: white;
-            background: linear-gradient(
-                transparent,
-                rgba(15,23,42,0.8)
-            );
+        }
+
+        .travel-card-content small {
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            opacity: .88;
+            font-weight: 700;
         }
 
         .travel-card-content h2 {
-            font-size: 30px;
-            margin-bottom: 7px;
+            font-family: "Playfair Display", serif;
+            font-size: 36px;
+            margin: 8px 0;
+        }
+
+        .travel-card-content p {
+            color: rgba(255,255,255,.86);
+            line-height: 1.55;
         }
 
         .floating-card {
             position: absolute;
-            background: white;
-            padding: 18px;
-            border-radius: 16px;
-            box-shadow: 0 15px 40px rgba(15,23,42,0.15);
-        }
-
-        .floating-card.one {
-            left: 0;
-            top: 40px;
-        }
-
-        .floating-card.two {
-            right: 0;
-            bottom: 35px;
+            z-index: 4;
+            background: rgba(255,255,255,.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,.7);
+            border-radius: 18px;
+            padding: 16px 18px;
+            box-shadow: 0 16px 40px rgba(15,23,42,.16);
         }
 
         .floating-card strong {
             display: block;
-            font-size: 17px;
-            margin-bottom: 5px;
+            font-size: 15px;
+            margin-bottom: 4px;
         }
 
         .floating-card small {
-            color: #64748b;
+            color: var(--muted);
         }
 
-        /* ================= FEATURES ================= */
+        .floating-card.one {
+            left: -35px;
+            top: 80px;
+        }
+
+        .floating-card.two {
+            right: -25px;
+            bottom: 70px;
+        }
+
+        .floating-card.three {
+            right: 5px;
+            top: 35px;
+            padding: 12px 15px;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats-wrap {
+            position: relative;
+            z-index: 10;
+            margin: -36px 7% 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 22px;
+            box-shadow: 0 18px 50px rgba(15,23,42,.09);
+            overflow: hidden;
+        }
+
+        .stat {
+            padding: 25px 18px;
+            text-align: center;
+            position: relative;
+        }
+
+        .stat:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 25%;
+            width: 1px;
+            height: 50%;
+            background: #e2e8f0;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 25px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* ================= GENERAL SECTION ================= */
 
         .section {
-            padding: 90px 7%;
+            padding: 95px 7%;
+        }
+
+        .section.soft {
+            background: linear-gradient(180deg, #ffffff, #f8fbff);
         }
 
         .section-heading {
+            max-width: 680px;
+            margin: 0 auto 48px;
             text-align: center;
-            max-width: 650px;
-            margin: 0 auto 50px;
+        }
+
+        .eyebrow {
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 10px;
         }
 
         .section-heading h2 {
-            font-size: 40px;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(36px, 4vw, 48px);
+            line-height: 1.1;
             margin-bottom: 14px;
-            color: #0f172a;
         }
 
         .section-heading p {
-            color: #64748b;
-            line-height: 1.7;
-            font-size: 17px;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.75;
         }
+
+        /* ================= DESTINATIONS ================= */
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr .85fr;
+            grid-auto-rows: 230px;
+            gap: 20px;
+        }
+
+        .destination-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            min-height: 230px;
+            isolation: isolate;
+            box-shadow: 0 12px 34px rgba(15,23,42,.08);
+        }
+
+        .destination-card.large {
+            grid-row: span 2;
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s ease;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.07);
+        }
+
+        .destination-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15,23,42,.8), rgba(15,23,42,.04) 60%);
+            z-index: 1;
+        }
+
+        .destination-info {
+            position: absolute;
+            left: 22px;
+            right: 22px;
+            bottom: 20px;
+            color: white;
+            z-index: 2;
+        }
+
+        .destination-info small {
+            font-size: 12px;
+            opacity: .82;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .destination-info h3 {
+            font-size: 24px;
+            margin-top: 4px;
+        }
+
+        /* ================= FEATURES ================= */
 
         .feature-grid {
             display: grid;
@@ -300,210 +818,383 @@
 
         .feature-card {
             background: white;
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid #e2e8f0;
-            transition: 0.25s;
+            padding: 28px;
+            border-radius: 22px;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 25px rgba(15,23,42,.035);
+            transition: .3s ease;
         }
 
         .feature-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 18px 40px rgba(15,23,42,0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 46px rgba(15,23,42,.1);
+            border-color: #bfdbfe;
         }
 
         .feature-icon {
-            width: 55px;
-            height: 55px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #eff6ff;
-            font-size: 25px;
+            width: 58px;
+            height: 58px;
+            border-radius: 17px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #eff6ff, #ecfeff);
+            font-size: 27px;
             margin-bottom: 20px;
         }
 
         .feature-card h3 {
+            font-size: 19px;
             margin-bottom: 10px;
-            font-size: 20px;
         }
 
         .feature-card p {
-            color: #64748b;
-            line-height: 1.6;
+            color: var(--muted);
+            line-height: 1.65;
+            font-size: 14px;
+        }
+
+        /* ================= HOW IT WORKS ================= */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            counter-reset: step;
+        }
+
+        .step {
+            padding: 30px;
+            background: white;
+            border-radius: 22px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .step-number {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            margin-bottom: 9px;
+            font-size: 20px;
+        }
+
+        .step p {
+            color: var(--muted);
+            line-height: 1.65;
+            font-size: 14px;
         }
 
         /* ================= CTA ================= */
 
         .cta {
-            margin: 20px 7% 80px;
-            padding: 70px 40px;
+            margin: 10px 7% 85px;
+            padding: 72px 35px;
             text-align: center;
-            border-radius: 30px;
+            border-radius: 32px;
             color: white;
-
+            position: relative;
+            overflow: hidden;
             background:
-                linear-gradient(
-                    135deg,
-                    #2563eb,
-                    #0891b2
-                );
+                radial-gradient(circle at 15% 20%, rgba(255,255,255,.18), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255,255,255,.13), transparent 24%),
+                linear-gradient(135deg, #1d4ed8, #0891b2);
+            box-shadow: 0 25px 60px rgba(37,99,235,.2);
         }
 
         .cta h2 {
-            font-size: 42px;
-            margin-bottom: 15px;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(36px, 4vw, 50px);
+            margin-bottom: 13px;
         }
 
         .cta p {
-            font-size: 18px;
-            opacity: 0.9;
+            font-size: 17px;
+            opacity: .9;
             margin-bottom: 28px;
         }
 
         .cta-btn {
             display: inline-block;
-            padding: 14px 25px;
+            padding: 15px 25px;
             background: white;
-            color: #2563eb;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
+            color: var(--primary);
+            border-radius: 14px;
+            font-weight: 800;
+            transition: .25s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(15,23,42,.18);
         }
 
         /* ================= FOOTER ================= */
 
         .footer {
-            background: #0f172a;
+            background: #0b1220;
             color: white;
-            padding: 35px 7%;
+            padding: 42px 7%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            gap: 24px;
+        }
+
+        .footer strong {
+            font-size: 18px;
         }
 
         .footer p {
             color: #94a3b8;
+            margin-top: 7px;
+            font-size: 13px;
         }
 
         .footer-links {
             display: flex;
-            gap: 20px;
+            gap: 24px;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
             color: #cbd5e1;
-            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* ================= ANIMATION ================= */
+
+        .fade-up {
+            animation: fadeUp .8s ease both;
+        }
+
+        .delay-1 { animation-delay: .1s; }
+        .delay-2 { animation-delay: .2s; }
+        .delay-3 { animation-delay: .3s; }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ================= RESPONSIVE ================= */
 
-        @media (max-width: 950px) {
-
+        @media (max-width: 1050px) {
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
+                padding-top: 60px;
             }
 
             .hero-content {
                 margin: auto;
             }
 
-            .hero-buttons {
+            .hero-text {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons,
+            .hero-trust {
                 justify-content: center;
             }
 
             .hero-visual {
-                min-height: 400px;
+                min-height: 500px;
             }
 
             .feature-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .home-nav {
-                gap: 12px;
+            .destination-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .destination-card.large {
+                grid-row: span 1;
+                grid-column: span 2;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 650px) {
-
+        @media (max-width: 760px) {
             .home-navbar {
-                padding: 15px 5%;
+                padding: 14px 5%;
+            }
+
+            .home-nav {
+                gap: 10px;
             }
 
             .home-nav a:not(.nav-login):not(.nav-signup) {
                 display: none;
             }
 
+            .home-logo h2 {
+                font-size: 19px;
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .nav-login,
+            .nav-signup {
+                padding: 9px 12px;
+                font-size: 12px !important;
+            }
+
             .hero {
-                padding: 60px 5%;
+                min-height: auto;
+                padding: 55px 5% 70px;
+                gap: 35px;
             }
 
             .hero h1 {
-                font-size: 45px;
+                font-size: 50px;
+                letter-spacing: -1px;
             }
 
-            .travel-card {
-                width: 100%;
-                height: 330px;
+            .hero-text {
+                font-size: 16px;
+            }
+
+            .hero-visual {
+                min-height: 410px;
+            }
+
+            .main-travel-card {
+                height: 410px;
+                border-radius: 26px;
             }
 
             .floating-card {
                 display: none;
             }
 
-            .feature-grid {
-                grid-template-columns: 1fr;
+            .stats-wrap {
+                margin: -28px 5% 0;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat:nth-child(2)::after {
+                display: none;
+            }
+
+            .stat {
+                border-bottom: 1px solid #eef2f7;
             }
 
             .section {
-                padding: 65px 5%;
+                padding: 70px 5%;
+            }
+
+            .feature-grid,
+            .destination-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .destination-card.large {
+                grid-column: span 1;
+            }
+
+            .destination-card {
+                height: 260px;
             }
 
             .cta {
-                margin: 10px 5% 60px;
+                margin: 0 5% 60px;
                 padding: 55px 20px;
-            }
-
-            .cta h2 {
-                font-size: 32px;
             }
 
             .footer {
                 flex-direction: column;
                 text-align: center;
             }
+
+            .footer-links {
+                justify-content: center;
+            }
         }
 
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .primary-btn,
+            .secondary-btn {
+                width: 100%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+    <!-- ================= COMMON NAVBAR ================= -->
 
-<nav class="home-navbar">
+<header class="navbar">
 
-    <a href="/" class="home-logo">
+    <!-- LOGO -->
+    <a href="{{ url_for('dashboard') if session.get('user_id') else '/' }}"
+       class="brand">
 
-        <div class="logo-icon">
+        <span class="brand-icon">
             🌍
-        </div>
+        </span>
 
-        <h2>
+        <span class="brand-text">
             Globe<span>Trotter</span>
-        </h2>
+        </span>
 
     </a>
 
 
-    <div class="home-nav">
+    <!-- NAVIGATION -->
+    <nav class="nav-links">
 
-        <a href="/">Home</a>
+        <a href="{{ url_for('dashboard') if session.get('user_id') else '/' }}">
+            Home
+        </a>
 
-        <a href="{{ url_for('explore') }}">
+        <a href="{{ url_for('cities') }}">
             Explore
         </a>
 
@@ -511,257 +1202,330 @@
             Plan Trip
         </a>
 
-        <a href="{{ url_for('trips') }}">
-            My Trips
-        </a>
+        {% if session.get('user_id') %}
 
-        <a href="{{ url_for('login') }}"
-           class="nav-login">
-            Login
-        </a>
+            <a href="{{ url_for('trips') }}">
+                My Trips
+            </a>
 
-        <a href="{{ url_for('signup') }}"
-           class="nav-signup">
-            Sign Up
-        </a>
+        {% endif %}
+
+    </nav>
+
+
+    <!-- RIGHT SIDE -->
+    <div class="nav-actions">
+
+        {% if session.get('user_id') %}
+
+            <a href="{{ url_for('logout') }}"
+               class="logout-btn">
+                Logout
+            </a>
+
+        {% else %}
+
+            <a href="{{ url_for('login') }}"
+               class="login-btn">
+                Login
+            </a>
+
+            <a href="{{ url_for('signup') }}"
+               class="signup-btn">
+                Sign Up
+            </a>
+
+        {% endif %}
 
     </div>
 
-</nav>
+</header>
 
+    <!-- ================= HERO ================= -->
+    <section class="hero">
 
-<!-- ================= HERO ================= -->
+        <div class="hero-content">
+            <div class="hero-badge fade-up">
+                ✈️ Travel planning, made beautifully simple
+            </div>
 
-<section class="hero">
+            <h1 class="fade-up delay-1">
+                Your dream trip,<br>
+                <span>planned smarter.</span>
+            </h1>
 
-    <div class="hero-content">
+            <p class="hero-text fade-up delay-2">
+                Discover inspiring destinations, build your itinerary,
+                organize every stop and keep your travel plans together —
+                all in one beautiful place.
+            </p>
 
-        <div class="hero-badge">
-            ✈️ Your journey starts here
+            <div class="hero-buttons fade-up delay-3">
+                <a href="{{ url_for('login') }}" class="primary-btn">
+                    Start Planning&nbsp; →
+                </a>
+
+                <a href="{{ url_for('cities') }}" class="secondary-btn">
+    Explore Destinations
+</a>
+            </div>
+
+            <div class="hero-trust fade-up delay-3">
+                <span class="trust-pill">✓ Easy itinerary builder</span>
+                <span class="trust-pill">✓ Budget-friendly planning</span>
+                <span class="trust-pill">✓ Discover beautiful places</span>
+            </div>
         </div>
 
-        <h1>
-            Plan less.<br>
-            <span>Travel more.</span>
-        </h1>
+        <div class="hero-visual fade-up delay-2">
 
-        <p class="hero-text">
-            GlobeTrotter helps you discover amazing destinations,
-            create personalized itineraries, organize your trips,
-            and turn your travel ideas into unforgettable journeys.
-        </p>
+            <div class="floating-card one">
+                <strong>📍 Smart Planning</strong>
+                <small>Every stop, perfectly organized</small>
+            </div>
 
-        <div class="hero-buttons">
+            <div class="floating-card three">
+                <strong>✨ Explore more</strong>
+            </div>
 
-            <a href="{{ url_for('login') }}"
-               class="primary-btn">
-                Start Planning →
-            </a>
+            <div class="main-travel-card">
 
-            <a href="{{ url_for('login') }}"
-               class="secondary-btn">
-                Explore Destinations
-            </a>
+                <div class="travel-card-top">
+                    <div class="photo-badge">🌎 Featured Escape</div>
+                    <div class="photo-heart">♡</div>
+                </div>
+
+                <div class="travel-card-content">
+                    <small>Adventure awaits</small>
+                    <h2>Explore the world</h2>
+                    <p>
+                        Turn a destination on your wishlist into a journey worth remembering.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="floating-card two">
+                <strong>🗓️ Your itinerary</strong>
+                <small>Everything in one place</small>
+            </div>
 
         </div>
 
+    </section>
+
+    <!-- ================= STATS ================= -->
+    <div class="stats-wrap">
+        <div class="stats">
+            <div class="stat">
+                <strong>40+</strong>
+                <span>Destinations</span>
+            </div>
+
+            <div class="stat">
+                <strong>1</strong>
+                <span>Smart travel hub</span>
+            </div>
+
+            <div class="stat">
+                <strong>Easy</strong>
+                <span>Trip planning</span>
+            </div>
+
+            <div class="stat">
+                <strong>100%</strong>
+                <span>Your journey</span>
+            </div>
+        </div>
     </div>
 
+    <!-- ================= DESTINATIONS ================= -->
+    <section class="section">
 
-    <div class="hero-visual">
+        <div class="section-heading">
+            <div class="eyebrow">Popular inspiration</div>
+            <h2>Where will you go next?</h2>
+            <p>
+                Start with a little inspiration. Explore beautiful cities,
+                dream destinations and experiences waiting to become part of your next trip.
+            </p>
+        </div>
 
-        <div class="floating-card one">
+        <div class="destination-grid">
 
-            <strong>📍 Smart Planning</strong>
+            <a href="{{ url_for('explore') }}" class="destination-card large">
+                <img
+                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85"
+                    alt="Tropical beach destination">
+                <div class="destination-info">
+                    <small>Island escape</small>
+                    <h3>Maldives</h3>
+                </div>
+            </a>
 
-            <small>
-                Organize every stop
-            </small>
+            <a href="{{ url_for('explore') }}" class="destination-card">
+                <img
+                    src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=900&q=85"
+                    alt="Paris">
+                <div class="destination-info">
+                    <small>City of lights</small>
+                    <h3>Paris</h3>
+                </div>
+            </a>
+
+            <a href="{{ url_for('explore') }}" class="destination-card">
+                <img
+                    src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=900&q=85"
+                    alt="Tokyo">
+                <div class="destination-info">
+                    <small>Urban adventure</small>
+                    <h3>Tokyo</h3>
+                </div>
+            </a>
+
+            <a href="{{ url_for('explore') }}" class="destination-card">
+                <img
+                    src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=900&q=85"
+                    alt="Dubai">
+                <div class="destination-info">
+                    <small>Modern wonder</small>
+                    <h3>Dubai</h3>
+                </div>
+            </a>
+
+            <a href="{{ url_for('explore') }}" class="destination-card">
+                <img
+                    src="https://images.unsplash.com/photo-1524230572899-a752b3835840?auto=format&fit=crop&w=900&q=85"
+                    alt="Bali">
+                <div class="destination-info">
+                    <small>Tropical calm</small>
+                    <h3>Bali</h3>
+                </div>
+            </a>
 
         </div>
 
+    </section>
 
-        <div class="travel-card">
+    <!-- ================= FEATURES ================= -->
+    <section class="section soft">
 
-            <div class="travel-card-content">
+        <div class="section-heading">
+            <div class="eyebrow">Everything in one place</div>
+            <h2>Travel smarter from idea to itinerary</h2>
+            <p>
+                GlobeTrotter gives you the tools you need to plan,
+                organize and enjoy every part of your journey.
+            </p>
+        </div>
 
-                <h2>
-                    Discover the World
-                </h2>
+        <div class="feature-grid">
 
+            <div class="feature-card">
+                <div class="feature-icon">🗺️</div>
+                <h3>Explore Destinations</h3>
                 <p>
-                    Your next adventure is waiting.
+                    Discover exciting cities, famous places and travel inspiration for your next adventure.
                 </p>
+            </div>
 
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>Build Itineraries</h3>
+                <p>
+                    Organize destinations, dates and activities into one clear and easy-to-follow plan.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Plan Your Budget</h3>
+                <p>
+                    Keep travel expenses organized so you can make smarter decisions before and during your trip.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Quick Planning</h3>
+                <p>
+                    Turn a simple destination idea into an organized trip faster with GlobeTrotter's quick planner.
+                </p>
             </div>
 
         </div>
 
+    </section>
 
-        <div class="floating-card two">
+    <!-- ================= HOW IT WORKS ================= -->
+    <section class="section">
 
-            <strong>🗓️ Your Itinerary</strong>
+        <div class="section-heading">
+            <div class="eyebrow">Simple by design</div>
+            <h2>From “I want to go” to “trip planned”</h2>
+            <p>
+                Planning your next journey should feel exciting, not complicated.
+            </p>
+        </div>
 
-            <small>
-                Everything in one place
-            </small>
+        <div class="steps">
+
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Choose your destination</h3>
+                <p>
+                    Explore places you love and pick the city or destination that inspires you.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Create your trip</h3>
+                <p>
+                    Add dates, stops, activities and useful details to build your personalized itinerary.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Travel with confidence</h3>
+                <p>
+                    Keep everything organized in one place and enjoy the journey you planned.
+                </p>
+            </div>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
-
-
-<!-- ================= FEATURES ================= -->
-
-<section class="section">
-
-    <div class="section-heading">
-
-        <h2>
-            Everything you need to travel smarter
-        </h2>
-
+    <!-- ================= CTA ================= -->
+    <section class="cta">
+        <h2>Your next adventure deserves a plan.</h2>
         <p>
-            From discovering destinations to organizing
-            your complete itinerary, GlobeTrotter keeps
-            your journey simple and organized.
+            Start building a journey that is completely yours.
         </p>
 
-    </div>
-
-
-    <div class="feature-grid">
-
-        <div class="feature-card">
-
-            <div class="feature-icon">
-                🗺️
-            </div>
-
-            <h3>
-                Explore Destinations
-            </h3>
-
-            <p>
-                Discover cities, attractions and
-                experiences that match your travel plans.
-            </p>
-
-        </div>
-
-
-        <div class="feature-card">
-
-            <div class="feature-icon">
-                📅
-            </div>
-
-            <h3>
-                Build Itineraries
-            </h3>
-
-            <p>
-                Organize destinations, dates and
-                activities into a clear travel plan.
-            </p>
-
-        </div>
-
-
-        <div class="feature-card">
-
-            <div class="feature-icon">
-                💰
-            </div>
-
-            <h3>
-                Plan Your Budget
-            </h3>
-
-            <p>
-                Keep your trip organized and make
-                smarter decisions about your expenses.
-            </p>
-
-        </div>
-
-
-        <div class="feature-card">
-
-            <div class="feature-icon">
-                ✨
-            </div>
-
-            <h3>
-                Quick Planning
-            </h3>
-
-            <p>
-                Use our quick planner to turn your
-                destination idea into a trip faster.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= CTA ================= -->
-
-<section class="cta">
-
-    <h2>
-        Ready for your next adventure?
-    </h2>
-
-    <p>
-        Create your trip and start exploring the world.
-    </p>
-
-    <a href="{{ url_for('login') }}"
-       class="cta-btn">
-        Plan My Trip →
-    </a>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer class="footer">
-
-    <div>
-        <strong>
-            🌍 GlobeTrotter
-        </strong>
-
-        <p>
-            Plan your journey. Explore the world.
-        </p>
-    </div>
-
-
-    <div class="footer-links">
-
-        <a href="{{ url_for('explore') }}">
-            Explore
+        <a href="{{ url_for('login') }}" class="cta-btn">
+            Plan My Trip →
         </a>
+    </section>
 
-        <a href="{{ url_for('login') }}">
-            Login
-        </a>
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
 
-        <a href="{{ url_for('signup') }}">
-            Sign Up
-        </a>
+        <div>
+            <strong>🌍 GlobeTrotter</strong>
+            <p>Plan your journey. Explore the world.</p>
+        </div>
 
-    </div>
+        <div class="footer-links">
+            <a href="{{ url_for('cities') }}">Explore</a>
+            <a href="{{ url_for('plan_trip') }}">Plan Trip</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('signup') }}">Sign Up</a>
+        </div>
 
-</footer>
+    </footer>
 
 </body>
 </html>
