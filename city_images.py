@@ -13,9 +13,9 @@ The city name must match the city name stored in the database.
 CITY_IMAGES = {
 
     # Gujarat
-    "Ahmedabad": "https://www.kiomoi.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fkmadmin%2Fimage%2Fupload%2Fc_scale%2Cw_1248%2Ff_auto%2Fv1560260650%2Fkiomoi%2FAhmedabad%2Fkankaria%20Lake%20%20(1).webp&w=3840&q=75",
+    "Ahmedabad": "https://images.trvl-media.com/place/372/39ab7992-befb-4f6f-b31a-491855ea1dfc.jpg",
     "Surat": "https://the-world.in/wp-content/uploads/2024/04/The-World-Blog-Charms-of-Surat-Landscape.webp",
-    "Vadodara": "hhttps://i0.wp.com/travelshoebum.com/wp-content/uploads/2018/09/img_3234.jpg?resize=1200%2C900&ssl=1",
+    "Vadodara": "https://s7ap1.scene7.com/is/image/incredibleindia/laxmi-vilas-palace-vadodara-gujarat-1-attr-nearby?qlt=82&ts=1750668517826",
     "Rajkot": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/2e/3e/02/caption.jpg?w=500&h=400&s=1",
 
     # Maharashtra
@@ -36,7 +36,7 @@ CITY_IMAGES = {
     "Lucknow": "https://static.toiimg.com/photo/msid-89182877,width-96,height-65.cms",
 
     # Karnataka
-    "Bengaluru": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlQKQT38p2Ljk8CECffWz9yPwER_yVlXVoGy5ebNHCDQ&s",
+    "Bengaluru": "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=1600&q=90",
     "Mysore": "https://www.agoda.com/wp-content/uploads/2024/03/Featured-image-Mysore-Palace-Mysore-India.jpg",
     "Hampi": "https://s7ap1.scene7.com/is/image/incredibleindia/a-journey-through-1-body-1?qlt=82&ts=1727368333677",
 
@@ -83,6 +83,10 @@ CITY_IMAGES = {
     "Bhubaneswar": "https://s7ap1.scene7.com/is/image/incredibleindia/1-lingaraj-temple-bhubaneshwar-odisha-city-hero?qlt=82&ts=1742167192930",
     "Visakhapatnam": "https://d26dp53kz39178.cloudfront.net/media/uploads/products/image7_result-1674872843438.webp",
     "Pondicherry": "https://production-nuego-cms.blr1.digitaloceanspaces.com/static-contents/prod-v1/Hero_Image_277_X_277_px_72f5e86051.jpg",
+    "Dubai": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
+    "New York": "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=80",
+    "Paris": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80",
+    "Seoul": "https://www.pelago.com/img/destinations/seoul/hero-image-large.jpg",
 }
 
 

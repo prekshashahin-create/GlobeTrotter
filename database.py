@@ -186,7 +186,15 @@ def init_db():
             """
         )
 
-
+        # Remove duplicate city records
+    connection.execute("""
+    DELETE FROM cities
+    WHERE id NOT IN (
+        SELECT MAX(id)
+        FROM cities
+        GROUP BY name, country
+    )
+""")
     connection.commit()
 
 
@@ -227,8 +235,8 @@ def seed_cities(connection):
             "Gujarat",
             2.5,
             8.5,
-            "Sabarmati Ashram",
-            "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
+            "Atal Bridge",
+            "https://images.trvl-media.com/place/372/39ab7992-befb-4f6f-b31a-491855ea1dfc.jpg",
             "A vibrant Gujarati city known for heritage architecture, food and culture."
         ),
 
@@ -338,7 +346,7 @@ def seed_cities(connection):
             3.5,
             9.2,
             "Lalbagh Botanical Garden",
-            "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=1200&q=80",
+            "https://www.swantour.com/blogs/wp-content/uploads/2018/02/Tourist-Places-in-Bangalore.jpg",
             "India's technology hub with gardens, cafes and a vibrant modern culture."
         ),
 
@@ -359,7 +367,7 @@ def seed_cities(connection):
             "Tamil Nadu",
             3.0,
             8.5,
-            "Marina Beach",
+            "Kapaleeshwarar Temple",
             "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
             "A coastal South Indian city known for temples, beaches and classical culture."
         ),
@@ -381,7 +389,7 @@ def seed_cities(connection):
             "Kerala",
             3.0,
             8.6,
-            "Chinese Fishing Nets",
+            "Boat House and Backwaters",
             "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80",
             "A beautiful Kerala destination combining coastal scenery and historic streets."
         ),
@@ -484,7 +492,6 @@ def seed_cities(connection):
             "https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=1200&q=80",
             "A classic Himalayan hill station filled with colonial architecture."
         ),
-
 
         # ====================================================
         # INTERNATIONAL
@@ -712,9 +719,23 @@ def seed_cities(connection):
     ]
 
 
-    # ========================================================
+    # ============================================================
+    # REMOVE EXISTING DUPLICATE CITY RECORDS
+    # ============================================================
+
+    connection.execute("""
+        DELETE FROM cities
+        WHERE id NOT IN (
+            SELECT MIN(id)
+            FROM cities
+            GROUP BY name, country
+        )
+    """)
+
+
+    # ============================================================
     # INSERT / UPDATE CITIES
-    # ========================================================
+    # ============================================================
 
     for city in cities:
 
@@ -730,6 +751,7 @@ def seed_cities(connection):
         ) = city
 
 
+        # Check if this city already exists
         existing = connection.execute(
             """
             SELECT id
@@ -743,6 +765,10 @@ def seed_cities(connection):
             )
         ).fetchone()
 
+
+        # ====================================================
+        # UPDATE EXISTING CITY
+        # ====================================================
 
         if existing:
 
@@ -768,6 +794,11 @@ def seed_cities(connection):
                     existing["id"]
                 )
             )
+
+
+        # ====================================================
+        # INSERT NEW CITY
+        # ====================================================
 
         else:
 
@@ -799,91 +830,11 @@ def seed_cities(connection):
             )
 
 
-    # ========================================================
-    # INSERT / UPDATE CITIES
-    # ========================================================
+    # ============================================================
+    # SAVE CHANGES
+    # ============================================================
 
-    for city in cities:
-
-        (
-            name,
-            country,
-            region,
-            cost_index,
-            popularity,
-            famous_place,
-            image_url,
-            description
-        ) = city
-
-
-        existing = connection.execute(
-            """
-            SELECT id
-            FROM cities
-            WHERE name = ?
-            AND country = ?
-            """,
-            (
-                name,
-                country
-            )
-        ).fetchone()
-
-
-        if existing:
-
-            connection.execute(
-                """
-                UPDATE cities
-                SET
-                    region = ?,
-                    cost_index = ?,
-                    popularity = ?,
-                    famous_place = ?,
-                    image_url = ?,
-                    description = ?
-                WHERE id = ?
-                """,
-                (
-                    region,
-                    cost_index,
-                    popularity,
-                    famous_place,
-                    image_url,
-                    description,
-                    existing["id"]
-                )
-            )
-
-        else:
-
-            connection.execute(
-                """
-                INSERT INTO cities
-                (
-                    name,
-                    country,
-                    region,
-                    cost_index,
-                    popularity,
-                    famous_place,
-                    image_url,
-                    description
-                )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                """,
-                (
-                    name,
-                    country,
-                    region,
-                    cost_index,
-                    popularity,
-                    famous_place,
-                    image_url,
-                    description
-                )
-            )
+    connection.commit()
 
 
 # ============================================================
@@ -1138,16 +1089,6 @@ def seed_activities(connection):
             1000,
             4
         ),
-
-        # Dubai
-        (
-            "Dubai",
-            "Burj Khalifa",
-            "Experience spectacular views from the world's tallest building.",
-            "Sightseeing",
-            4000,
-            3
-        )
     ]
 
 

@@ -1,6 +1,29 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from city_images import CITY_IMAGES
+
+# ============================================================
+# FAMOUS PLACES / FAMOUS FOR
+# ============================================================
+
+CITY_FAMOUS_FOR = {
+    "Ahmedabad": "Atal Bridge",
+    "Mumbai": "Gateway of India",
+    "Delhi": "Red Fort",
+    "Jaipur": "Hawa Mahal",
+    "Udaipur": "City Palace",
+    "Jodhpur": "Mehrangarh Fort",
+    "Bengaluru": "Silicon Valley of India",
+    "Mysore": "Mysore Palace",
+    "Chennai": "Kapaleeshwarar Temple",
+    "Kolkata": "Victoria Memorial",
+    "Goa": "Beaches & Portuguese Heritage",
+    "Agra": "Taj Mahal",
+    "Varanasi": "Ghats of the Ganges",
+    "Hyderabad": "Charminar",
+    "Kochi": "Boat House and Backwaters",
+}
+
 import sqlite3
 import os
 from datetime import datetime
@@ -11,6 +34,11 @@ app.secret_key = "globetrotter-secret-key"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASE = os.path.join(BASE_DIR, "globetrotter.db")
+
+print("================================")
+print("DATABASE BEING USED:")
+print(DATABASE)
+print("================================")
 def get_db_connection():
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
@@ -123,14 +151,22 @@ def cities():
     conn = get_db_connection()
 
     if search:
-
         city_list = conn.execute("""
-            SELECT *
-            FROM destinations
-            WHERE city LIKE ?
-               OR state LIKE ?
+            SELECT
+                id,
+                name AS city,
+                country,
+                region AS state,
+                cost_index,
+                popularity,
+                famous_place AS popular_place,
+                image_url,
+                description
+            FROM cities
+            WHERE name LIKE ?
+               OR region LIKE ?
                OR country LIKE ?
-            ORDER BY city
+            ORDER BY name
         """, (
             f"%{search}%",
             f"%{search}%",
@@ -138,28 +174,85 @@ def cities():
         )).fetchall()
 
     else:
-
         city_list = conn.execute("""
-            SELECT *
-            FROM destinations
-            ORDER BY city
+            SELECT
+                id,
+                name AS city,
+                country,
+                region AS state,
+                cost_index,
+                popularity,
+                famous_place AS popular_place,
+                image_url,
+                description
+            FROM cities
+            ORDER BY name
         """).fetchall()
 
     conn.close()
 
-    # Add the image from city_images.py to every city
-    cities_with_images = []
+    # --------------------------------------------------------
+    # REMOVE DUPLICATE CITY CARDS
+    # Prefer the record that has complete information.
+    # --------------------------------------------------------
+
+    unique_cities = {}
 
     for city in city_list:
 
         city_data = dict(city)
 
-        city_name = city_data.get("city") or city_data.get("name") or ""
+        city_name = (
+            city_data.get("city")
+            or city_data.get("name")
+            or ""
+        ).strip()
 
+        key = city_name.lower()
+
+        # If this city hasn't appeared yet, store it.
+        if key not in unique_cities:
+            unique_cities[key] = city_data
+
+        else:
+            existing = unique_cities[key]
+
+            # Prefer the record with description/famous place.
+            existing_complete = bool(
+                existing.get("description")
+                or existing.get("popular_place")
+            )
+
+            new_complete = bool(
+                city_data.get("description")
+                or city_data.get("popular_place")
+            )
+
+            if new_complete and not existing_complete:
+                unique_cities[key] = city_data
+
+    cities_with_images = []
+
+    for city_data in unique_cities.values():
+
+        city_name = (
+            city_data.get("city")
+            or city_data.get("name")
+            or ""
+        ).strip()
+
+        # Custom image
         custom_image = CITY_IMAGES.get(city_name, "")
 
         if custom_image:
             city_data["image_url"] = custom_image
+            city_data["image"] = custom_image
+
+        # Custom "Famous for"
+        famous_for = CITY_FAMOUS_FOR.get(city_name)
+
+        if famous_for:
+            city_data["popular_place"] = famous_for
 
         cities_with_images.append(city_data)
 
@@ -182,13 +275,13 @@ def city_details(city_id):
     connection = get_db_connection()
 
     # --------------------------------------------------------
-    # GET CITY FROM DESTINATIONS TABLE
+    # GET CITY FROM CITIES TABLE
     # --------------------------------------------------------
 
     city = connection.execute(
         """
         SELECT *
-        FROM destinations
+        FROM cities
         WHERE id = ?
         """,
         (city_id,)
@@ -203,8 +296,6 @@ def city_details(city_id):
     # --------------------------------------------------------
     # NORMALIZE CITY NAME
     # --------------------------------------------------------
-    # Your destinations table may use "city",
-    # while city_details.html uses "name".
 
     city_name = (
         city_data.get("city")
@@ -215,7 +306,7 @@ def city_details(city_id):
     city_data["name"] = city_name
 
     # --------------------------------------------------------
-    # ADD CUSTOM IMAGE FROM city_images.py
+    # ADD CUSTOM IMAGE
     # --------------------------------------------------------
 
     custom_image = CITY_IMAGES.get(
@@ -224,17 +315,12 @@ def city_details(city_id):
     )
 
     if custom_image:
-
         city_data["image_url"] = custom_image
-
-        # Keep this too in case another template uses "image"
         city_data["image"] = custom_image
 
     # --------------------------------------------------------
     # GET USER'S TRIPS
     # --------------------------------------------------------
-    # city_details.html needs this for the
-    # "Add to Trip" dropdown.
 
     trips_list = connection.execute(
         """
@@ -745,10 +831,6 @@ def dashboard():
     ).fetchall()
 
     # --------------------------------------------------------
-    # ALL CITIES
-    # --------------------------------------------------------
-
-        # --------------------------------------------------------
     # ALL CITIES
     # --------------------------------------------------------
 
