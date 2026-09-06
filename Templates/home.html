@@ -708,43 +708,134 @@
             font-weight: 700;
         }
 
-        /* ================= GENERAL SECTION ================= */
+ /* =========================================================
+   POPULAR INSPIRATION
+   ========================================================= */
 
-        .section {
-            padding: 95px 7%;
-        }
+.section-heading {
+    max-width: 1250px;
+    margin: 70px auto;
 
-        .section.soft {
-            background: linear-gradient(180deg, #ffffff, #f8fbff);
-        }
+    display: grid;
 
-        .section-heading {
-            max-width: 680px;
-            margin: 0 auto 48px;
-            text-align: center;
-        }
+    grid-template-columns: 190px 1fr 430px;
 
-        .eyebrow {
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1.8px;
-            font-size: 12px;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
+    align-items: center;
 
-        .section-heading h2 {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(36px, 4vw, 48px);
-            line-height: 1.1;
-            margin-bottom: 14px;
-        }
+    column-gap: 45px;
 
-        .section-heading p {
-            color: var(--muted);
-            font-size: 16px;
-            line-height: 1.75;
-        }
+    text-align: left;
+}
+
+
+/* ================= EYEBROW ================= */
+
+.section-heading .eyebrow {
+    justify-self: start;
+
+    display: inline-block;
+
+    padding: 8px 16px;
+
+    border-radius: 30px;
+
+    background: #eeeaff;
+
+    color: #3156d3;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+
+/* ================= MAIN HEADING ================= */
+
+.section-heading h2 {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 42px;
+
+    font-weight: 600;
+
+    line-height: 1.15;
+
+    letter-spacing: -1px;
+
+    color: #172033;
+}
+
+
+/* ================= DESCRIPTION ================= */
+
+.section-heading p {
+    margin: 0;
+
+    max-width: 430px;
+
+    font-size: 16px;
+
+    line-height: 1.65;
+
+    color: #68758a;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    .section-heading {
+        grid-template-columns: 160px 1fr;
+
+        row-gap: 18px;
+
+        column-gap: 30px;
+    }
+
+    .section-heading p {
+        grid-column: 2;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .section-heading {
+        display: block;
+
+        text-align: center;
+
+        padding: 0 20px;
+    }
+
+    .section-heading .eyebrow {
+        margin-bottom: 15px;
+    }
+
+    .section-heading h2 {
+        margin-bottom: 18px;
+
+        font-size: 34px;
+    }
+
+    .section-heading p {
+        max-width: 600px;
+
+        margin: 0 auto;
+    }
+
+}
 
         /* ================= DESTINATIONS ================= */
 
